@@ -1,0 +1,49 @@
+{
+  "name": "my-composer",
+  "version": "0.0.0",
+  "description": "my composer is an app for experiments in modeling of music creativity",
+  "main": "index.js",
+  "scripts": {
+    "stats": "webpack --profile --json > stats.json",
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "lint": "npm run lint-js && npm run lint-css",
+    "lint-js": "eslint . --ext .js --ext .jsx",
+    "lint-css": "csslint app --quiet"
+  },
+  "author": "daletune",
+  "license": "MIT",
+  "dependencies": {
+    "alt": "^0.17.6",
+    "array.prototype.findindex": "^1.0.0",
+    "bootstrap": "^3.3.5",
+    "node-uuid": "^1.4.3",
+    "react": "^0.14.0",
+    "react-bootstrap": "^0.27.2",
+    "react-dnd": "^2.0.2",
+    "react-dnd-html5-backend": "^2.0.0",
+    "react-dom": "^0.14.0",
+    "twbs": "0.0.6"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "babel-plugin-react-transform": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.3",
+    "css-loader": "^0.21.0",
+    "csslint": "^0.10.0",
+    "csslint-loader": "^0.2.1",
+    "eslint-loader": "^1.1.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "gulp": "^3.9.0",
+    "html-webpack-plugin": "^1.6.2",
+    "jscs": "^2.3.5",
+    "jscs-loader": "^0.2.0",
+    "react-transform-hmr": "^1.0.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1",
+    "webpack-merge": "^0.2.0"
+  }
+}
