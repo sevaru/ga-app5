@@ -27,7 +27,8 @@ var common = {
             {
                 test: /\.jsx?$/,
                 loaders: ['eslint'],
-                include: APP_PATH
+                include: APP_PATH,
+                exclude: `${APP_PATH}/plugins/GA/libs`
             }
         ],
         loaders: [
@@ -44,7 +45,10 @@ var common = {
             title: 'Melody composer app',
             template: 'template.html'
         })
-    ]
+    ],
+    externals: {
+        'ABCJS': 'ABCJS'
+    }
 };
 
 if ( TARGET === 'start' || !TARGET ) {

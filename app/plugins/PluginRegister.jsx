@@ -3,8 +3,6 @@ import nav from '../nav.js';
 
 class PluginRegister {
 	register({ path, component, title }) {
-		console.log(title);
-
 		nav.push({
 			path,
 			title
@@ -14,8 +12,6 @@ class PluginRegister {
 			path,
 			component
 		});
-
-		console.log(routes.childRoutes);
 	}
 }
 

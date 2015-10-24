@@ -10,8 +10,8 @@ export default class Individual {
 	constructor(referenceIndividual, useReferenceForStart = true) {
 		this._reference = referenceIndividual.slice();
 		this._content = useReferenceForStart ? 
-			this._reference :
-			this._reference.map(() => arrayUtils.randomElement(availableValues));
+			this._reference.map(() => arrayUtils.randomElement(availableValues)) :
+			this._reference;
 	}
 
 	mutate(options) {
@@ -31,12 +31,11 @@ export default class Individual {
 	fitness() {
 		/*1) Fitness by reference individual*/
 		/* assume check notes or structure ([14,]-1,-1,-1 == [15,]-1,-1,-1 ) */
-		let length = this._content;
+		let length = this._content.length;
 		
 		return this._content.reduce((prev, item, index) => {
-			return prev + Number(item === this._reference[index]) / length;
+			return prev + (Number(item === this._reference[index]) / length);
 		}, 0);
-
 	}
 
 	// Always return by value!
@@ -45,7 +44,7 @@ export default class Individual {
 	}
 
 	//TODO: redo with decorator
-	static create(a, b = true) {
+	static create(a, b) {
 		return new Individual(a, b);
 	}
 }

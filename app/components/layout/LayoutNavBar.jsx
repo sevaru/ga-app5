@@ -5,8 +5,9 @@ export default class LayoutNavBar extends React.Component {
 	render() {
 		return (
 			<Navbar inverse fixedTop toggleNavKey={0}>
-				<NavBrand>React-Bootstrap</NavBrand>
-				<Nav right eventKey={0}> {/* This is the eventKey referenced */}
+				<NavBrand>My Composer</NavBrand>
+				{/*
+				<Nav right eventKey={0}>
 					<NavItem eventKey={1} href="#">Link</NavItem>
 					<NavItem eventKey={2} href="#">Link</NavItem>
 					<NavDropdown eventKey={3} title="Dropdown" id="collapsible-navbar-dropdown">
@@ -16,7 +17,8 @@ export default class LayoutNavBar extends React.Component {
 						<MenuItem divider />
 						<MenuItem eventKey="4">Separated link</MenuItem>
 					</NavDropdown>
-				</Nav>
+				</Nav>*/
+				}
 		  	</Navbar>
 		);
 	}
