@@ -3,21 +3,21 @@ import React from 'react';
 import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';
 import ABCJS from 'ABCJS';
 import GA from '../plugin/GA';
-import convert from '../plugin/utils/convert';
+import convertToABC from '../plugin/utils/convertToABC';
 import Player from '../plugin/utils/Player';
 import Sheet from './Sheet.jsx';
+import Options from './Options.jsx';
 
 const GA_CONFIG = {
 	deathLimit: 0.3,
     count: 25,
 	threshold: 0.8, /* End processing when someone near good (best 1) */
-    maxIterations: 2000,
+    maxIterations: 500,
     mutationProbability: 0.7,
-    useRandomInitialIndividuals: true,
+    useRandomInitialIndividuals: false,
     countOfBestToLiveThrought: 4
 };
 
-//TODO: set selected in grid
 export default class Index extends React.Component { 
 	constructor(params) {
 		super(params);
@@ -27,30 +27,38 @@ export default class Index extends React.Component {
 		this.renderTableItem = this.renderTableItem.bind(this);
 		this.select = this.select.bind(this);
 
+		this._settings = GA_CONFIG;
+
 		this.state = {
 			selected: null,
 			selectedIndex: -1,
-			population: []
+			population: [],
 		};
 	}
 	render() {
 		return(
 			<Grid fluid>
 				<Row>
-					<Col sm={6} md={6}>
-						<Panel header="Panel heading without title">
+					<Col sm={8} md={8}>
+						<Panel header="Options">
 							<ButtonGroup>
 								<Button bsStyle="success" onClick={this.play}>Play</Button>
 								<Button bsStyle="danger" onClick={this.stop}>Stop</Button>
 							</ButtonGroup>
+
+							<Options settings={this._settings} onChange={this.onOptionsChange.bind(this)} />
+						</Panel>
+
+						<Panel header="Scores">
 							<Sheet abc={this.state.selected}/>
 						</Panel>
 					</Col>
-					<Col sm={6} md={6}>
-						<Panel header="Panel heading without title">
+					<Col sm={4} md={4}>
+						<Panel header="Population">
 							<ButtonGroup>
 								<Button bsStyle="primary" onClick={this.run}>Run</Button>
 							</ButtonGroup>
+
 							<Table striped bordered condensed hover>
 								<thead>
 									<tr>
@@ -66,18 +74,8 @@ export default class Index extends React.Component {
 						</Panel>
 					</Col>
 				</Row>
-				<Row>
-					<Col sm={12} md={12}>
-						<Panel header="Panel heading without title">
-							Panel content
-						</Panel>
-					</Col>
-				</Row>
 			</Grid>
 		);
-	}
-	onSliderChange(event) {
-		console.log(event.target.value);		
 	}
 	renderTableItem( item, index ) {
 		const classes = ( this.state.selectedIndex === index ) ? 'highlight' : '';
@@ -92,14 +90,12 @@ export default class Index extends React.Component {
 	select( item, index ) {
 		this.setState({
 			selectedIndex: index,
-			selected: convert(item.content)
+			selected: convertToABC(item.content)
 		});
 	}
 	run() {
-		let ga = new GA(GA_CONFIG);
+		let ga = new GA(this._settings);
 		let population = ga.run();
-
-		window['a'] = population;
 
 		this.setState({
 			population: population
@@ -118,5 +114,8 @@ export default class Index extends React.Component {
 	}
 	stop() {
 		Player.stop();
+	}
+	onOptionsChange(settings) {
+		this._settings = settings;
 	}
 }

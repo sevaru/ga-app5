@@ -14,7 +14,6 @@ const defaultOptions = {
 export default class GA {
 	constructor( preferences ) {
 		this._options = Object.assign({}, defaultOptions, preferences);
-        console.log(this._options);
 		this._population = [];
 		this._bestGuys = [];
 	}
@@ -121,9 +120,9 @@ export default class GA {
         this._createInitialPopulation();
 
         do {
-            this._selection();
             this._mutate();
             this._crossover();
+            this._selection();
             this._createNewPopulation();
 			i++;
 

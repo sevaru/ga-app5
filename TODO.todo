@@ -6,3 +6,33 @@ Technical Debt:
 
  ☐ abcjs включено руками в страницу и прописана как external в webpack
  ☐ bootstrap.css включенг руками в страницу опять же
+
+
+ Proposal:
+
+ ☐ UI
+
+export class UI {
+
+}
+
+
+let form = UIForm.fromConfig({
+  numberOfIterations: {
+    type: 'numeric',
+    title: 'number of iteration' // default is humanize 
+    options: {
+      range: [0, 1] // default
+    }
+  }
+})
+
+let form = UIForm.create()
+        .range()
+        .numeric()
+        .checkbox()
+      
+
+form.jsx() // for rendering
+
+form.value() // values of options
