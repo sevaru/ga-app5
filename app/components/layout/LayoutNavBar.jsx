@@ -1,4 +1,5 @@
 import React from 'react';
+import PlayerControls from '../PlayerControls.jsx';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, NavBrand } from 'react-bootstrap';
 
 export default class LayoutNavBar extends React.Component {
@@ -6,6 +7,7 @@ export default class LayoutNavBar extends React.Component {
 		return (
 			<Navbar inverse fixedTop toggleNavKey={0}>
 				<NavBrand>My Composer</NavBrand>
+				<PlayerControls />
 				{/*
 				<Nav right eventKey={0}>
 					<NavItem eventKey={1} href="#">Link</NavItem>

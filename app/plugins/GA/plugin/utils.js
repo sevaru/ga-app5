@@ -10,6 +10,17 @@ function checkObj( obj ) {
 	}
 }
 
+const numberUtils = {
+	randomBetween( one, another ) {
+		if ( another === undefined ) {
+			another = one;
+			one = 0;
+		}
+
+		return Math.floor(Math.random() * another) + one;  
+	}
+};
+
 const arrayUtils = {
 	make( value, length ) {
 		let arr = [];
@@ -43,4 +54,5 @@ const objUtils = {
 	}
 };
 
-export { objUtils, arrayUtils };
+
+export { objUtils, arrayUtils, numberUtils };

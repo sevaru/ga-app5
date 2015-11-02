@@ -15,7 +15,7 @@ const Synth = (() => {
         }
 
         // Set the type and frequency of the oscillator.
-        oscillator.type = 'square';
+        oscillator.type = 'sine';
         oscillator.frequency.value = frequency;
 
         // Set volume of the oscillator.

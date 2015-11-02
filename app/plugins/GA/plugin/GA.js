@@ -36,51 +36,73 @@ export default class GA {
     //-----------------------------
     //TODO: redo in functional way (no mutations);
     _crossover() {
-        this._population.forEach(( item, index, array ) => {
-            let neightbour = (array.length === this._population.length) ? array[0] : array[index + 1];
-            item.crossover(neightbour);
-        });
+        let result = [];
+        let clones = this._population.slice();
+        clones = this._sortByFitness(clones);
+
+
+        while ( clones.length > 2 ) {
+            const mama = clones.pop();
+            const papa = clones.pop();
+            const baby = papa.crossover(mama);
+            result.push(baby);
+        }
+
+        return result;
     }
-    _mutate() {
-        this._population.forEach(( item ) => {
+
+    _mutate(population) {
+        let clones = population.slice();
+        clones.forEach(item => {
             if ( Math.random() < this._options.mutationProbability ) {
                 item.mutate(this._options);
             }
         });
+        return clones;
     }
 
     //-----------------------------
     //  3. Selection
     //-----------------------------
-    _selection() {
-        this._bestGuys = this._population.filter(item => {
+    _selection(newPopulation) {
+        let goodGuys = newPopulation.filter(item => {
             return item.fitness() > this._options.deathLimit;
         });
 
         const count = this._options.countOfBestToLiveThrought;
 
-        if ( count && this._bestGuys.length < count ) {
-            const offset = this._bestGuys.length;
-            let population = this._sortByFitness(this._population);
+        if ( count && goodGuys.length < count ) {
+            const offset = goodGuys.length;
+            let population = this._sortByFitness(newPopulation);
 
             for ( let i = offset; i < count; i++ ) {
-                this._bestGuys.push(population[i]);
+                goodGuys.push(population[i]);
             }
         }
+
+        return goodGuys;
     }
 
     //-----------------------------
     //  4. Create New Population
     //-----------------------------
     //TODO: redo in functional way!
-    _createNewPopulation() {
-        let newPopulation = [];
+    _createNewPopulation(newPopulation) {
+        let population = newPopulation.slice();
 
-        for ( var i = 0, l = (this._options.count - this._bestGuys.length); i < l; i++ ) {
-            newPopulation.push(Individual.create(REFERENCE_INDIVIDUAL, this._options.useRandomInitialIndividuals));
+        const need = this._options.count - population.length; 
+
+        // if we need more guys
+        if ( need > 0 ) {
+            for ( var i = 0; i < need; i++ ) {
+                population.push(Individual.create(REFERENCE_INDIVIDUAL, this._options.useRandomInitialIndividuals));
+            }
+        // if we need cut someone
+        } else {
+            population = this._sortByFitness(population).slice(0, this._options.count);
         }
 
-        this._population = this._bestGuys.concat(newPopulation);
+        return population;
     }
 
     //-----------------------------
@@ -90,9 +112,10 @@ export default class GA {
         return this._population.some(item => item.fitness() > this._options.threshold);
     }
 
-    _getBest() {
+    _getBest(population) {
+        population = population || this._population;
         let best = 0;
-        this._population.forEach(item => {
+        population.forEach(item => {
             const f = item.fitness();
             if ( f > best ) {
                 best = f;
@@ -120,11 +143,15 @@ export default class GA {
         this._createInitialPopulation();
 
         do {
-            this._mutate();
-            this._crossover();
-            this._selection();
-            this._createNewPopulation();
-			i++;
+            let parents = this._population.slice();
+
+            let children = this._crossover();
+
+            let newPopulation = this._mutate([].concat(children, parents));
+            newPopulation = this._selection(newPopulation);
+
+            this._population = this._createNewPopulation(newPopulation);
+            i++;
 
             if ( i % 50 === 0 ) {
                 console.log(`iteration: ${i}, best: ${this._getBest()}`);

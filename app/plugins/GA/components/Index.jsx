@@ -4,17 +4,17 @@ import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstr
 import ABCJS from 'ABCJS';
 import GA from '../plugin/GA';
 import convertToABC from '../plugin/utils/convertToABC';
-import Player from '../plugin/utils/Player';
 import Sheet from './Sheet.jsx';
 import Options from './Options.jsx';
+import {PlayerSource} from '../../../components/PlayerControls.jsx';
 
 const GA_CONFIG = {
-	deathLimit: 0.3,
+	deathLimit: 0.2,
     count: 25,
 	threshold: 0.8, /* End processing when someone near good (best 1) */
     maxIterations: 500,
     mutationProbability: 0.7,
-    useRandomInitialIndividuals: false,
+    useRandomInitialIndividuals: true,
     countOfBestToLiveThrought: 4
 };
 
@@ -32,6 +32,7 @@ export default class Index extends React.Component {
 		this.state = {
 			selected: null,
 			selectedIndex: -1,
+			progress: 0,
 			population: [],
 		};
 	}
@@ -40,17 +41,12 @@ export default class Index extends React.Component {
 			<Grid fluid>
 				<Row>
 					<Col sm={8} md={8}>
-						<Panel header="Options">
-							<ButtonGroup>
-								<Button bsStyle="success" onClick={this.play}>Play</Button>
-								<Button bsStyle="danger" onClick={this.stop}>Stop</Button>
-							</ButtonGroup>
-
-							<Options settings={this._settings} onChange={this.onOptionsChange.bind(this)} />
-						</Panel>
-
 						<Panel header="Scores">
 							<Sheet abc={this.state.selected}/>
+						</Panel>
+
+						<Panel header="Options">
+							<Options settings={this._settings} onChange={this.onOptionsChange.bind(this)} />
 						</Panel>
 					</Col>
 					<Col sm={4} md={4}>
@@ -58,7 +54,6 @@ export default class Index extends React.Component {
 							<ButtonGroup>
 								<Button bsStyle="primary" onClick={this.run}>Run</Button>
 							</ButtonGroup>
-
 							<Table striped bordered condensed hover>
 								<thead>
 									<tr>
@@ -88,6 +83,7 @@ export default class Index extends React.Component {
 		);
 	}
 	select( item, index ) {
+		PlayerSource.setInternalFormat(item.content);
 		this.setState({
 			selectedIndex: index,
 			selected: convertToABC(item.content)
@@ -98,12 +94,13 @@ export default class Index extends React.Component {
 		let population = ga.run();
 
 		this.setState({
-			population: population
+			selected: null,
+			selectedIndex: -1,
+			population
 		});
 	}
 	play() {
 		Player.stop();
-		
 		const selectedIndex = this.state.selectedIndex;
 		if ( selectedIndex === -1 ) {
 			return;

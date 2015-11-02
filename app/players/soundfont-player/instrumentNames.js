@@ -1,4 +1,4 @@
-export const instrumentNames = {
+const instrumentNames = {
 	accordion: 'accordion',
 	acoustic_bass: 'acoustic_bass',
 	acoustic_grand_piano: 'acoustic_grand_piano',
@@ -128,3 +128,5 @@ export const instrumentNames = {
 	woodblock: 'woodblock',
 	xylophone: 'xylophone'
 };
+
+export default instrumentNames;

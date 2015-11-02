@@ -1,10 +1,7 @@
-import { arrayUtils, objUtils } from './utils';
+import { arrayUtils, objUtils, numberUtils } from './utils';
 import { availableValues } from './common';
 import Mutations from './mutations/Mutations';
-
-
-//TODO: redo with options?
-const CROSSOVER_RATE = 0.5;
+import TwoPointCrossOver from './crossovers/TwoPointCrossOver.js';
 
 export default class Individual {
 	constructor(referenceIndividual, useReferenceForStart = true) {
@@ -20,12 +17,8 @@ export default class Individual {
 	}
 
 	crossover( someone ) {
-		let someoneGens = someone.content;
-		let myGens = this.content;
-
-		this._content = this._content.map(( item, index ) => {
-			return Math.random() > CROSSOVER_RATE ? myGens[index] : someoneGens[index];
-		});
+		const newContent = TwoPointCrossOver.crossover(this.content, someone.content);
+		return new Individual(newContent, true);
 	}
 
 	fitness() {
