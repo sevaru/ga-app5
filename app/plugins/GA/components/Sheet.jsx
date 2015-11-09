@@ -1,5 +1,6 @@
 import React from 'react';
 import ABCJS from 'ABCJS';
+import convertToABC from '../plugin/utils/convertToABC';
 
 export default class Sheet extends React.Component {
 	constructor(params) {
@@ -7,16 +8,17 @@ export default class Sheet extends React.Component {
 		this._element = null;
 	}
 	componentDidMount() {
+		console.log('componentDidMount');
 	    this._element = this.refs.abcjs;
 	}
-	componentWillUpdate(nextProps, nextState) {
-		if ( !nextProps.abc ) {
+	componentWillReceiveProps(nextProps) {
+		if ( !nextProps.data ) {
 			return;
 		}
 
-		ABCJS.renderAbc(this._element, nextProps.abc, null, {
+		ABCJS.renderAbc(this._element, convertToABC(nextProps.data), null, {
 			scale: 1
-		});
+		});	
 	}
 	render() {
 		return <div ref="abcjs"></div>

@@ -22,6 +22,10 @@ const numberUtils = {
 };
 
 const arrayUtils = {
+	last( array ) {
+		return array[array.length - 1];
+	},
+
 	make( value, length ) {
 		let arr = [];
 		while( length-- ) {
@@ -30,13 +34,33 @@ const arrayUtils = {
 		return arr;
 	},
 
+	getRandomIndexes( count /*: number */, length /*: number */ ) {
+		const result = [];
+
+		if ( count > length ) {
+			throw new Error('Count can\'t be more that length');
+		}
+
+		while( count > 0 ) {
+			const newIndex = numberUtils.randomBetween(length);
+			if ( result.indexOf(newIndex) !== -1 ) {
+				continue;
+			}
+
+			result.push(newIndex);
+			count--;
+		}
+
+		return result;
+	},
+
 	randomKey( arr ) {
 		checkArray(arr);
-		return Math.floor(Math.random() * arr.length);
+		return numberUtils.randomBetween(arr.length);
 	},
 	
 	randomElement( arr ) {
-		let randomKey = arrayUtils.randomKey(arr);
+		const randomKey = arrayUtils.randomKey(arr);
 		return arr[randomKey];
 	},
 	
@@ -45,7 +69,7 @@ const arrayUtils = {
 	}
 };
 
-const objUtils = {
+const objectUtils = {
 	randomElement( obj ) {
 		checkObj(obj);
 		const keys = Object.keys(obj);
@@ -54,5 +78,50 @@ const objUtils = {
 	}
 };
 
+const stringUtils = {
+	camelCaseToHuman(str) {
+		// \d - any digit 0..9 and other locals
+		const reg = /([a-z])([A-Z])/g;
+		const template = '$1 $2';
+		const splitter = ' ';
 
-export { objUtils, arrayUtils, numberUtils };
+		return str
+			.replace(reg, template)
+			.split(splitter)
+			.map(w => stringUtils.firstUpper(w))
+			.join(splitter);
+	},
+
+	firstUpper(str) {
+		return `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
+	}
+}
+
+const selectionUtils = {
+	getRandomKeyByWeight( obj ) {
+		const keys = Object.keys(obj);
+		const weights = Object.keys(obj).map(key => obj[key].weight * 100);
+		return selectionUtils._roulette(keys, weights);
+	},
+
+	_roulette(keys, weights) /*: string (key)*/ {
+		let rouletteArray = [];
+		
+		keys.forEach((key, i) => {
+			rouletteArray = rouletteArray.concat(arrayUtils.make(key, weights[i]));
+		});
+
+		const index = numberUtils.randomBetween(rouletteArray.length);
+		return rouletteArray[index];
+	}
+};
+
+export notesUtils from './utils/NotesUtils.js';
+
+export { 
+	objectUtils as objUtils,
+	arrayUtils,
+	numberUtils,
+	stringUtils,
+	selectionUtils
+};

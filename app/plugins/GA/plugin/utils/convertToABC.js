@@ -4,15 +4,18 @@
 c maj as a default key
 */
 const n = '\n';
-const defaultHeader =  'X:1' + n +
-	'T:' + ' Abc' + n +
-	'M:4/4' + n + 
-	'C:GA' + n +
-	'K:D' + n + 
-	'L:1/8' + n;
+
+const defaultHeader = `
+X:1
+T:Abc
+M:4/4
+C:GA
+K:C
+L:1/8
+`;
 
 const referenceTable = {
-	0: 'Z',
+	0: 'z',
 	1: 'C',
 	2: 'D',
 	3: 'E',
@@ -66,5 +69,6 @@ export default function convertToABC( source ) {
 			answer += '\n';
 		}
 	}
+	
 	return answer;
 }

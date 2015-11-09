@@ -2,7 +2,8 @@ import { numberUtils } from '../utils';
 
 class TwoPointCrossOver {
 	_createPortion(source, firstPoint, secondPoint) {
-		return [source.slice(0, firstPoint), source.slice(firstPoint, secondPoint), source.slice(secondPoint, source.length - 1)];
+		const portions = [source.slice(0, firstPoint), source.slice(firstPoint, secondPoint), source.slice(secondPoint)];
+		return portions;
 	}
 
 	crossover(a, b) {

@@ -1,0 +1,1146 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"invalid",
+				"invalidComposition"
+			],
+			[
+				"raw",
+				"rawArray"
+			],
+			[
+				"List",
+				"ListGroupItem"
+			],
+			[
+				"FIR",
+				"FIRMWARE_INDIVIDUAL"
+			],
+			[
+				"onSelect",
+				"onSelectComposition"
+			],
+			[
+				"__",
+				"__assert_composition_length"
+			],
+			[
+				"__aser",
+				"__assert_composition_length"
+			],
+			[
+				"__a",
+				"__assert_after_composition_count"
+			],
+			[
+				"__ase",
+				"__assert_data_count"
+			],
+			[
+				"expec",
+				"expectedResult"
+			],
+			[
+				"NOTE_",
+				"NOTES_CONVERTER"
+			],
+			[
+				"debug",
+				"debugStr"
+			],
+			[
+				"debu",
+				"debugStr"
+			],
+			[
+				"conten",
+				"contentValues"
+			],
+			[
+				"ave",
+				"average"
+			],
+			[
+				"_cal",
+				"_calculateFitness"
+			],
+			[
+				"MAX",
+				"MAX_DISPERSION_DIFF"
+			],
+			[
+				"aver",
+				"averageSum"
+			],
+			[
+				"dispe",
+				"dispersionSum"
+			],
+			[
+				"value",
+				"valuesArray"
+			],
+			[
+				"_ref",
+				"_referenceIntervalValuesInBar"
+			],
+			[
+				"conte",
+				"contentPitch"
+			],
+			[
+				"half",
+				"halfTones"
+			],
+			[
+				"INTER",
+				"INTERVAL_REFERENCE"
+			],
+			[
+				"refe",
+				"referencePitch"
+			],
+			[
+				"content",
+				"contentBar"
+			],
+			[
+				"max",
+				"maxPitchDistance"
+			],
+			[
+				"prev",
+				"prevValue"
+			],
+			[
+				"ran",
+				"randomKey"
+			],
+			[
+				"mutat",
+				"mutated"
+			],
+			[
+				"mu",
+				"mutated"
+			],
+			[
+				"weight",
+				"weights"
+			],
+			[
+				"roul",
+				"rouletteArray"
+			],
+			[
+				"random",
+				"randomBetween"
+			],
+			[
+				"index",
+				"indexes"
+			],
+			[
+				"two",
+				"TwoPointCrossover"
+			],
+			[
+				"_",
+				"_options"
+			],
+			[
+				"onOp",
+				"onOptionsChange"
+			],
+			[
+				"split",
+				"splitter"
+			],
+			[
+				"th",
+				"threshold"
+			],
+			[
+				"_rende",
+				"_renderCrossoverOptions"
+			],
+			[
+				"_ren",
+				"_renderMutationOptions"
+			],
+			[
+				"_re",
+				"_renderFitnessOptions"
+			],
+			[
+				"Ind",
+				"IndividualsTable"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"good",
+				"goodGuys"
+			],
+			[
+				"pop",
+				"population"
+			],
+			[
+				"first",
+				"firstPoint"
+			],
+			[
+				"rand",
+				"randomBetween"
+			],
+			[
+				"some",
+				"someone"
+			],
+			[
+				"selec",
+				"selected"
+			],
+			[
+				"conver",
+				"convertedNotes"
+			],
+			[
+				"default",
+				"defaultOptions"
+			],
+			[
+				"GA",
+				"GA_CONFIG"
+			],
+			[
+				"in",
+				"instrumentName"
+			],
+			[
+				"Sou",
+				"SoundfontPlayer"
+			],
+			[
+				"inst",
+				"instrumentNames"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"sele",
+				"selectedIndex"
+			],
+			[
+				"selecte",
+				"selectedIndex"
+			],
+			[
+				"defa",
+				"defaultOptions"
+			],
+			[
+				"plu",
+				"PluginRegister"
+			],
+			[
+				"Plug",
+				"PluginRegister"
+			],
+			[
+				"remove",
+				"removeFromArray"
+			],
+			[
+				"sou",
+				"sourceProps"
+			],
+			[
+				"targe",
+				"targetNoteIndex"
+			],
+			[
+				"source",
+				"sourceNoteIndex"
+			],
+			[
+				"_move",
+				"_moveToAnotherLane"
+			],
+			[
+				"_findLan",
+				"_findLaneByNote"
+			],
+			[
+				"sour",
+				"sourceId"
+			],
+			[
+				"tar",
+				"targetId"
+			],
+			[
+				"target",
+				"targetProps"
+			],
+			[
+				"HTML",
+				"HTML5Backend"
+			],
+			[
+				"Lane",
+				"LaneActions"
+			],
+			[
+				"render",
+				"renderValue"
+			],
+			[
+				"final",
+				"finalStore"
+			],
+			[
+				"block",
+				"inline-block"
+			],
+			[
+				"eid",
+				"editing"
+			],
+			[
+				"app",
+				"appendChild"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/plugins/GA/components/Composition.jsx",
+			"settings":
+			{
+				"buffer_size": 2246,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/plugin/MusicContext.js",
+			"settings":
+			{
+				"buffer_size": 654,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/plugin/SimpleStorage.js",
+			"settings":
+			{
+				"buffer_size": 2058,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/components/Compositions.jsx",
+			"settings":
+			{
+				"buffer_size": 1658,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 127.0,
+		"last_filter": "jsx",
+		"selected_items":
+		[
+			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"jsn",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"jsne",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"jsnex",
+				"Set Syntax: JavaScript Next"
+			],
+			[
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insall",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Repos/university/my-composer",
+		"/D/Repos/university/my-composer/app",
+		"/D/Repos/university/my-composer/app/components",
+		"/D/Repos/university/my-composer/app/components/layout",
+		"/D/Repos/university/my-composer/app/plugins",
+		"/D/Repos/university/my-composer/app/plugins/GA",
+		"/D/Repos/university/my-composer/app/plugins/GA/components",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils"
+	],
+	"file_history":
+	[
+		"/C/Users/Сева/Desktop/build/vendor.8bcaefac963bf48c1494.js",
+		"/C/Users/Сева/Desktop/build/abcjs.js",
+		"/C/Users/Сева/Desktop/build/app.c60449ca224e43013171.js",
+		"/C/Users/Сева/Desktop/build/index.html",
+		"/D/Repos/university/my-composer/build.js",
+		"/D/Repos/university/my-composer/package.json",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/SimpleStorage.js",
+		"/D/Repos/university/my-composer/template.html",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/MusicContext.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Sheet.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Compositions.jsx",
+		"/D/Repos/university/my-composer/app/routes.jsx",
+		"/D/Repos/university/my-composer/app/index.jsx",
+		"/C/Users/Сева/Desktop/MVP(GOALS).todo",
+		"/D/Repos/university/my-composer/app/plugins/PluginRegister.jsx",
+		"/D/Repos/university/my-composer/app/players/soundfont-player/Player.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Note.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convertToABC.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/IntervalFitness.js",
+		"/D/Repos/university/my-composer/app/constants/itemTypes.js",
+		"/C/Users/Сева/Desktop/GOALS.todo",
+		"/C/Users/Сева/Desktop/documents-export-2015-11-07/notes/ACTUAL.md",
+		"/C/Users/Сева/Desktop/documents-export-2015-11-07.zip",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/common.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/NotesConverter.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GA.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/changeDuration.js",
+		"/C/Users/Сева/Desktop/BAD.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/GA.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Composition.js",
+		"/D/Repos/university/my-composer/__tests__/composition-test.js",
+		"/D/Repos/university/my-composer/__tests__/notes-converter-test.js",
+		"/D/Repos/university/my-composer/__tests__/note-test.js",
+		"/D/Repos/university/my-composer/__tests__/utils-test.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/NotesUtils.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/MutationProvider.js",
+		"/D/Repos/university/my-composer/webpack.config.js",
+		"/D/Repos/university/my-composer/app/components/App.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/CrossoverProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Individual.js",
+		"/C/Users/Сева/Desktop/CURRENT.TODO",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils.js",
+		"/C/Users/Сева/Desktop/index.js",
+		"/C/Users/Сева/Desktop/MVP(GOALS).md",
+		"/C/Users/Сева/Desktop/MVP(GOALS",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/MutationProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/OnePointCrossover.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/IntervalFitness/common.js",
+		"/C/Users/Сева/Desktop/todo.todo",
+		"/D/Repos/university/my-composer/app/libs/utils.js",
+		"/D/Repos/university/my-composer/app/components/PlayerControls.jsx",
+		"/D/Repos/university/my-composer/__tests__/mylib/some-test.js",
+		"/D/Repos/university/my-composer/__tests__/some-test.js",
+		"/D/Repos/university/my-composer/app/__tests__/some-test.js",
+		"/D/Repos/university/my-composer/node_modules/soundfont-player/dist/soundfont-player.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/UIFactory.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/FitnessProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/MelodyFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/upAndDown.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/swap2.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/IndividualsTable.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/MagnitudeFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/BasicReferenceFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Index.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/TwoPointCrossover.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/Mutator.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/BaseMutation.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Options.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Index2.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations2/TODO.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/Mutations.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/basic.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/Mutations.js",
+		"/C/Users/Сева/Desktop/TODO.todo",
+		"/D/Repos/university/my-composer/app/components/layout/LayoutNavBar.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/SoundfontPlayer.js",
+		"/D/Repos/university/my-composer/app/components/Player.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/common.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/instrumentNames.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Synth.js",
+		"/C/Users/Сева/Desktop/nn_exp/main.js",
+		"/C/Users/Сева/Desktop/nn_exp/index.html",
+		"/D/Repos/university/my-composer/MVP.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ui/UI.jsx",
+		"/D/Repos/university/my-composer/TODO.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convertToNoteString.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/SoundfontPlayer.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/TODO.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Player.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/AvailableInstruments.js",
+		"/D/Repos/university/my-composer/node_modules/midi/Gruntfile.js",
+		"/D/Repos/university/my-composer/node_modules/midi/package.json",
+		"/D/Repos/university/ga-app4/src/js/Player.js",
+		"/D/Repos/university/my-composer/app/main.css",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/styles.css",
+		"/D/Repos/university/my-composer/app/plugins/GA/libs/abcjs.js",
+		"/D/Repos/university/my-composer/.eslintignore",
+		"/D/Repos/university/ga-app4/src/js/lib/abcjs/abcjs_basic_latest-min.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convert.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/Mutator.js",
+		"/D/Repos/university/ga-app4/src/js/GA.js",
+		"/D/Repos/university/ga-app4/src/js/mutations/basic.js",
+		"/D/Repos/university/ga-app4/src/js/mutations/upAndDown.js",
+		"/D/Repos/university/ga-app4/src/js/mutations/Mutations.js",
+		"/D/Repos/university/ga-app4/src/js/mutations/Mutator.js",
+		"/D/Repos/university/ga-app4/src/js/utils.js",
+		"/D/Repos/university/my-composer/app/components/layout/About.jsx",
+		"/D/Repos/university/my-composer/app/components/layout/LayoutSideBar.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/services/GA.js",
+		"/D/Repos/university/my-composer/app/plugins/all.jsx",
+		"/D/Repos/university/my-composer/app/components/layout/Home.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Utils.js",
+		"/D/Repos/university/my-composer/app/plugins/PluginBase.jsx",
+		"/D/Repos/university/my-composer/app/nav.js",
+		"/D/Repos/university/my-composer/app/plugins/components/Index.jsx",
+		"/D/Repos/university/my-composer/app/components/layout/LayoutMain.jsx",
+		"/D/Repos/university/my-composer/app/components/layout/dashboard.css",
+		"/D/Repos/university/my-composer/app/components/layout/grid.jsx",
+		"/D/Repos/university/my-composer/app/template.html",
+		"/D/Repos/university/my-composer/.jscsrc.json",
+		"/D/Repos/university/my-composer/.csslintrc",
+		"/D/Repos/university/my-composer/.eslintrc",
+		"/D/Repos/university/my-composer/build/index.html",
+		"/D/Repos/university/my-composer/app/stores/LaneStore.js",
+		"/D/Repos/university/my-composer/app/components/Lane.jsx",
+		"/D/Repos/university/my-composer/app/components/Note.jsx",
+		"/D/Repos/university/my-composer/app/components/Notes.jsx"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"D:\\Repos\\university\\my-composer\\app",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"composition",
+			"strigify",
+			"onSelectComposition",
+			"availableValues",
+			"common.js",
+			"common",
+			"itemTypes",
+			"8, -1, ",
+			"'",
+			"\"",
+			"\n",
+			",",
+			"_selection",
+			"raw",
+			"randomBetween",
+			"NotesUtils",
+			"IsPause",
+			"Swap2Mutation",
+			"TwoPointCrossover",
+			"firstPoint, secondPoint",
+			"firstPoint",
+			"TwoPointCrossOver",
+			"expectedRhytm",
+			"loadData",
+			"nameToUrl",
+			": {",
+			"this._options",
+			"MelodyFitness",
+			"_calculateIntervalValuesForBar",
+			"2",
+			"INTERVAL_TYPE_VALUES1",
+			"1,",
+			"second",
+			"minor",
+			"MagnitudeFitness",
+			"toPitch",
+			"randomElement",
+			"CrossoverProvider",
+			"selectedIndex",
+			"INDIVIDUAL",
+			"Individual",
+			"ndividual.crea",
+			"Individual.create",
+			"_bestGuys",
+			"options",
+			"weights",
+			"mutationProbability",
+			"this._options",
+			"this.onChan",
+			"onChange",
+			"nd(this",
+			"this",
+			"obj",
+			"renderAllOptions",
+			"PlayerSource",
+			"Player",
+			"selected",
+			"run",
+			"renderTableItem",
+			"Mutations",
+			"mutationoptions",
+			"_selection",
+			"_getBest",
+			"_isDone",
+			"_createNewPopulation",
+			"console.log",
+			"_createInitialPopulation",
+			"_isDone",
+			"_sortByFitness",
+			"_createNewPopulation",
+			"_selection",
+			"_mutate",
+			"_crossover",
+			"CROSSOVER_RATE",
+			"a.",
+			"const",
+			"_sortByFitness",
+			"_crossover",
+			"_selection",
+			"_crossover",
+			"_mutate",
+			"countOfBestToLiveThrought",
+			"fitness",
+			"piano",
+			"path",
+			"Player",
+			"renderSlider",
+			"this",
+			"_getBest",
+			"convert",
+			"\n",
+			" ",
+			"console.log",
+			"select",
+			"play",
+			"Player",
+			"\"",
+			"run",
+			"randerTableItem",
+			"run",
+			"\"",
+			"bestguys",
+			"\"",
+			"js",
+			"options",
+			"$",
+			"PluginBase",
+			"LayoutSideBar",
+			"LayoutNavBar",
+			"Composer",
+			"htmlweb",
+			"htmlwebpa",
+			"detachFromLane",
+			"source",
+			"d",
+			"editNote",
+			"addNote",
+			". ",
+			"addNote",
+			"finishEdit",
+			"npm:babel-core@5.5.4",
+			"nvm"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/plugins/GA/components/Composition.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1306,
+								1306
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/JSX/JSX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/plugins/GA/plugin/MusicContext.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 654,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								350,
+								350
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/plugins/GA/plugin/SimpleStorage.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2058,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								132,
+								132
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/plugins/GA/components/Compositions.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1328,
+								1328
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "ga-app5.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"simple",
+				"app\\plugins\\GA\\plugin\\SimpleStorage.js"
+			],
+			[
+				"music",
+				"app\\plugins\\GA\\plugin\\MusicContext.js"
+			],
+			[
+				"common",
+				"app\\plugins\\GA\\plugin\\common.js"
+			],
+			[
+				"notesconve",
+				"app\\plugins\\GA\\plugin\\utils\\NotesConverter.js"
+			],
+			[
+				"changedur",
+				"app\\plugins\\GA\\plugin\\mutations\\changeDuration.js"
+			],
+			[
+				"composition",
+				"app\\plugins\\GA\\plugin\\utils\\Composition.js"
+			],
+			[
+				"notescon",
+				"app\\plugins\\GA\\plugin\\utils\\NotesConverter.js"
+			],
+			[
+				"changedi",
+				"app\\plugins\\GA\\plugin\\mutations\\changeDuration.js"
+			],
+			[
+				"note",
+				"__tests__\\note-test.js"
+			],
+			[
+				"interval",
+				"app\\plugins\\GA\\plugin\\fitness\\IntervalFitness.js"
+			],
+			[
+				"pa",
+				"package.json"
+			],
+			[
+				"utilsjs",
+				"app\\plugins\\GA\\plugin\\utils.js"
+			],
+			[
+				"soun",
+				"node_modules\\soundfont-player\\dist\\soundfont-player.js"
+			],
+			[
+				"plajsx",
+				"app\\components\\PlayerControls.jsx"
+			],
+			[
+				"fitness",
+				"app\\plugins\\GA\\plugin\\fitness\\FitnessProvider.js"
+			],
+			[
+				"utils",
+				"app\\libs\\utils.js"
+			],
+			[
+				"web",
+				"webpack.config.js"
+			],
+			[
+				"index",
+				"app\\index.jsx"
+			],
+			[
+				"pla",
+				"app\\players\\soundfont-player\\Player.js"
+			],
+			[
+				"play",
+				"app\\players\\soundfont-player\\Player.js"
+			],
+			[
+				"indivi",
+				"app\\plugins\\GA\\plugin\\Individual.js"
+			],
+			[
+				"indexjsx",
+				"app\\plugins\\GA\\components\\Index.jsx"
+			],
+			[
+				"ga.js",
+				"app\\plugins\\GA\\plugin\\GA.js"
+			],
+			[
+				"ga.",
+				"app\\plugins\\GA\\plugin\\GA.js"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"todo.to",
+				"my-composer\\TODO.todo"
+			],
+			[
+				"player",
+				"ga-app4\\src\\js\\Player.js"
+			],
+			[
+				"todo",
+				"my-composer\\TODO.todo"
+			],
+			[
+				"tem",
+				"my-composer\\template.html"
+			],
+			[
+				"webpack",
+				"my-composer\\webpack.config.js"
+			],
+			[
+				"mutator",
+				"app\\plugins\\GA\\plugin\\mutations\\Mutator.js"
+			],
+			[
+				"basic.js",
+				"app\\plugins\\GA\\plugin\\mutations\\basic.js"
+			],
+			[
+				"mutations",
+				"app\\plugins\\GA\\plugin\\mutations\\Mutations.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"lanesto",
+				"app\\stores\\LaneStore.js"
+			],
+			[
+				"notes.jsx",
+				"app\\components\\Notes.jsx"
+			],
+			[
+				"laneaction",
+				"app\\actions\\LaneActions.js"
+			],
+			[
+				"notejsx",
+				"app\\components\\Note.jsx"
+			],
+			[
+				"appjsx",
+				"app\\components\\App.jsx"
+			],
+			[
+				"lanejsx",
+				"app\\components\\Lane.jsx"
+			],
+			[
+				"lanesjsx",
+				"app\\components\\Lanes.jsx"
+			],
+			[
+				"main",
+				"app\\main.css"
+			],
+			[
+				"lanestore",
+				"app\\stores\\LaneStore.js"
+			],
+			[
+				"lane.jsx",
+				"app\\components\\Lane.jsx"
+			],
+			[
+				"notesjsx",
+				"app\\components\\Notes.jsx"
+			],
+			[
+				"maincs",
+				"app\\main.css"
+			],
+			[
+				"laneact",
+				"app\\actions\\LaneActions.js"
+			],
+			[
+				"appjs",
+				"app\\components\\App.jsx"
+			],
+			[
+				"bodyjs",
+				"app\\components\\Body\\Body.jsx"
+			],
+			[
+				"javasc",
+				"gulp\\tasks\\javascript.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 279.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -48,6 +48,7 @@ class Converter {
 //this._instrument.play(note, time, duration);
 class Player {
 	constructor(instrumentName = instrumentNames.acoustic_grand_piano) {
+		this._callbacks = [];
 		this._ctx = new AudioContext();
 		this._ready = false;
 		this._notes = [];
@@ -63,6 +64,23 @@ class Player {
 	set(notes) {
 		this._notes = Converter.convert(notes);
 		this._prevNotes = this._notes.slice();
+		this._runCallbacks(notes);
+	}
+
+	_runCallbacks(param) {
+		if ( this._callbacks.length ) {
+			this._callbacks.forEach(callback => {
+				callback(param);
+			});
+		}
+	}
+
+	onSet(callback) {
+		this._callbacks.push(callback);
+	}
+
+	offSet() {
+		this._callbacks = [];
 	}
 
 	//notes is Array<number> where number -1, .. , 15
@@ -76,6 +94,12 @@ class Player {
 		} else {
 			this._instrument.onready(() => this._playInternal());
 		}
+	}
+
+	clear() {
+		this._notes = [];
+		this._prevNotes = [];
+		this._runCallbacks(null);
 	}
 
 	_playInternal() {

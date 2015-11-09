@@ -1,34 +1,34 @@
 import { arrayUtils, objUtils, numberUtils } from './utils';
 import { availableValues } from './common';
-import Mutations from './mutations/Mutations';
-import TwoPointCrossOver from './crossovers/TwoPointCrossOver.js';
+import MutationProvider from './mutations/MutationProvider.js';
+import CrossoverProvider from './crossovers/CrossoverProvider.js';
+import FitnessProvider from './fitness/FitnessProvider.js';
 
 export default class Individual {
-	constructor(referenceIndividual, useReferenceForStart = true) {
+	constructor(referenceIndividual, contentToStart, useRandomToStart = true) {
 		this._reference = referenceIndividual.slice();
-		this._content = useReferenceForStart ? 
+
+		if ( contentToStart ) {
+			this._content = contentToStart;
+			return;
+		}
+
+		this._content = useRandomToStart ? 
 			this._reference.map(() => arrayUtils.randomElement(availableValues)) :
-			this._reference;
+			referenceIndividual.slice();
 	}
 
 	mutate(options) {
-		//TODO: redo mutations to mo explicit way (not just random!)
-		this._content = objUtils.randomElement(Mutations)(this._content, options);
+		this._content = MutationProvider.mutate(this._content);
 	}
 
 	crossover( someone ) {
-		const newContent = TwoPointCrossOver.crossover(this.content, someone.content);
-		return new Individual(newContent, true);
+		const newContent = CrossoverProvider.crossover(this.content, someone.content);
+		return new Individual(this._reference, newContent);
 	}
 
 	fitness() {
-		/*1) Fitness by reference individual*/
-		/* assume check notes or structure ([14,]-1,-1,-1 == [15,]-1,-1,-1 ) */
-		let length = this._content.length;
-		
-		return this._content.reduce((prev, item, index) => {
-			return prev + (Number(item === this._reference[index]) / length);
-		}, 0);
+		return FitnessProvider.fitness(this.content, this._reference);
 	}
 
 	// Always return by value!
@@ -37,7 +37,7 @@ export default class Individual {
 	}
 
 	//TODO: redo with decorator
-	static create(a, b) {
-		return new Individual(a, b);
+	static create(a, b, c) {
+		return new Individual(a, b, c);
 	}
 }

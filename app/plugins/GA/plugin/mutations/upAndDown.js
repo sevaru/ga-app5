@@ -1,24 +1,41 @@
-export default function mutate( data, weights, options ) {
-	return data.map((item, i) => {
-		if ( Math.random() < weights[i] ) {
-			return item;
-		}
+import { arrayUtils } from '../utils.js';
 
+const defaultOptions = {
+	count: 64
+};
+
+const UP_CORNER = 14;
+const DOWN_CORNER = 1;
+
+class UpAndDownMutation {
+	mutate( data, options = {} ) {
+		options = Object.assign({}, defaultOptions, options);
+		const indexes = arrayUtils.getRandomIndexes(options.count, data.length);
+		indexes.forEach(i => {
+			if ( data[i] === -1 || data[i] === 0 ) {
+				return;
+			} 
+			data[i] = this._mutateOne(data[i]);
+		});
+		return data;
+	}
+	_mutateOne( value ) {
 		if ( Math.random() > 0.5 ) {
 			//TODO: export to common END
-			if ( item < 14 ) {
-				return item + 1;
+			if ( value < UP_CORNER ) {
+				return value + 1;
 			}
 
-			return item;
+			return value;
 		} else {
 			//TODO: export to common START
-			if ( item > 2 ) {
-				return item - 1;
+			if ( value > (DOWN_CORNER + 1)  ) {
+				return value - 1;
 			}
 
-			return item;
+			return value;
 		}
+	}
+}
 
-	});
-};
+export default new UpAndDownMutation();

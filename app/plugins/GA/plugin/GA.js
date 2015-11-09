@@ -1,21 +1,30 @@
 import Individual from './Individual';
 import { REFERENCE_INDIVIDUAL } from './common';
+import CrossoverProvider from './crossovers/CrossoverProvider.js';
+import MutationProvider from './mutations/MutationProvider.js';
+import FitnessProvider from './fitness/FitnessProvider.js';
 
 const defaultOptions = {
-    deathLimit: 0.5,
-    count: 25,
-	threshold: 0.8, /* End processing when someone near good (best 1) */
-    maxIterations: 1000,
-    mutationProbability: 0.2,
-    useRandomInitialIndividuals: true,
-    countOfBestToLiveThrought: 0
+    GA: {
+        deathLimit: 0.5,
+        count: 25,
+    	threshold: 0.8, /* End processing when someone near good (best 1) */
+        maxIterations: 1000,
+        mutationProbability: 0.2,
+        useRandomInitialIndividuals: true,
+        countOfBestToLiveThrought: 0
+    }
 };
 
 export default class GA {
 	constructor( preferences ) {
 		this._options = Object.assign({}, defaultOptions, preferences);
 		this._population = [];
-		this._bestGuys = [];
+        this._bestOne = null;
+
+        CrossoverProvider.setOptions(this._options.crossover)
+        MutationProvider.setOptions(this._options.mutation);
+        FitnessProvider.setOptions(this._options.fitness);
 	}
 	
 	//-----------------------------
@@ -24,9 +33,9 @@ export default class GA {
 	_createInitialPopulation() {
         this._population = [];
 
-        for ( var i = 0; i < this._options.count; i++ ) {
+        for ( var i = 0; i < this._options.GA.count; i++ ) {
             this._population.push(
-            	Individual.create(REFERENCE_INDIVIDUAL, this._options.useRandomInitialIndividuals)
+            	Individual.create(REFERENCE_INDIVIDUAL, null, this._options.GA.useRandomInitialIndividuals)
         	);    
         }
     }
@@ -39,7 +48,6 @@ export default class GA {
         let result = [];
         let clones = this._population.slice();
         clones = this._sortByFitness(clones);
-
 
         while ( clones.length > 2 ) {
             const mama = clones.pop();
@@ -54,8 +62,8 @@ export default class GA {
     _mutate(population) {
         let clones = population.slice();
         clones.forEach(item => {
-            if ( Math.random() < this._options.mutationProbability ) {
-                item.mutate(this._options);
+            if ( Math.random() < this._options.GA.mutationProbability ) {
+                item.mutate(this._options.GA);
             }
         });
         return clones;
@@ -65,11 +73,12 @@ export default class GA {
     //  3. Selection
     //-----------------------------
     _selection(newPopulation) {
-        let goodGuys = newPopulation.filter(item => {
-            return item.fitness() > this._options.deathLimit;
+        //TODO: remove i - #for_debug
+        let goodGuys = newPopulation.filter((item, i) => {
+            return item.fitness() > this._options.GA.deathLimit;
         });
 
-        const count = this._options.countOfBestToLiveThrought;
+        const count = this._options.GA.countOfBestToLiveThrought;
 
         if ( count && goodGuys.length < count ) {
             const offset = goodGuys.length;
@@ -90,16 +99,16 @@ export default class GA {
     _createNewPopulation(newPopulation) {
         let population = newPopulation.slice();
 
-        const need = this._options.count - population.length; 
+        const need = this._options.GA.count - population.length; 
 
         // if we need more guys
         if ( need > 0 ) {
             for ( var i = 0; i < need; i++ ) {
-                population.push(Individual.create(REFERENCE_INDIVIDUAL, this._options.useRandomInitialIndividuals));
+                population.push(Individual.create(REFERENCE_INDIVIDUAL, null, this._options.GA.useRandomInitialIndividuals));
             }
         // if we need cut someone
         } else {
-            population = this._sortByFitness(population).slice(0, this._options.count);
+            population = this._sortByFitness(population).slice(0, this._options.GA.count);
         }
 
         return population;
@@ -109,19 +118,20 @@ export default class GA {
     //  5. Finish!
     //-----------------------------
     _isDone() {
-        return this._population.some(item => item.fitness() > this._options.threshold);
+        return this._population.some(item => item.fitness() > this._options.GA.threshold);
     }
 
     _getBest(population) {
         population = population || this._population;
-        let best = 0;
+        let bestFitness = this._bestOne ? this._bestOne.fitness() : 0;
         population.forEach(item => {
             const f = item.fitness();
-            if ( f > best ) {
-                best = f;
+            if ( f > bestFitness ) {
+                bestFitness = f;
+                this._bestOne = item;
             }
         });
-        return best;
+        return bestFitness;
     }
 
     _sortByFitness( population, desc = 1 ) {
@@ -146,22 +156,29 @@ export default class GA {
             let parents = this._population.slice();
 
             let children = this._crossover();
+            children = this._mutate(children);
 
-            let newPopulation = this._mutate([].concat(children, parents));
-            newPopulation = this._selection(newPopulation);
+            let newPopulation = this._selection([].concat(children, parents));
 
             this._population = this._createNewPopulation(newPopulation);
             i++;
 
             if ( i % 50 === 0 ) {
+                console.clear();
                 console.log(`iteration: ${i}, best: ${this._getBest()}`);
             }
 
-        } while ( !this._isDone() && i < this._options.maxIterations );
+        } while ( !this._isDone() && i < this._options.GA.maxIterations );
 
-        this._population.unshift(Individual.create(REFERENCE_INDIVIDUAL, false));
         this._population = this._sortByFitness(this._population);
+    
+        const original = Individual.create(REFERENCE_INDIVIDUAL, null, false);
 
+        if ( this._bestOne ) {
+            this._population.unshift(this._bestOne);
+        }
+        
+        this._population.unshift(original);
         return this._population;
 	}
 
