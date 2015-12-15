@@ -8,7 +8,6 @@ export default class Sheet extends React.Component {
 		this._element = null;
 	}
 	componentDidMount() {
-		console.log('componentDidMount');
 	    this._element = this.refs.abcjs;
 	}
 	componentWillReceiveProps(nextProps) {

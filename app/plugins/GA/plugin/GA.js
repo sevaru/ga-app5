@@ -16,15 +16,24 @@ const defaultOptions = {
     }
 };
 
+const defaultWorkerOptions = {
+    onProgress: undefined,
+    onDone: undefined,
+    progressRate: 100
+};
+
 export default class GA {
-	constructor( preferences ) {
+	constructor( preferences, workerOptions = {} ) {
 		this._options = Object.assign({}, defaultOptions, preferences);
+        this._workerOptions = Object.assign({}, defaultWorkerOptions, workerOptions);
+
 		this._population = [];
         this._bestOne = null;
 
         CrossoverProvider.setOptions(this._options.crossover)
         MutationProvider.setOptions(this._options.mutation);
         FitnessProvider.setOptions(this._options.fitness);
+        this.run();
 	}
 	
 	//-----------------------------
@@ -35,7 +44,7 @@ export default class GA {
 
         for ( var i = 0; i < this._options.GA.count; i++ ) {
             this._population.push(
-            	Individual.create(REFERENCE_INDIVIDUAL, null, this._options.GA.useRandomInitialIndividuals)
+            	Individual.create(REFERENCE_INDIVIDUAL, null, null, this._options.GA.useRandomInitialIndividuals)
         	);    
         }
     }
@@ -73,9 +82,8 @@ export default class GA {
     //  3. Selection
     //-----------------------------
     _selection(newPopulation) {
-        //TODO: remove i - #for_debug
-        let goodGuys = newPopulation.filter((item, i) => {
-            return item.fitness() > this._options.GA.deathLimit;
+        let goodGuys = newPopulation.filter(item => {
+            return item.fitnessValue > this._options.GA.deathLimit;
         });
 
         const count = this._options.GA.countOfBestToLiveThrought;
@@ -104,7 +112,7 @@ export default class GA {
         // if we need more guys
         if ( need > 0 ) {
             for ( var i = 0; i < need; i++ ) {
-                population.push(Individual.create(REFERENCE_INDIVIDUAL, null, this._options.GA.useRandomInitialIndividuals));
+                population.push(Individual.create(REFERENCE_INDIVIDUAL, null, null, this._options.GA.useRandomInitialIndividuals));
             }
         // if we need cut someone
         } else {
@@ -118,16 +126,15 @@ export default class GA {
     //  5. Finish!
     //-----------------------------
     _isDone() {
-        return this._population.some(item => item.fitness() > this._options.GA.threshold);
+        return this._population.some(item => item.fitnessValue > this._options.GA.threshold);
     }
 
     _getBest(population) {
         population = population || this._population;
-        let bestFitness = this._bestOne ? this._bestOne.fitness() : 0;
+        let bestFitness = this._bestOne ? this._bestOne.fitnessValue : 0;
         population.forEach(item => {
-            const f = item.fitness();
-            if ( f > bestFitness ) {
-                bestFitness = f;
+            if ( item.fitnessValue > bestFitness ) {
+                bestFitness = item.fitnessValue;
                 this._bestOne = item;
             }
         });
@@ -136,8 +143,8 @@ export default class GA {
 
     _sortByFitness( population, desc = 1 ) {
         return population.slice().sort((a, b) => {
-            let af = a.fitness(); 
-            let bf = b.fitness();
+            let af = a.fitnessValue; 
+            let bf = b.fitnessValue;
 
             if ( af === bf ) {
                 return 0;
@@ -149,7 +156,12 @@ export default class GA {
 
 	run() {
 		let i = 0;
-		
+        const onProgress = this._workerOptions.onProgress;
+		const onDone = this._workerOptions.onDone;
+        const notify = Boolean(onProgress);
+        const notifyRate = this._workerOptions.progressRate;
+        const maxIterations = this._options.GA.maxIterations;
+
         this._createInitialPopulation();
 
         do {
@@ -168,18 +180,30 @@ export default class GA {
                 console.log(`iteration: ${i}, best: ${this._getBest()}`);
             }
 
-        } while ( !this._isDone() && i < this._options.GA.maxIterations );
+            if ( notify && i % notifyRate === 0 ) {
+                onProgress(this._formatFitness(i, maxIterations));
+            }
+
+        } while ( !this._isDone() && i < maxIterations );
 
         this._population = this._sortByFitness(this._population);
     
-        const original = Individual.create(REFERENCE_INDIVIDUAL, null, false);
+        const original = Individual.create(REFERENCE_INDIVIDUAL, null, null, false);
 
         if ( this._bestOne ) {
             this._population.unshift(this._bestOne);
         }
         
         this._population.unshift(original);
+
+        if ( onDone ) {
+            onDone(this._population);
+        }
+
         return this._population;
 	}
 
+    _formatFitness(iteration, maxIterations) {
+        return (iteration / maxIterations * 100)|0;
+    }
 } 

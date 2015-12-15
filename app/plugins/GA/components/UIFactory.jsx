@@ -4,11 +4,6 @@ import { stringUtils } from '../plugin/utils.js';
 
 
 class BaseControl extends React.Component {
-    constructor(params) {
-        super(params);
-        this.state = this.props.obj;
-    }
-
 	render() {
 		throw new Error('Abstract class');
 	}
@@ -24,11 +19,7 @@ class BaseControl extends React.Component {
                 break;
         }
 
-        const newState = this.state;
-        newState[field] = value;
-        this.setState(newState);
-
-        this.props.onChange(this.state);
+        this.props.onChange(field, value);
     }
 }
 
@@ -45,10 +36,10 @@ export class SliderControl extends BaseControl {
 
 		return (
             <div className="form-group">
-                <label>{title} - {this.state[field]}</label>
+                <label>{title} - {this.props.value}</label>
                 <input 
                 	type="range"
-                	value={this.state[field]}
+                	value={this.props.value}
                 	min={min}
                 	max={max}
                 	step={step}
@@ -69,7 +60,7 @@ export class CheckboxControl extends BaseControl {
                 <label>
                     <input 
                     	type="checkbox"
-                    	checked={this.state[field]}
+                    	checked={this.props.value}
                     	onChange={this.onChange.bind(this, {field, type: 'boolean'})} />
                 	{title}
                 </label>

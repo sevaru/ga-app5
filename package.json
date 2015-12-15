@@ -32,6 +32,7 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^5.8.25",
+    "babel-eslint": "^4.1.6",
     "babel-jest": "^5.3.0",
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.1.1",
@@ -39,7 +40,9 @@
     "css-loader": "^0.21.0",
     "csslint": "^0.10.0",
     "csslint-loader": "^0.2.1",
+    "eslint": "^1.10.2",
     "eslint-loader": "^1.1.0",
+    "eslint-plugin-react": "^3.11.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "gulp": "^3.9.0",
     "html-webpack-plugin": "^1.6.2",
@@ -49,11 +52,18 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1",
-    "webpack-merge": "^0.2.0"
+    "webpack-merge": "^0.2.0",
+    "worker-loader": "^0.7.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testFileExtensions": ["js"],
-    "moduleFileExtensions": ["js", "json", "jsx"]
+    "testFileExtensions": [
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ]
   }
 }

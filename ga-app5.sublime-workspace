@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"GA",
+				"GAWorker"
+			],
+			[
+				"_",
+				"_population"
+			],
+			[
+				"worker",
+				"workerOptions"
+			],
+			[
 				"invalid",
 				"invalidComposition"
 			],
@@ -148,10 +160,6 @@
 				"TwoPointCrossover"
 			],
 			[
-				"_",
-				"_options"
-			],
-			[
 				"onOp",
 				"onOptionsChange"
 			],
@@ -214,10 +222,6 @@
 			[
 				"default",
 				"defaultOptions"
-			],
-			[
-				"GA",
-				"GA_CONFIG"
 			],
 			[
 				"in",
@@ -324,35 +328,63 @@
 	"buffers":
 	[
 		{
-			"file": "app/plugins/GA/components/Composition.jsx",
+			"contents": "//libs\nimport React from 'react';\nimport { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';\nimport ABCJS from 'ABCJS';\n\n//styles\nimport styles from './styles.css';\n\n//inner modules\nimport GA from './GA.jsx';\nimport Player from '../../../players/soundfont-player/Player.js';\n\n//Components\nimport Sheet from './Sheet.jsx';\nimport Options from './Options.jsx';\nimport IndividualsTable from './IndividualsTable.jsx';\n\nexport default class Index extends React.Component { \n	constructor(params) {\n		super(params);\n\n		this.state = {\n			selected: null,\n			population: [],\n		};\n	}\n	select( item, index ) {\n		Player.set(item.content);\n		this.setState({\n			selected: item.content\n		});\n	}\n	run() {\n		this.setState({\n			selected: null,\n			population: []\n		});\n		\n		GA.run(population => this.setState({ population }));\n	}\n	render() {\n		return(\n			<Grid fluid>\n				<Row>\n					<Col sm={8} md={8}>\n						<Panel header=\"Scores\">\n							<Sheet data={this.state.selected}/>\n						</Panel>\n						{GA.renderAllOptions()}\n					</Col>\n					<Col sm={4} md={4}>\n						<Panel header=\"Population\">\n							<ButtonGroup>\n								<Button bsStyle=\"primary\" onClick={this.run.bind(this)}>Run</Button>\n							</ButtonGroup>\n\n							<IndividualsTable population={this.state.population} onSelect={this.select.bind(this)} />\n						</Panel>\n					</Col>\n				</Row>\n			</Grid>\n		);\n	}\n}",
+			"file": "app/plugins/GA/components/Index.jsx",
+			"file_size": 1437,
+			"file_write_time": 130935608322455910,
 			"settings":
 			{
-				"buffer_size": 2246,
+				"buffer_size": 1374,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/plugins/GA/plugin/MusicContext.js",
+			"file": "app/plugins/GA/components/GA.jsx",
 			"settings":
 			{
-				"buffer_size": 654,
+				"buffer_size": 6677,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/plugins/GA/plugin/SimpleStorage.js",
+			"file": "/C/Users/Сева/Desktop/LicenseKeys_20151027 (2).csv",
 			"settings":
 			{
-				"buffer_size": 2058,
+				"buffer_size": 7861,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/plugins/GA/components/Compositions.jsx",
+			"file": "app/plugins/GA/plugin/Individual.js",
 			"settings":
 			{
-				"buffer_size": 1658,
+				"buffer_size": 1397,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/plugin/GAWorker.js",
+			"settings":
+			{
+				"buffer_size": 631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/plugin/GA.js",
+			"settings":
+			{
+				"buffer_size": 6107,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Create GA worker with\n\n\nimport GA from './GA';\n\nconst GA = new GA(bus);\n\n/*\n//internally in GA\n\nwhile (true) {\n	\n	bus.postMessage(currentIteration/maxIterations);\n\n}\n\n*/ \n\nonMessage(event) {\n	switch( event.data ) {\n		case START:\n			GA.run();\n			break;\n		case STOP:\n			GA.stop();\n			break;\n	}\n}",
+			"settings":
+			{
+				"buffer_size": 293,
+				"line_ending": "Windows",
+				"name": "Create GA worker with"
 			}
 		}
 	],
@@ -364,9 +396,21 @@
 	"command_palette":
 	{
 		"height": 127.0,
-		"last_filter": "jsx",
+		"last_filter": "babel",
 		"selected_items":
 		[
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
 			[
 				"jsx",
 				"Set Syntax: JSX"
@@ -382,10 +426,6 @@
 			[
 				"jsne",
 				"Set Syntax: JavaScript Next"
-			],
-			[
-				"side",
-				"View: Toggle Side Bar"
 			],
 			[
 				"jsnex",
@@ -445,21 +485,30 @@
 		"/D/Repos/university/my-composer/app/plugins/GA",
 		"/D/Repos/university/my-composer/app/plugins/GA/components",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils"
+		"/D/Repos/university/my-composer/node_modules"
 	],
 	"file_history":
 	[
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Individual.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GA.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Sheet.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/WorkerUse.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Worker.js",
+		"/G/CfgBRC_W20151118151921_Config.xml",
+		"/G/Cons 1030/20140701_BRC1_ACC_UL1.xml",
+		"/G/Cons 1030/SW002138_BRC_G1_MMI_setup_v5.0.7/!MsiAssembly",
+		"/D/Downloads/С++/1-modern-cpp-00-context/descript.ion",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Composition.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Compositions.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/SimpleStorage.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/MusicContext.js",
 		"/C/Users/Сева/Desktop/build/vendor.8bcaefac963bf48c1494.js",
 		"/C/Users/Сева/Desktop/build/abcjs.js",
 		"/C/Users/Сева/Desktop/build/app.c60449ca224e43013171.js",
 		"/C/Users/Сева/Desktop/build/index.html",
 		"/D/Repos/university/my-composer/build.js",
 		"/D/Repos/university/my-composer/package.json",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/SimpleStorage.js",
 		"/D/Repos/university/my-composer/template.html",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/MusicContext.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Sheet.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Compositions.jsx",
 		"/D/Repos/university/my-composer/app/routes.jsx",
 		"/D/Repos/university/my-composer/app/index.jsx",
 		"/C/Users/Сева/Desktop/MVP(GOALS).todo",
@@ -475,7 +524,6 @@
 		"/C/Users/Сева/Desktop/documents-export-2015-11-07.zip",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/common.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/NotesConverter.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GA.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/changeDuration.js",
 		"/C/Users/Сева/Desktop/BAD.todo",
 		"/D/Repos/university/my-composer/app/plugins/GA/components/GA.jsx",
@@ -489,7 +537,6 @@
 		"/D/Repos/university/my-composer/webpack.config.js",
 		"/D/Repos/university/my-composer/app/components/App.jsx",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/CrossoverProvider.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Individual.js",
 		"/C/Users/Сева/Desktop/CURRENT.TODO",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils.js",
 		"/C/Users/Сева/Desktop/index.js",
@@ -569,14 +616,7 @@
 		"/D/Repos/university/my-composer/app/components/layout/dashboard.css",
 		"/D/Repos/university/my-composer/app/components/layout/grid.jsx",
 		"/D/Repos/university/my-composer/app/template.html",
-		"/D/Repos/university/my-composer/.jscsrc.json",
-		"/D/Repos/university/my-composer/.csslintrc",
-		"/D/Repos/university/my-composer/.eslintrc",
-		"/D/Repos/university/my-composer/build/index.html",
-		"/D/Repos/university/my-composer/app/stores/LaneStore.js",
-		"/D/Repos/university/my-composer/app/components/Lane.jsx",
-		"/D/Repos/university/my-composer/app/components/Note.jsx",
-		"/D/Repos/university/my-composer/app/components/Notes.jsx"
+		"/D/Repos/university/my-composer/.jscsrc.json"
 	],
 	"find":
 	{
@@ -596,6 +636,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"office standard 2013",
+			"run",
+			"GALib",
+			"14",
+			"version",
 			"composition",
 			"strigify",
 			"onSelectComposition",
@@ -740,83 +785,83 @@
 			[
 				{
 					"buffer": 0,
-					"file": "app/plugins/GA/components/Composition.jsx",
+					"file": "app/plugins/GA/components/Index.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2246,
+						"buffer_size": 1374,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1306,
-								1306
+								787,
+								787
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/JSX/JSX.tmLanguage"
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/plugins/GA/plugin/MusicContext.js",
+					"file": "app/plugins/GA/components/GA.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 654,
+						"buffer_size": 6677,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								350,
-								350
+								1871,
+								1871
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 756.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "app/plugins/GA/plugin/SimpleStorage.js",
+					"file": "/C/Users/Сева/Desktop/LicenseKeys_20151027 (2).csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2058,
+						"buffer_size": 7861,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								132,
-								132
+								1383,
+								1383
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -827,19 +872,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "app/plugins/GA/components/Compositions.jsx",
+					"file": "app/plugins/GA/plugin/Individual.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1658,
+						"buffer_size": 1397,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1328,
-								1328
+								1280,
+								1280
 							]
 						],
 						"settings":
@@ -847,11 +892,99 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
-						"translation.y": 135.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/plugins/GA/plugin/GAWorker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/plugins/GA/plugin/GA.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6020,
+								6020
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2862.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								241,
+								251
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Create GA worker with",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -859,7 +992,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -896,7 +1029,7 @@
 	"project": "ga-app5.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":

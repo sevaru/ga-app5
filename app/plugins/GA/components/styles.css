@@ -1,3 +1,7 @@
 .table tr.highlight {
 	background: red !important;
 }
+
+.progress-bar-wrapper {
+	margin-top: 10px;
+}
