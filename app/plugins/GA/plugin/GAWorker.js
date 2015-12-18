@@ -19,10 +19,10 @@ interface IEvent {
 onmessage = function(event) {
 	const options = event.data;
 
-	const onProgress = percentage => {
+	const onProgress = data => {
 		postMessage({
-			action: 'progress',
-			data: percentage
+			data,
+			action: 'progress'
 		});
 	};
 
@@ -31,7 +31,9 @@ onmessage = function(event) {
 			action: 'done',
 			data: population
 		});
+
+		close();
 	};
 
-	let instance = new GA(options, { onProgress, onDone });
+	const instance = new GA(options, { onProgress, onDone });
 };

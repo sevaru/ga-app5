@@ -1,13 +1,11 @@
 //libs
 import React from 'react';
 import { Table, Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
+import { LineChart } from 'react-d3';
 import ABCJS from 'ABCJS';
 
 //styles
 import styles from './styles.css';
-
-//inner modules
-//import GA from './GA.jsx';
 
 import Player from '../../../players/soundfont-player/Player.js';
 import DEFAULT_OPTIONS from '../plugin/default-options.js';
@@ -22,39 +20,53 @@ export default class Index extends React.Component {
 	constructor(params) {
 		super(params);
 
+		this.runner = null;
+
 		this.state = {
 			selected: null,
 			population: [],
 			percentage: 0,
-			options: Object.assign({}, DEFAULT_OPTIONS)
+			best: null,
+			options: Object.assign({}, DEFAULT_OPTIONS),
+			statistics: []
 		};
 	}
+	
 	select( item, index ) {
 		Player.set(item.content);
 		this.setState({
 			selected: item.content
 		});
 	}
+
 	run() {
 		this.setState({
 			selected: null,
 			population: [],
+			statistics: [],
 			percentage: 0
 		});
 
-		const runner = new GARunner(
+		if ( this.runner ) {
+			this.runner.destroy();
+		}
+
+		this.runner = new GARunner(
 			this.state.options,
 				population => { 
 				this.setState({ population });
-				this.setState({ percentage: 100 });
 			},
-			percentage => {
-				console.log(percentage);
-				this.setState({	percentage });
+			({ percentage, best }) => {
+				const statistics = this.state.statistics;
+
+				statistics.push({
+					x: percentage,
+					y: (best.fitnessValue * 100)
+				});
+
+				this.setState({ best, percentage, statistics });
 			}
 		);
-
-		//runner.destroy();
 	}
 
 	onOptionsChange(path /*string like mutations.swap2 */, field, value) {
@@ -72,14 +84,67 @@ export default class Index extends React.Component {
         };
 
         const individualsTable = this.state.population.length ? <IndividualsTable population={this.state.population} onSelect={this.select.bind(this)} /> : null;
-            
-		return(
+        let scoresPanel = null;
+        let progressBar = null;
+        let best = null;
+
+        // Panels
+        if ( this.state.selected ) {
+        	scoresPanel = (
+        		<Panel header="Scores">
+					<Sheet data={this.state.selected}/>
+				</Panel>
+    		);
+        }
+
+        // ProgressBar
+        if ( this.state.percentage ) {
+        	progressBar = (
+        		<div className="progress-bar-wrapper">
+        			<h3>Progress: </h3>
+	                <ProgressBar now={(this.state.percentage)|0} label="%(percent)s%" />
+	            </div>
+    		);
+        }
+
+        if ( this.state.best ) {
+        	best = (
+        		<div className="progress-bar-wrapper">
+        			<h3>Best: </h3>
+	                <ProgressBar bsStyle="success" now={(this.state.best.fitnessValue * 100)|0} label="%(percent)s%" key="1" />
+	            </div>
+    		);
+        }
+
+        const viewBoxObject = {
+		    x: 0,
+		    y: 0,
+		    width: 500,
+		    height: 400
+		};
+
+		const lineChart = (this.state.statistics && this.state.statistics.length) ? (
+			<Panel header="Graph">
+				<LineChart
+				  legend={true}
+				  data={this._createLineChartData(this.state.statistics)}
+				  width={800}
+				  height={400}
+				  viewBoxObject={viewBoxObject}
+				  title="Line Chart"
+				  yAxisLabel="Altitude"
+				  xAxisLabel="Elapsed Time (sec)"
+				  gridHorizontal={true}
+				></LineChart>
+			</Panel>
+		) : null;
+
+		return (
 			<Grid fluid>
 				<Row>
 					<Col sm={8} md={8}>
-						<Panel header="Scores">
-							<Sheet data={this.state.selected}/>
-						</Panel>
+						{lineChart}
+						{scoresPanel}
 						<GAOptions onChange={this.onOptionsChange.bind(this)} options={this.state.options} />
 					</Col>
 					<Col sm={4} md={4}>
@@ -87,16 +152,25 @@ export default class Index extends React.Component {
 							<ButtonGroup>
 								<Button bsStyle="primary" onClick={this.run.bind(this)}>Run</Button>
 							</ButtonGroup>
-
-							<div className="progress-bar-wrapper">
-				                <ProgressBar now={this.state.percentage} label="%(percent)s%" />
-				            </div>
-							
+							{best}
+							{progressBar}
 							{individualsTable}
 						</Panel>
 					</Col>
 				</Row>
 			</Grid>
 		);
+	}
+
+	// TODO: move to separate module wrapper on linechart
+	_createLineChartData(data) {
+		return [
+			{
+				name: 'series1',
+				values: data,
+				strokeWidth: 3,
+				strokeDashArray: '5,5',
+			}
+		];
 	}
 }

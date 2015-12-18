@@ -7,19 +7,29 @@ export default class Sheet extends React.Component {
 		super(params);
 		this._element = null;
 	}
+
 	componentDidMount() {
 	    this._element = this.refs.abcjs;
+		if ( this.props.data ) {
+			this._initializeWidget(this.props.data);
+		}
 	}
+
 	componentWillReceiveProps(nextProps) {
 		if ( !nextProps.data ) {
 			return;
 		}
 
-		ABCJS.renderAbc(this._element, convertToABC(nextProps.data), null, {
-			scale: 1
-		});	
+		this._initializeWidget(nextProps.data);
 	}
+
 	render() {
 		return <div ref="abcjs"></div>
+	}
+
+	_initializeWidget(data) {
+		ABCJS.renderAbc(this._element, convertToABC(data), null, {
+			scale: 1
+		});
 	}
 }

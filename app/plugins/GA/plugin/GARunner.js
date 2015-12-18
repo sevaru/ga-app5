@@ -3,17 +3,24 @@ import GAWorker from 'worker!../plugin/GAWorker.js';
 
 export default class GARunner {
 	constructor(options, onDone, onProgress = null) {
-        const worker = new GAWorker();
-        worker.onmessage = ({ data: { data, action } }) => {
+        this._worker = new GAWorker();
+        this._worker.onmessage = ({ data: { data, action } }) => {
             if ( action === 'done' /*Symbol('done')*/) {
                 const population = data.map(obj => Individual.fromDTO(obj));
-                onProgress(100);
+                onProgress({ percentage: 100, best: population[1] });
                 onDone(population);
             } else if ( onProgress && action === 'progress') {
-                onProgress(data); //percentage
+                onProgress({
+                    percentage: data.percentage,
+                    best: Individual.fromDTO(data.best)
+                }); //{ percentage, best }
             }
 
         };
-        worker.postMessage(options);
+        this._worker.postMessage(options);
+    }
+
+    destroy() {
+        this._worker.terminate();
     }
 }

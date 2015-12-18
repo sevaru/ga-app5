@@ -25,7 +25,7 @@ export default class GAOptions extends React.Component {
                     <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.deathLimit} field={'deathLimit'} />
                     <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.count} field={'count'} min={1} max={100} step={1} />
                     <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.threshold} field={'threshold'} />
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.maxIterations} field={'maxIterations'} min={1} max={10000} step={1}/>
+                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.maxIterations} field={'maxIterations'} min={1} max={100000} step={1}/>
                     <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.mutationProbability} field={'mutationProbability'} />
                     <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.countOfBestToLiveThrought} field={'countOfBestToLiveThrought'} min={0} max={10} step={1}/>
                     <CheckboxControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.useRandomInitialIndividuals} field={'useRandomInitialIndividuals'} />

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
+//TODO:
+// Переделать так, чтобы можно было отловить вход новых population
+// сейчас componentWillReceiveProps вызывается при каждом клике на таблицу при выделении
+// так как под собой это несет this.props.onSelect который меняет state парента и поэтому происходит процесс перерасчета
 export default class IndividualsTable extends React.Component {
 	constructor(params) {
 		super(params);

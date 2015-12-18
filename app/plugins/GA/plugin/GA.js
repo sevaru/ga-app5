@@ -175,13 +175,21 @@ export default class GA {
             this._population = this._createNewPopulation(newPopulation);
             i++;
 
-            if ( i % 50 === 0 ) {
+           /* if ( i % 50 === 0 ) {
                 console.clear();
                 console.log(`iteration: ${i}, best: ${this._getBest()}`);
-            }
+            }*/
 
             if ( notify && i % notifyRate === 0 ) {
-                onProgress(this._formatFitness(i, maxIterations));
+                //TODO: bad calcs this._bestOne and this._bestFitness
+                this._getBest();
+                const percentage = this._formatFitness(i, maxIterations);
+                const best = this._bestOne;
+
+                onProgress({
+                    percentage,
+                    best
+                });
             }
 
         } while ( !this._isDone() && i < maxIterations );
@@ -204,6 +212,6 @@ export default class GA {
 	}
 
     _formatFitness(iteration, maxIterations) {
-        return (iteration / maxIterations * 100)|0;
+        return (iteration / maxIterations * 100);
     }
 } 
