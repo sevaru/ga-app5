@@ -1,19 +1,21 @@
-var pkg = require('./package.json');
-var path = require('path');
-var HtmlwebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
-var merge = require('webpack-merge');
-var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const pkg = require('./package.json');
+const path = require('path');
+const HtmlwebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const Clean = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
-var TARGET = process.env.npm_lifecycle_event;
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+
+const TARGET = process.env.npm_lifecycle_event;
+const ROOT_PATH = path.resolve(__dirname);
+const APP_PATH = path.resolve(ROOT_PATH, 'app');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 process.env.BABEL_ENV = TARGET;
 
-var common = {
+const common = {
     entry: APP_PATH,
     resolve: {
         extensions: ['', '.js', '.jsx']
@@ -28,13 +30,13 @@ var common = {
                 test: /\.jsx?$/,
                 loaders: ['eslint'],
                 include: APP_PATH,
-                exclude: `${APP_PATH}/plugins/GA/libs`
+                exclude: `${APP_PATH}/plugins/GA/vendor`
             }
         ],
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: ['babel'],
+                loaders: ['babel?cacheDirectory'],
                 include: APP_PATH
             }
         ]
@@ -44,8 +46,10 @@ var common = {
             inject: true,
             title: 'Melody composer app',
             template: 'template.html'
-        })
+        }),
+        new OpenBrowserPlugin()
     ],
+    // TODO: find out a better way
     externals: {
         'ABCJS': 'ABCJS'
     }
@@ -56,9 +60,10 @@ if ( TARGET === 'start' || !TARGET ) {
         devtool: 'eval-source-map',
         devServer: {
             historyApiFallback: true,
-            hot: true,
+            hot: false, // true to HMR
             inline: true,
-            progress: true
+            progress: true,
+            host: '0.0.0.0'
         },
         module : {
             loaders: [

@@ -1,67 +1,39 @@
+// 3d Party
 import React from 'react';
 import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';
+
+// Local
 import { SliderControl, CheckboxControl } from './UIFactory.jsx';
-import Individual from '../plugin/Individual.js';
-import GAWorker from 'worker!../plugin/GAWorker.js';
 
+import {Component as CrossoverProvider} from '../lib/crossovers/CrossoverProvider';
+import {Component as MutationProvider} from '../lib/mutations/MutationProvider';
+import {Component as FitnessProvider} from '../lib/fitness/FitnessProvider';
+import {render as GAOptionsComponent} from '../lib/ga/options';
 
-export default class GAOptions extends React.Component {
-    render() {
-        return (
-            <div>
-                {this._renderOptions()}
-                {this._renderMutationOptions()}
-                {this._renderCrossoverOptions()}
-                {this._renderFitnessOptions()}
-            </div>
-        );
-    }
+/*
+should call render methods on UIProviders
 
-    _renderOptions() {
-        const options = this.props.options.GA;
-        return (
-            <Panel header="Options">
-                <form>
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.deathLimit} field={'deathLimit'} />
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.count} field={'count'} min={1} max={100} step={1} />
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.threshold} field={'threshold'} />
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.maxIterations} field={'maxIterations'} min={1} max={100000} step={1}/>
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.mutationProbability} field={'mutationProbability'} />
-                    <SliderControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.countOfBestToLiveThrought} field={'countOfBestToLiveThrought'} min={0} max={10} step={1}/>
-                    <CheckboxControl onChange={this.props.onChange.bind(this, 'GA')} value={this.props.options.GA.useRandomInitialIndividuals} field={'useRandomInitialIndividuals'} />
-                </form>
-            </Panel>
-        )
-    }
-    
-    _renderCrossoverOptions() {
-        return null;
-    }
+import ProvidersContext from 'providers-context';
 
-    _renderMutationOptions() {
-        const options = this.props.options.mutation;
-        return (
-            <Panel header="Mutations">
-                <form>
-                    <Panel header="Swap2">
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.swap2')} value={this.props.options.mutation.swap2.weight} field={'weight'} />
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.swap2')} value={this.props.options.mutation.swap2.count} title="Count of genes" field={'count'} min={1} max={128} step={1} />
-                    </Panel>
+ProvidersContext.forEach(() => )
+ */
 
-                    <Panel header="UpAndDown">
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.upAndDown')} value={this.props.options.mutation.upAndDown.weight} field={'weight'} />
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.upAndDown')} value={this.props.options.mutation.upAndDown.count} title="Count of genes" field={'count'} min={1} max={128} step={1} />
-                    </Panel>
+export default ({store}) => (
+    <div>
+        <GAOptionsComponent store={store} />
+        <CrossoverProvider store={store} />
+        <MutationProvider store={store} />
+        <FitnessProvider store={store} />
+    </div>
+);
 
-                    <Panel header="ChangeDuration">
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.changeDuration')} value={this.props.options.mutation.changeDuration.weight} field={'weight'} />
-                        <SliderControl onChange={this.props.onChange.bind(this, 'mutation.changeDuration')} value={this.props.options.mutation.changeDuration.count} title="Count of genes" field={'count'} min={1} max={16} step={1} />
-                    </Panel>
-                </form>
-            </Panel >
-        )
-    }
-
+/**
+ * @deprecated
+ */
+class GAOptions_old extends React.Component {
+    /**
+     * @deprecated
+     */
     _renderFitnessOptions() {
         const options = this.props.options.fitness;
         return (
@@ -80,7 +52,7 @@ export default class GAOptions extends React.Component {
                         <CheckboxControl onChange={this.props.onChange.bind(this, 'fitness.intervalFitness')} value={this.props.options.fitness.intervalFitness.on} field={'on'} />
                     </Panel>
                 </form>
-            </Panel >
+            </Panel>
         )
     }
 }

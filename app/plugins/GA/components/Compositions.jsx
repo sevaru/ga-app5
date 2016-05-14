@@ -1,7 +1,10 @@
+// 3d Party
 import React from 'react';
 import { Link } from 'react-router';
 import { Input, Button, Grid, Col, Row, Table, Glyphicon } from 'react-bootstrap';
-import MusicContext from '../plugin/MusicContext.js';
+
+// Plugin
+import MusicContext from '../lib/MusicContext.js';
 
 const DEFAULT = 'default';
 

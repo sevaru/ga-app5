@@ -1,8 +1,15 @@
+// 3d Party
 import React, {ReactDOM} from 'react';
 import { Input, Button, Grid, Col, Row, ListGroup, ListGroupItem, ButtonGroup } from 'react-bootstrap';
-import MusicContext, { availableValuesInGF } from '../plugin/MusicContext.js';
-import Sheet from './Sheet.jsx';
+
+// Framework
 import Player from '../../../players/soundfont-player/Player.js';
+
+// Plugin
+import MusicContext, { availableValuesInGF } from '../lib/MusicContext.js';
+
+// Local
+import Sheet from './Sheet.jsx';
 
 const DEFAULT = 'default';
 

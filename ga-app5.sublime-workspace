@@ -4,6 +4,74 @@
 		"selected_items":
 		[
 			[
+				"_clea",
+				"_cleanState"
+			],
+			[
+				"Fitnes",
+				"FitnessProvider"
+			],
+			[
+				"plug",
+				"plugins"
+			],
+			[
+				"ins",
+				"instance"
+			],
+			[
+				"regi",
+				"_registerInStore"
+			],
+			[
+				"optiosn",
+				"optionsPath"
+			],
+			[
+				"currnt",
+				"currentIndex"
+			],
+			[
+				"Crossover",
+				"CrossoverRenderProvider"
+			],
+			[
+				"React",
+				"React.Component	Component Template (ES2015)"
+			],
+			[
+				"Croo",
+				"CrossoverProvider"
+			],
+			[
+				"redu",
+				"reducers"
+			],
+			[
+				"GA",
+				"GAOptions"
+			],
+			[
+				"DEFA",
+				"DEFAULT_STATE"
+			],
+			[
+				"_getB",
+				"_getBestWeHave"
+			],
+			[
+				"cros",
+				"crossover"
+			],
+			[
+				"Line",
+				"LineChart"
+			],
+			[
+				"line",
+				"lineChardData"
+			],
+			[
 				"pro",
 				"progressBar"
 			],
@@ -34,10 +102,6 @@
 			[
 				"_",
 				"_content"
-			],
-			[
-				"GA",
-				"GAWorker"
 			],
 			[
 				"worker",
@@ -351,6 +415,54 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/plugins/GA/lib/ga/GAWorker.js",
+			"settings":
+			{
+				"buffer_size": 1333,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/lib/ga/loop.js",
+			"settings":
+			{
+				"buffer_size": 150,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/lib/ga/GA.js",
+			"settings":
+			{
+				"buffer_size": 9050,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/components/Index.jsx",
+			"settings":
+			{
+				"buffer_size": 5147,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/plugins/GA/lib/ga/GARunner.js",
+			"settings":
+			{
+				"buffer_size": 1825,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "TODO2.todo",
+			"settings":
+			{
+				"buffer_size": 853,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -359,13 +471,85 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 127.0,
-		"last_filter": "babe",
+		"height": 392.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
+				"js",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
 				"babe",
 				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"pacl",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"types",
+				"Set Syntax: AppleScript"
+			],
+			[
+				"jx",
+				"Set Syntax: JSX"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"toeore",
+				"TodoReview: Project Files"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"sidebar",
+				"View: Toggle Side Bar"
+			],
+			[
+				"side",
+				"Preferences: Settings - Default"
+			],
+			[
+				"sideb",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"sdiebar",
+				"View: Toggle Side Bar"
+			],
+			[
+				"Side",
+				"Preferences: Settings - Default"
 			],
 			[
 				"babel",
@@ -374,18 +558,6 @@
 			[
 				"insta",
 				"Package Control: Install Package"
-			],
-			[
-				"side",
-				"View: Toggle Side Bar"
-			],
-			[
-				"jsx",
-				"Set Syntax: JSX"
-			],
-			[
-				"js",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"jsn",
@@ -404,14 +576,6 @@
 				"Set Syntax: SQL"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"html",
-				"Set Syntax: HTML"
-			],
-			[
 				"json",
 				"Set Syntax: JSON"
 			],
@@ -424,7 +588,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 416.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -447,53 +611,132 @@
 	[
 		"/D/Repos/university/my-composer",
 		"/D/Repos/university/my-composer/app",
-		"/D/Repos/university/my-composer/app/components/layout",
 		"/D/Repos/university/my-composer/app/plugins",
 		"/D/Repos/university/my-composer/app/plugins/GA",
 		"/D/Repos/university/my-composer/app/plugins/GA/components",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin",
-		"/D/Repos/university/my-composer/node_modules"
+		"/D/Repos/university/my-composer/app/plugins/GA/lib",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga"
 	],
 	"file_history":
 	[
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga/loop.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/components/Index.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga/GARunner.js",
+		"/D/Repos/university/my-composer/TODO2.todo",
+		"/D/Repos/university/my-composer/dev-server.js",
+		"/D/Repos/university/my-composer/build.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/index.jsx",
+		"/D/Repos/university/my-composer/app/nav.js",
+		"/D/Repos/university/my-composer/app/components/layout/Home.jsx",
+		"/D/Repos/university/my-composer/app/containers/root.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga/GAWorker.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga/GA.js",
+		"/D/Repos/university/my-composer/package.json",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/mutations/MutationProvider.js",
+		"/D/Repos/university/my-composer/webpack.config.js",
+		"/C/Users/Сева/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/BaseCalculateProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/createProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/providers/OnePointCrossover.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/createRenderComponent.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/CrossoverProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/FitnessProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/ProviderFactory.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/_FitnessProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/DkFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/IntervalFitness/common.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/IntervalFitness/calculate.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/MagnitudeFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/utils/Composition.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/BasicReferenceFitness.js",
+		"/D/Repos/university/my-composer/app/index.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/ga/options.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/Individual.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/reducers/index.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/IntervalFitness.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/MelodyFitness.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/components/GAOptions.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GARunner.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GA.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GAWorker.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Sheet.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/IndividualsTable.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/MelodyFitness/calculate.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/fitness/providers/MagnitudeFitness/calculate.js",
+		"/D/Repos/university/my-composer/TODO.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/CrossoverProvider.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/mutations/providers/changeDurationMutation.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/mutations/providers/upAndDownMutation.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/mutations/providers/swap2Mutation.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/BaseRenderComponent.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/createPluginsHash.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/common/BaseProvider.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/TwoPointCrossover.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/OnePointCrossover.jsx",
+		"/D/Repos/university/my-composer/PLUGINS.md",
+		"/D/Repos/university/my-composer/app/plugins/GA/utils.js",
+		"/C/Users/Сева/Desktop/LicenseKeys_20151027 (2).csv",
+		"/C/Users/Сева/Desktop/CURRENT.TODO",
+		"/C/Users/Сева/Desktop/BAD.todo",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/crossovers/all.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/components/UIFactory.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/GA.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/actions/index.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/providers-context.js",
+		"/D/Repos/university/my-composer/app/store/initialState.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/context.js",
+		"/C/Users/Сева/Downloads/parser.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/lib/default-options.js",
+		"/D/Repos/university/my-composer/app/store/configureStore.js",
+		"/D/Repos/university/my-composer/app/reducers/index.js",
+		"/D/Repos/university/my-composer/PROPOSAL.js",
+		"/D/Repos/university/my-composer/template.html",
+		"/D/Repos/university/my-composer/app/plugins/GA/reducers/crossover-reducer.js",
+		"/D/Repos/university/my-composer/app/plugins/all.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Composition.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Sheet.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/Compositions.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ga/GA.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ga/GARunner.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ga/GAWorker.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/CrossoverProvider.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GA.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/OnePointCrossover.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/TwoPointCrossover.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/all.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/default-options.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GARunner.js",
+		"/D/Repos/university/my-composer/app/plugins/PluginRegister.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils.js",
+		"/C/Users/Сева/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Repos/university/my-composer/ABOUT.md",
+		"/D/Repos/university/my-composer/app/libs/persist.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ABOUT.md",
+		"/D/Repos/university/my-composer/app/players/soundfont-player/Player.js",
+		"/D/Repos/university/my-composer/MVP.todo",
+		"/D/Repos/university/my-composer/ga-app5.sublime-project",
+		"/C/Users/Сева/Desktop/my-composer.bat",
+		"/D/Repos/university/my-composer/start.bat",
+		"/C/Users/Сева/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/D/Program Files (x86)/Steam/html5app/package.json",
+		"/C/Users/Сева/Desktop/index.js",
+		"/C/Users/Сева/Desktop/MVP(GOALS).todo",
+		"/C/Users/Сева/AppData/Local/Temp/JETCD14.tmp",
+		"/C/Users/Сева/AppData/Local/Temp/etilqs_9UxN9wPEhGbmkWE",
+		"/C/Users/Сева/Desktop/build/index.html",
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/GAWorker.js",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/IndividualsTable.jsx",
+		"/D/Repos/university/my-composer/app/plugins/GA/components/GA.jsx",
 		"/D/Repos/university/my-composer/app/plugins/GA/components/styles.css",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Individual.js",
 		"/D/Repos/university/my-composer/app/components/layout/LayoutNavBar.jsx",
-		"/D/Repos/university/my-composer/app/nav.js",
-		"/D/Repos/university/my-composer/app/plugins/PluginRegister.jsx",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin.jsx",
 		"/D/Repos/university/my-composer/app/routes.jsx",
-		"/C/Users/Сева/Desktop/LicenseKeys_20151027 (2).csv",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/WorkerUse.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Worker.js",
 		"/G/CfgBRC_W20151118151921_Config.xml",
 		"/G/Cons 1030/20140701_BRC1_ACC_UL1.xml",
 		"/G/Cons 1030/SW002138_BRC_G1_MMI_setup_v5.0.7/!MsiAssembly",
 		"/D/Downloads/С++/1-modern-cpp-00-context/descript.ion",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Composition.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Compositions.jsx",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/SimpleStorage.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/MusicContext.js",
 		"/C/Users/Сева/Desktop/build/vendor.8bcaefac963bf48c1494.js",
 		"/C/Users/Сева/Desktop/build/abcjs.js",
 		"/C/Users/Сева/Desktop/build/app.c60449ca224e43013171.js",
-		"/C/Users/Сева/Desktop/build/index.html",
-		"/D/Repos/university/my-composer/build.js",
-		"/D/Repos/university/my-composer/package.json",
-		"/D/Repos/university/my-composer/template.html",
-		"/D/Repos/university/my-composer/app/index.jsx",
-		"/C/Users/Сева/Desktop/MVP(GOALS).todo",
-		"/D/Repos/university/my-composer/app/players/soundfont-player/Player.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Note.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convertToABC.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/IntervalFitness.js",
@@ -503,91 +746,11 @@
 		"/C/Users/Сева/Desktop/documents-export-2015-11-07.zip",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/common.js",
 		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/NotesConverter.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/changeDuration.js",
-		"/C/Users/Сева/Desktop/BAD.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Composition.js",
-		"/D/Repos/university/my-composer/__tests__/composition-test.js",
-		"/D/Repos/university/my-composer/__tests__/notes-converter-test.js",
-		"/D/Repos/university/my-composer/__tests__/note-test.js",
-		"/D/Repos/university/my-composer/__tests__/utils-test.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/NotesUtils.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/MutationProvider.js",
-		"/D/Repos/university/my-composer/webpack.config.js",
-		"/D/Repos/university/my-composer/app/components/App.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/CrossoverProvider.js",
-		"/C/Users/Сева/Desktop/CURRENT.TODO",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils.js",
-		"/C/Users/Сева/Desktop/index.js",
-		"/C/Users/Сева/Desktop/MVP(GOALS).md",
-		"/C/Users/Сева/Desktop/MVP(GOALS",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/MutationProvider.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/OnePointCrossover.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/IntervalFitness/common.js",
-		"/C/Users/Сева/Desktop/todo.todo",
-		"/D/Repos/university/my-composer/app/libs/utils.js",
-		"/D/Repos/university/my-composer/app/components/PlayerControls.jsx",
-		"/D/Repos/university/my-composer/__tests__/mylib/some-test.js",
-		"/D/Repos/university/my-composer/__tests__/some-test.js",
-		"/D/Repos/university/my-composer/app/__tests__/some-test.js",
-		"/D/Repos/university/my-composer/node_modules/soundfont-player/dist/soundfont-player.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/FitnessProvider.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/MelodyFitness.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/upAndDown.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/swap2.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/MagnitudeFitness.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/fitness/BasicReferenceFitness.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/crossovers/TwoPointCrossover.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/Mutator.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/BaseMutation.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Options.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/components/Index2.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations2/TODO.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/core/Mutations.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/basic.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/Mutations.js",
-		"/C/Users/Сева/Desktop/TODO.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/SoundfontPlayer.js",
-		"/D/Repos/university/my-composer/app/components/Player.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/common.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/instrumentNames.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Synth.js",
-		"/C/Users/Сева/Desktop/nn_exp/main.js",
-		"/C/Users/Сева/Desktop/nn_exp/index.html",
-		"/D/Repos/university/my-composer/MVP.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/ui/UI.jsx",
-		"/D/Repos/university/my-composer/TODO.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convertToNoteString.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/SoundfontPlayer.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/players/soundfont-player/TODO.todo",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/Player.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/AvailableInstruments.js",
-		"/D/Repos/university/my-composer/node_modules/midi/Gruntfile.js",
-		"/D/Repos/university/my-composer/node_modules/midi/package.json",
-		"/D/Repos/university/ga-app4/src/js/Player.js",
-		"/D/Repos/university/my-composer/app/main.css",
-		"/D/Repos/university/my-composer/app/plugins/GA/libs/abcjs.js",
-		"/D/Repos/university/my-composer/.eslintignore",
-		"/D/Repos/university/ga-app4/src/js/lib/abcjs/abcjs_basic_latest-min.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/utils/convert.js",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/Mutator.js",
-		"/D/Repos/university/ga-app4/src/js/GA.js",
-		"/D/Repos/university/ga-app4/src/js/mutations/basic.js",
-		"/D/Repos/university/ga-app4/src/js/mutations/upAndDown.js",
-		"/D/Repos/university/ga-app4/src/js/mutations/Mutations.js",
-		"/D/Repos/university/ga-app4/src/js/mutations/Mutator.js",
-		"/D/Repos/university/ga-app4/src/js/utils.js",
-		"/D/Repos/university/my-composer/app/components/layout/About.jsx",
-		"/D/Repos/university/my-composer/app/components/layout/LayoutSideBar.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/services/GA.js",
-		"/D/Repos/university/my-composer/app/plugins/all.jsx",
-		"/D/Repos/university/my-composer/app/components/layout/Home.jsx",
-		"/D/Repos/university/my-composer/app/plugins/GA/plugin/Utils.js",
-		"/D/Repos/university/my-composer/app/plugins/PluginBase.jsx",
-		"/D/Repos/university/my-composer/app/plugins/components/Index.jsx"
+		"/D/Repos/university/my-composer/app/plugins/GA/plugin/mutations/changeDuration.js"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -603,6 +766,70 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_createInitialPopulation",
+			"GARunner",
+			"notifyRate",
+			"_stopped",
+			"onProgress",
+			"onDone",
+			"GARunner",
+			"_cleanState",
+			", ",
+			"pluginKey",
+			"OpenBrowserPlugin",
+			"GARunner",
+			"run(",
+			"run",
+			"^",
+			"cont",
+			"defaultOptions",
+			"__assertHelper",
+			"toDTO",
+			"onProgress",
+			"fromDTO",
+			"_context",
+			"context",
+			"getState",
+			"./context",
+			"crossover",
+			"import",
+			"Individual",
+			"CalculateCrossoverProvider",
+			"change",
+			"CrossoverProvider",
+			"crossovers/all",
+			"crossover/all",
+			"all",
+			"onChange",
+			"<tr class=\"even\"><td class=\"width-1\"><a href=\"/content/povyshenie-proizvoditelnosti-sistemy-upravleniya-promyshlennym-predpriyatiem-na-osnove-bystr\">Повышение производительности системы управления промышленным предприятием на основе быстрого формирования и выполнения пользовательских запросов</a></td>",
+			"a href=",
+			"table",
+			"his._bestOne = null;",
+			"CrossoverProvider ",
+			"CrossoverProvider",
+			"FitnessProvider",
+			"GAOptions",
+			"plugin/",
+			"Individual",
+			"GAWorker",
+			"GARunner",
+			"						\nGARunner",
+			"CrossoverProvider",
+			",\n",
+			"common",
+			"MusicContext",
+			"common",
+			"var",
+			"office standard 2013",
+			"_createLineChardData",
+			"y: ",
+			"y",
+			"0",
+			"},\n",
+			"0",
+			"},\n",
+			"\"",
+			"...,",
 			"_getBest",
 			"GARunner",
 			"ind(this,",
@@ -666,71 +893,7 @@
 			"IsPause",
 			"Swap2Mutation",
 			"TwoPointCrossover",
-			"firstPoint, secondPoint",
-			"firstPoint",
-			"TwoPointCrossOver",
-			"expectedRhytm",
-			"loadData",
-			"nameToUrl",
-			": {",
-			"this._options",
-			"MelodyFitness",
-			"_calculateIntervalValuesForBar",
-			"2",
-			"INTERVAL_TYPE_VALUES1",
-			"1,",
-			"second",
-			"minor",
-			"MagnitudeFitness",
-			"toPitch",
-			"randomElement",
-			"CrossoverProvider",
-			"selectedIndex",
-			"INDIVIDUAL",
-			"Individual",
-			"ndividual.crea",
-			"Individual.create",
-			"_bestGuys",
-			"options",
-			"weights",
-			"mutationProbability",
-			"this._options",
-			"this.onChan",
-			"onChange",
-			"nd(this",
-			"this",
-			"obj",
-			"renderAllOptions",
-			"PlayerSource",
-			"Player",
-			"selected",
-			"run",
-			"renderTableItem",
-			"Mutations",
-			"mutationoptions",
-			"_selection",
-			"_getBest",
-			"_isDone",
-			"_createNewPopulation",
-			"console.log",
-			"_createInitialPopulation",
-			"_isDone",
-			"_sortByFitness",
-			"_createNewPopulation",
-			"_selection",
-			"_mutate",
-			"_crossover",
-			"CROSSOVER_RATE",
-			"a.",
-			"const",
-			"_sortByFitness",
-			"_crossover",
-			"_selection",
-			"_crossover",
-			"_mutate",
-			"countOfBestToLiveThrought",
-			"fitness",
-			"piano"
+			"firstPoint, secondPoint"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -748,14 +911,189 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/plugins/GA/lib/ga/GAWorker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1333,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1021,
+								1021
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/plugins/GA/lib/ga/loop.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 150,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/plugins/GA/lib/ga/GA.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9050,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5986,
+								5986
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3960.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/plugins/GA/components/Index.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5147,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JSX/JSX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/plugins/GA/lib/ga/GARunner.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1026,
+								1026
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 240.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "TODO2.todo",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 853,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								371,
+								371
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PlainTasks/PlainTasks.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -792,7 +1130,7 @@
 	"project": "ga-app5.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -801,6 +1139,74 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"gawork",
+				"app\\plugins\\GA\\lib\\ga\\GAWorker.js"
+			],
+			[
+				"ga.js",
+				"app\\plugins\\GA\\lib\\ga\\GA.js"
+			],
+			[
+				"todo",
+				"TODO2.todo"
+			],
+			[
+				"mutatio",
+				"app\\plugins\\GA\\lib\\mutations\\MutationProvider.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"onepoint",
+				"app\\plugins\\GA\\lib\\crossovers\\providers\\OnePointCrossover.jsx"
+			],
+			[
+				"createrender",
+				"app\\plugins\\GA\\lib\\common\\createRenderComponent.jsx"
+			],
+			[
+				"web",
+				"webpack.config.js"
+			],
+			[
+				"crossoverpro",
+				"app\\plugins\\GA\\lib\\crossovers\\CrossoverProvider.jsx"
+			],
+			[
+				"",
+				"package.json"
+			],
+			[
+				"ga",
+				"app\\plugins\\GA\\lib\\ga\\GA.js"
+			],
+			[
+				"ga.",
+				"app\\plugins\\GA\\lib\\ga\\GA.js"
+			],
+			[
+				"indivi",
+				"app\\plugins\\GA\\lib\\Individual.js"
+			],
+			[
+				"crossover",
+				"app\\plugins\\GA\\lib\\crossovers\\CrossoverProvider.jsx"
+			],
+			[
+				"gaoptions",
+				"app\\plugins\\GA\\components\\GAOptions.jsx"
+			],
+			[
+				"crossoverprovider",
+				"app\\plugins\\GA\\lib\\crossovers\\CrossoverProvider.js"
+			],
+			[
+				"alljs",
+				"app\\plugins\\GA\\plugin\\crossovers\\all.js"
+			],
 			[
 				"plugi",
 				"app\\plugins\\PluginRegister.jsx"
@@ -878,10 +1284,6 @@
 				"app\\libs\\utils.js"
 			],
 			[
-				"web",
-				"webpack.config.js"
-			],
-			[
 				"index",
 				"app\\index.jsx"
 			],
@@ -894,20 +1296,8 @@
 				"app\\players\\soundfont-player\\Player.js"
 			],
 			[
-				"indivi",
-				"app\\plugins\\GA\\plugin\\Individual.js"
-			],
-			[
 				"indexjsx",
 				"app\\plugins\\GA\\components\\Index.jsx"
-			],
-			[
-				"ga.js",
-				"app\\plugins\\GA\\plugin\\GA.js"
-			],
-			[
-				"ga.",
-				"app\\plugins\\GA\\plugin\\GA.js"
 			],
 			[
 				"pac",
@@ -920,10 +1310,6 @@
 			[
 				"player",
 				"ga-app4\\src\\js\\Player.js"
-			],
-			[
-				"todo",
-				"my-composer\\TODO.todo"
 			],
 			[
 				"tem",
@@ -947,10 +1333,6 @@
 			],
 			[
 				"pack",
-				"package.json"
-			],
-			[
-				"package",
 				"package.json"
 			],
 			[
@@ -1043,10 +1425,10 @@
 	{
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 279.0,
+	"side_bar_width": 302.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

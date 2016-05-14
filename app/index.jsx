@@ -1,6 +1,6 @@
 import 'array.prototype.findindex';
 import './main.css';
-import './components/layout/dashboard.css';
+import './styles/dashboard.css';
 
 //LIBS
 import React from 'react';
@@ -8,21 +8,20 @@ import { render } from 'react-dom'
 import { Route, DefaultRoute, Link, RouteHandler } from 'react-router';
 import Router from 'react-router';
 
-//WRAPPERS
-import alt from './libs/alt';
-import storage from './libs/storage';
-import persist from './libs/persist';
 
 //APP
-import routes from './routes';
 import './plugins/all.jsx';
+import Root from './containers/root';
+import configureStore from './store/configureStore'
+import initialState from './store/initialState';
 
-function main() {
-	persist(alt, storage, 'app');
-	const app = document.createElement('div');
-	document.body.appendChild(app);
+console.log(initialState);
+const store = configureStore(initialState);
 
-	render((<Router>{routes}</Router>), app);
-}
+window.store = store;
 
-main();
+render(
+	<Root store={store} />,
+	document.getElementById('root')
+);
+

@@ -1,35 +1,50 @@
+//styles
+import styles from './styles.css';
+
 //libs
 import React from 'react';
 import { Table, Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
 import { LineChart } from 'react-d3';
 import ABCJS from 'ABCJS';
-
-//styles
-import styles from './styles.css';
+import {connect} from 'react-redux';
 
 import Player from '../../../players/soundfont-player/Player.js';
-import DEFAULT_OPTIONS from '../plugin/default-options.js';
+import DEFAULT_OPTIONS from '../lib/default-options.js';
 
 //Components
 import GAOptions from './GAOptions.jsx';
-import GARunner from '../plugin/GARunner.js';
+import GARunner from '../lib/ga/GARunner.js';
 import Sheet from './Sheet.jsx';
 import IndividualsTable from './IndividualsTable.jsx';
 
-export default class Index extends React.Component { 
-	constructor(params) {
-		super(params);
+const DEFAULT_STATE = {
+	paused: false,
+	selected: null,
+	population: [],
+	statistics: [],
+	percentage: 0,
+	best: null	
+};
 
+// TODO: read crossover options from redux state
+export default class Index extends React.Component { 
+	constructor(params, context) {
+		super(params);
 		this.runner = null;
 
-		this.state = {
-			selected: null,
-			population: [],
-			percentage: 0,
-			best: null,
-			options: Object.assign({}, DEFAULT_OPTIONS),
-			statistics: []
-		};
+		const state = context.store.getState();
+
+		// TODO: put options state in namespace? or grab it from?
+		this.state = Object.assign(
+			{},
+			DEFAULT_STATE,
+			// TODO: why i put this in state?
+			{
+				crossover: state.GA.crossover,
+				mutation: state.GA.mutation,
+				options: state.GA.options
+		 	}
+		);
 	}
 	
 	select( item, index ) {
@@ -40,6 +55,7 @@ export default class Index extends React.Component {
 	}
 
 	run() {
+		// Update UI with default values
 		this.setState({
 			selected: null,
 			population: [],
@@ -47,52 +63,66 @@ export default class Index extends React.Component {
 			percentage: 0
 		});
 
+		// Delete old runner if it is
 		if ( this.runner ) {
 			this.runner.destroy();
 		}
 
-		this.runner = new GARunner(
-			this.state.options,
-				population => { 
-				this.setState({ population });
-			},
-			({ percentage, best }) => {
-				const statistics = this.state.statistics;
+		// New Runner
+		const onDone = population => this.setState({ population });
+		const onPause = population => this.setState({ population, paused: true });
+		const onProgress = ({ percentage, best }) => {
+			const statistics = this.state.statistics;
 
-				statistics.push({
-					x: percentage,
-					y: (best.fitnessValue * 100)
-				});
+			statistics.push({
+				x: percentage,
+				y: (best.fitnessValue * 100)
+			});
 
-				this.setState({ best, percentage, statistics });
-			}
-		);
+			this.setState({ best, percentage, statistics });
+		};
+
+		const options = this.context.store.getState().GA;
+		this.runner = new GARunner(options, onDone, onProgress, onPause);
 	}
 
-	onOptionsChange(path /*string like mutations.swap2 */, field, value) {
-		const options = this.state.options;
-		const target = path.split('.').reduce((store, dir) => {
-			return store[dir];
-		}, options);
-		target[field] = value;
-		this.setState({ options });
+	resume() {
+		this.runner && this.runner.resume();
+	}
+
+	pause() {
+		this.runner && this.runner.pause();
+	}
+
+	stop() {
+		this.runner && this.runner.stop();
 	}
 
 	render() {
+		const {store} = this.context;
 		const style = {
             marginTop: '10px'
         };
 
-        const individualsTable = this.state.population.length ? <IndividualsTable population={this.state.population} onSelect={this.select.bind(this)} /> : null;
         let scoresPanel = null;
         let progressBar = null;
+        let lineChart = null;
         let best = null;
+        let individualsTable = null;
+
+        if ( this.state.population.length ) {
+        	individualsTable = (
+        		<IndividualsTable
+        			population={this.state.population}
+        			onSelect={this.select.bind(this)} />
+    		);
+        }
 
         // Panels
         if ( this.state.selected ) {
         	scoresPanel = (
         		<Panel header="Scores">
-					<Sheet data={this.state.selected}/>
+					<Sheet data={this.state.selected} />
 				</Panel>
     		);
         }
@@ -107,6 +137,7 @@ export default class Index extends React.Component {
     		);
         }
 
+        // Best Guys ProgressBar
         if ( this.state.best ) {
         	best = (
         		<div className="progress-bar-wrapper">
@@ -116,28 +147,30 @@ export default class Index extends React.Component {
     		);
         }
 
-        const viewBoxObject = {
-		    x: 0,
-		    y: 0,
-		    width: 500,
-		    height: 400
-		};
-
-		const lineChart = (this.state.statistics && this.state.statistics.length) ? (
-			<Panel header="Graph">
-				<LineChart
-				  legend={true}
-				  data={this._createLineChartData(this.state.statistics)}
-				  width={800}
-				  height={400}
-				  viewBoxObject={viewBoxObject}
-				  title="Line Chart"
-				  yAxisLabel="Altitude"
-				  xAxisLabel="Elapsed Time (sec)"
-				  gridHorizontal={true}
-				></LineChart>
-			</Panel>
-		) : null;
+        // Graph of Progress
+		if ( this.state.statistics && this.state.statistics.length ) {
+			const viewBoxObject = {
+			    x: 0,
+			    y: 0,
+			    width: 500,
+			    height: 400
+			};
+			lineChart = (
+				<Panel header="Graph">
+					<LineChart
+					  legend={true}
+					  data={this._createLineChartData(this.state.statistics)}
+					  width={800}
+					  height={400}
+					  viewBoxObject={viewBoxObject}
+					  title="Line Chart"
+					  yAxisLabel="Altitude"
+					  xAxisLabel="Elapsed Time (sec)"
+					  gridHorizontal={true}
+					></LineChart>
+				</Panel>
+			);
+		}
 
 		return (
 			<Grid fluid>
@@ -145,12 +178,23 @@ export default class Index extends React.Component {
 					<Col sm={8} md={8}>
 						{lineChart}
 						{scoresPanel}
-						<GAOptions onChange={this.onOptionsChange.bind(this)} options={this.state.options} />
+						<GAOptions store={store} />
 					</Col>
 					<Col sm={4} md={4}>
 						<Panel header="Population">
 							<ButtonGroup>
-								<Button bsStyle="primary" onClick={this.run.bind(this)}>Run</Button>
+								<Button bsStyle="primary" onClick={this.run.bind(this)}>
+									Run
+								</Button>
+								<Button bsStyle="primary" onClick={this.stop.bind(this)}>
+									Stop
+								</Button>
+								<Button bsStyle="primary" onClick={this.resume.bind(this)}>
+									Resume
+								</Button>
+								<Button bsStyle="primary" onClick={this.pause.bind(this)}>
+									Pause
+								</Button>
 							</ButtonGroup>
 							{best}
 							{progressBar}
@@ -174,3 +218,7 @@ export default class Index extends React.Component {
 		];
 	}
 }
+// TODO: redo with react-redux connect later on
+Index.contextTypes = {
+	store: React.PropTypes.object
+};

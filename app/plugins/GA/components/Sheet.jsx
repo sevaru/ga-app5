@@ -1,6 +1,6 @@
 import React from 'react';
 import ABCJS from 'ABCJS';
-import convertToABC from '../plugin/utils/convertToABC';
+import convertToABC from '../lib/utils/convertToABC';
 
 export default class Sheet extends React.Component {
 	constructor(params) {
@@ -24,7 +24,7 @@ export default class Sheet extends React.Component {
 	}
 
 	render() {
-		return <div ref="abcjs"></div>
+		return <div ref="abcjs"></div>;
 	}
 
 	_initializeWidget(data) {
