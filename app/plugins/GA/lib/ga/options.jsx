@@ -7,7 +7,7 @@ import rootState from '../../../../store/initialState';
 const NAMESPACE = 'options';
 
 rootState.GA[NAMESPACE] = {
-	maxIterations: 250,
+	maxIterations: 2500,
     deathLimit: 0.4,
     count: 25,
     threshold: 0.9, /* End processing when someone near good (best 1) */

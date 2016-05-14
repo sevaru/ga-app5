@@ -39,18 +39,19 @@ export default class GA {
 	}
 
     resume() {
-        this._stopped = false;
+        this._paused = false;
         this._run();
     }
 
     // TODO: redo stop logic (now embedded in _run)
     pause() {
-        this._stopped = true;
+        this._paused = true;
     }
 
     stop() {
+        this._paused = true;
         this._stopped = true;
-        this._cleanState();
+        // TODO: clean state for new execution?
     }
 
 	
@@ -186,6 +187,7 @@ export default class GA {
 
     _cleanState() {
         this._i = 0;
+        this._paused = false;
         this._stopped = false;
         this._population = [];
         this._bestOne = null;
@@ -199,7 +201,7 @@ export default class GA {
         this._createInitialPopulation();
 
         loop(
-            () => (!this._stopped && !this._isDone() && this._i < maxIterations),
+            () => (!this._paused && !this._isDone() && this._i < maxIterations),
             () => {
                 this._i++;
                 let parents = this._population.slice();
@@ -227,8 +229,10 @@ export default class GA {
                 const populationDTO = this._snapshot(this._population, this._bestOne);
 
                 if ( this._stopped ) {
+                    onDone(populationDTO);
+                } else if ( this._paused ) {
                     onPause(populationDTO);
-                } else if ( onDone ) {
+                } else {
                     onDone(populationDTO);
                 }
             }
@@ -266,11 +270,11 @@ export default class GA {
                 });
             }
 
-        } while ( !this._stopped && !this._isDone() && this._i < maxIterations );
+        } while ( !this._paused && !this._isDone() && this._i < maxIterations );
 
         const populationDTO = this._snapshot(this._population, this._bestOne);
 
-        if ( this._stopped ) {
+        if ( this._paused ) {
             onPause(populationDTO);
         } else if ( onDone ) {
             onDone(populationDTO);

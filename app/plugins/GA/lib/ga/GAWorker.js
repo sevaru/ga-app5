@@ -64,7 +64,8 @@ onmessage = function(event/*: { data: { action: 'start' | 'stop' | 'pause', data
 
 		case 'stop':
 			sharedInstance.stop();
-			close();
+			// TODO: creepy way to let websocket send message on onDone back and only than close socket; 
+			setTimeout(close, 100);
 			break;
 
 		case 'pause':

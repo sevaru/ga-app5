@@ -18,6 +18,7 @@ import Sheet from './Sheet.jsx';
 import IndividualsTable from './IndividualsTable.jsx';
 
 const DEFAULT_STATE = {
+	working: false, // calculate process is execution
 	paused: false,
 	selected: null,
 	population: [],
@@ -57,9 +58,11 @@ export default class Index extends React.Component {
 	run() {
 		// Update UI with default values
 		this.setState({
+			working: true,
 			selected: null,
 			population: [],
 			statistics: [],
+			best: 0,
 			percentage: 0
 		});
 
@@ -69,8 +72,8 @@ export default class Index extends React.Component {
 		}
 
 		// New Runner
-		const onDone = population => this.setState({ population });
-		const onPause = population => this.setState({ population, paused: true });
+		const onDone = population => this.setState({ population, working: false, paused: false }); // onDone back to default state
+		const onPause = population => this.setState({ population });
 		const onProgress = ({ percentage, best }) => {
 			const statistics = this.state.statistics;
 
@@ -87,10 +90,16 @@ export default class Index extends React.Component {
 	}
 
 	resume() {
+		this.setState({
+			paused: false
+		});
 		this.runner && this.runner.resume();
 	}
 
 	pause() {
+		this.setState({
+			paused: true
+		})
 		this.runner && this.runner.pause();
 	}
 
@@ -103,6 +112,7 @@ export default class Index extends React.Component {
 		const style = {
             marginTop: '10px'
         };
+        const {paused, working} = this.state;
 
         let scoresPanel = null;
         let progressBar = null;
@@ -182,18 +192,31 @@ export default class Index extends React.Component {
 					</Col>
 					<Col sm={4} md={4}>
 						<Panel header="Population">
+							{/* extract to <GACalculationControls play pause resume stop working paused>*/}
 							<ButtonGroup>
-								<Button bsStyle="primary" onClick={this.run.bind(this)}>
-									Run
-								</Button>
-								<Button bsStyle="primary" onClick={this.stop.bind(this)}>
-									Stop
-								</Button>
-								<Button bsStyle="primary" onClick={this.resume.bind(this)}>
-									Resume
-								</Button>
-								<Button bsStyle="primary" onClick={this.pause.bind(this)}>
-									Pause
+								{
+									working ?
+									(
+										paused ?
+										(
+											<Button bsStyle="success" onClick={this.resume.bind(this)}>
+												<span className="glyphicon glyphicon-play"></span>
+											</Button>
+										):
+										(
+											<Button bsStyle="warning" onClick={this.pause.bind(this)}>
+												<span className="glyphicon glyphicon-pause"></span>
+											</Button>
+										)
+									) :
+									(
+										<Button bsStyle="success" onClick={this.run.bind(this)}>
+											<span className="glyphicon glyphicon-play"></span>
+										</Button>
+									)
+								}
+								<Button bsStyle="danger" onClick={this.stop.bind(this)}>
+									<span className="glyphicon glyphicon-stop"></span>
 								</Button>
 							</ButtonGroup>
 							{best}
