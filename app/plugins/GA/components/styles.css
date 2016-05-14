@@ -1,5 +1,6 @@
 .table tr.highlight {
-	background: red !important;
+	background: #5cb85c !important;
+	color: white !important;
 }
 
 .progress-bar-wrapper {
