@@ -1,6 +1,6 @@
 //Base paths
 const APP = '../app/';
-const PLUGIN = APP + 'plugins/GA/plugin/';
+const PLUGIN = APP + 'plugins/GA/lib/';
 
 //Module paths
 const NOTE = PLUGIN + 'utils/Note.js';
@@ -9,8 +9,8 @@ const COMMON = PLUGIN + 'common.js';
 jest.dontMock(NOTE);
 jest.dontMock(COMMON);
 
-xdescribe('Note', () => {
-	const Note = require(NOTE);
+describe('Note', () => {
+	const Note = require(NOTE).default;
 
 	it('Should throw exception on invalid arguments', () => {
 		const invalidArgument = -1;

@@ -1,6 +1,6 @@
 //Base paths
 const APP = '../app/';
-const PLUGIN = APP + 'plugins/GA/plugin/';
+const PLUGIN = APP + 'plugins/GA/lib/';
 
 //Module paths
 const UTILS = PLUGIN + 'utils.js'
@@ -9,7 +9,7 @@ const NOTES_UTILS = PLUGIN + 'utils/NotesUtils.js'
 jest.dontMock(UTILS);
 jest.dontMock(NOTES_UTILS);
 
-xdescribe('stringUtils', () => {
+describe('stringUtils', () => {
 	const stringUtils = require(UTILS).stringUtils;
 
 	it('firstUpper should uppercase first char in string', () => {
@@ -22,7 +22,7 @@ xdescribe('stringUtils', () => {
 });
 
 
-xdescribe('arrayUtils', () => {
+describe('arrayUtils', () => {
 	const arrayUtils = require(UTILS).arrayUtils;
 
 	it('findObjectByKey', () => {
@@ -33,8 +33,8 @@ xdescribe('arrayUtils', () => {
 	});
 });
 
-xdescribe('notesUtils', () => {
-	const notesUtils = require(NOTES_UTILS);
+describe('notesUtils', () => {
+	const notesUtils = require(NOTES_UTILS).default;
 
 	const content = [
 		3, -1, 3, -1, 3, -1, 3, -1,

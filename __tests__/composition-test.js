@@ -1,6 +1,6 @@
 //Base paths
 const APP = '../app/';
-const PLUGIN = APP + 'plugins/GA/plugin/';
+const PLUGIN = APP + 'plugins/GA/lib/';
 
 //Module paths
 const COMPOSITION = PLUGIN + 'utils/Composition.js';
@@ -15,14 +15,14 @@ jest.dontMock(NOTE);
 jest.dontMock(COMMON);
 jest.dontMock(NOTES_CONVERTER);
 
-xdescribe('Composition', () => {
+describe('Composition', () => {
 	function serialize( bar ) {
 		return bar.map(b => b.map(n => n.toRaw()).toString()).toString();
 	}
 
-	const Composition = require(COMPOSITION);
-	const NotesConverter = require(NOTES_CONVERTER);
-	const Note = require(NOTE);
+	const Composition = require(COMPOSITION).default;
+	const NotesConverter = require(NOTES_CONVERTER).default;
+	const Note = require(NOTE).default;
 
 	const raw = [
 		3, -1, 3, -1, 3, -1, 3, -1,
@@ -44,13 +44,5 @@ xdescribe('Composition', () => {
 		const composition = new Composition(raw);
 		const testResult = composition.bars(); 
 		expect(serialize(testResult)).toBe(serialize(bars));
-	});
-
-	xit('construction big', () => {
-		const composition = new Composition(raw2);
-		const bars = composition.bars(); 
-		
-
-
 	});
 });

@@ -1,6 +1,6 @@
 //Base paths
 const APP = '../app/';
-const PLUGIN = APP + 'plugins/GA/plugin/';
+const PLUGIN = APP + 'plugins/GA/lib/';
 
 //Module paths
 const NOTE = PLUGIN + 'utils/Note.js';
@@ -12,8 +12,8 @@ jest.dontMock(COMMON);
 jest.dontMock(NOTES_CONVERTER);
 
 describe('NotesConverter', () => {
-	const NotesConverter = require(NOTES_CONVERTER);
-	const Note = require(NOTE);
+	const NotesConverter = require(NOTES_CONVERTER).default;
+	const Note = require(NOTE).default;
 
 	it('toNotes', () => {
 		const raw = [
