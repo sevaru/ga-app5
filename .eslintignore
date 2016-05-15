@@ -1,3 +1,5 @@
 build/
 
-app/plugins/**/libs/
+app/plugins/**/vendors/
+
+out/

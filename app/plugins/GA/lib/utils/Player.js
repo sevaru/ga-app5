@@ -115,6 +115,6 @@ const Player = ((Synth) => {
         stop: stop
     };
 
-}(Synth));
+})(Synth);
 
 export default Player;

@@ -1,5 +1,4 @@
 const Synth = (() => {
-
     // Create Web Audio Context.
     var context = new AudioContext(),
         currentOscillator;
@@ -46,6 +45,6 @@ const Synth = (() => {
         stopNote: stopNote
     };
 
-}());
+})();
 
 export default Synth;
