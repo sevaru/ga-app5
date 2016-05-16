@@ -236,7 +236,7 @@ export default class Index extends React.Component {
 				name: 'series1',
 				values: data,
 				strokeWidth: 3,
-				strokeDashArray: '5,5',
+				strokeDashArray: '5,5'
 			}
 		];
 	}

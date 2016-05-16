@@ -17,7 +17,7 @@ export function createPluginsReducer(namespace, fullState) {
 	const initialState = fullState[namespace];
 	return (state = initialState, action) => {
 		switch (action.type) {
-			case OPTIONS_CHANGE_ACTION:
+			case OPTIONS_CHANGE_ACTION: {
 				if (action.optionsPath[0] !== namespace) {
 					return state;
 				} 
@@ -25,6 +25,7 @@ export function createPluginsReducer(namespace, fullState) {
 				const [, ...optionsPath] = action.optionsPath;
 				console.log(optionsPath)
 				return Object.assign({}, state, createDeepProperty({optionsPath, value: action.value}));
+			}
 			default:
 				return state;
 		}

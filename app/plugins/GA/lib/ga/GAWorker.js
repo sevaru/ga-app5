@@ -53,7 +53,7 @@ function createGA(options) {
 
 let sharedInstance;
 
-onmessage = function(event/*: { data: { action: 'start' | 'stop' | 'pause', data: any } } */) {
+onmessage = function(event/*: { data: { action: 'start' | 'stop' | 'pause', data: any } } */) { // eslint-disable-line
 	const { data, action } = event.data;
 
 	console.log(action);

@@ -1,5 +1,7 @@
 import SimpleStorage from './SimpleStorage.js';
+import {REFERENCE_INDIVIDUAL} from './common';
 
+// TODO: does it used?
 class MusicContext {
 	getAllCompositions() {
 		return SimpleStorage.getKeys();
