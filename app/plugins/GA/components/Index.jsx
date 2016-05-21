@@ -9,7 +9,6 @@ import ABCJS from 'ABCJS';
 import {connect} from 'react-redux';
 
 import Player from '../../../players/soundfont-player/Player.js';
-import DEFAULT_OPTIONS from '../lib/default-options.js';
 
 //Components
 import GAOptions from './GAOptions.jsx';
