@@ -1,7 +1,15 @@
+import {normalizeNotesDiscrete} from '../../utils/normalization';
+
 const run =
-	(content, reference) =>
-		content.reduce((prev, item, index) =>
-		 	prev + (+(item === reference[index]) / content.length), 0);
+	(content, reference) => {
+		const normContent = normalizeNotesDiscrete(content);
+		const normReference = normalizeNotesDiscrete(reference);
+		const point = 1 / normContent.length;
+
+		return normContent
+			.reduce((store, item, index) =>
+				 item === normReference[index] ? store + point : store, 0);
+	};
 
 const getInitialState = () => ({ weight: 1 });
 
