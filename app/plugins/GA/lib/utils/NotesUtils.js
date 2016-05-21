@@ -5,6 +5,7 @@ class NotesUtils {
 	/*
 		[1, -2, 3, 1, 1] where 1 is 1/8 and "-" is pause
 	*/
+	// TODO: redo fitness and this creepy logic
 	toRhythm( data ) {
 		let result = [];
 		let bar = undefined;
