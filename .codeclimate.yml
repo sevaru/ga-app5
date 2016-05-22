@@ -20,3 +20,4 @@ exclude_paths:
   - app/plugins/**/vendors/**/*
   - out/**/*
   - build/**/*
+  - stats.json
