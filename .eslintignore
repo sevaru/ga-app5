@@ -3,3 +3,7 @@ build/
 app/plugins/**/vendors/
 
 out/
+
+coverage/
+
+node_modules/
