@@ -17,4 +17,6 @@ ratings:
   - "app/**/*.jsx"
   - "__tests__/**/*.js"
 exclude_paths: 
-  - "app/plugins/**/vendors/*"
+  - app/plugins/**/vendors/**/*
+  - out/**/*
+  - build/**/*
