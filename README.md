@@ -3,8 +3,7 @@
 [![devDependency Status][dev-dep-status-img]][dev-dep-status-link]
 [![Build Status][ci-img]][ci]
 
-
-[code-climate-img]: https://codeclimate.com/github/sevaru/ga-app5.png
+[code-climate-img]: https://codeclimate.com/github/sevaru/ga-app5/badges/gpa.svg
 [code-climate-link]: https://codeclimate.com/github/sevaru/ga-app5
 [dep-status-img]: https://david-dm.org/sevaru/ga-app5.svg
 [dep-status-link]: https://david-dm.org/sevaru/ga-app5
