@@ -1,8 +1,12 @@
 import SimpleStorage from './SimpleStorage.js';
 import {REFERENCE_INDIVIDUAL} from './common';
 
-// TODO: does it used?
+// TODO: used in composition/s jsx
 class MusicContext {
+	getCompositionLength() {
+		return 128;
+	}
+
 	getAllCompositions() {
 		return SimpleStorage.getKeys();
 	}
