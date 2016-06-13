@@ -11,13 +11,20 @@ function checkObj( obj ) {
 }
 
 const numberUtils = {
-	randomBetween( one, another ) {
-		if ( another === undefined ) {
-			another = one;
-			one = 0;
+	/**
+	 * @param {number} startIndex
+	 * @param {number} endIndex not included
+	 */
+	randomBetween( startIndex, endIndex ) {
+		if (startIndex < 0 || endIndex < 0) {
+			throw 'wft randomBetween';
+		}
+		if ( endIndex === undefined ) {
+			endIndex = startIndex;
+			startIndex = 0;
 		}
 
-		return Math.floor(Math.random() * another) + one;  
+		return Math.floor(Math.random() * endIndex) + startIndex;  
 	}
 };
 

@@ -29,3 +29,9 @@ at root project directory
 ```shell
 npm start
 ```
+
+# Debug tests
+
+```shell
+node debug --harmony ./node_modules/jest-cli/bin/jest.js --runInBand
+``` 
