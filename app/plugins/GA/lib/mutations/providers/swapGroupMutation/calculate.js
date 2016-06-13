@@ -99,6 +99,7 @@ function getSecondGroupIndexes(couldBe, indexes, count, length) {
 export function calculate(data, options = { count: 3 }) {
 	const length = data.length;
 	const count = options.count;
+	let run = true;
 
 	// 1. Validation
 	validateInput(options, length);
@@ -107,13 +108,12 @@ export function calculate(data, options = { count: 3 }) {
 		getFirstGroupIndexes(indexes, length, count)
 	];
 	
-	while (1) {
+	while ( run ) {
 		const couldBe = secondGroupPositionInfo(indexes, count, length);
-		if ( !couldBe ) {
-			continue;
+		if ( couldBe ) {
+			indexes[1] = getSecondGroupIndexes(couldBe, indexes, count, length);
+			run = false;
 		}
-		indexes[1] = getSecondGroupIndexes(couldBe, indexes, count, length);
-		break;
 	}
 
 	return swapParts(data, normalizeOrder(indexes), length);

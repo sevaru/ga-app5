@@ -34,6 +34,7 @@ describe('Swap group mutation', () => {
 	});
 
 	// TODO: fix test
+	/*
 	xit('should swap 2', () => {
 		// Arrange
 		//  [1, 9, 2, 5, (0, -1, 12), 4];
@@ -43,7 +44,6 @@ describe('Swap group mutation', () => {
 			const values = [0, 0]; //[1, 4];
 
 			return () => {
-				debugger;
 				return values.pop();
 			}
 		};
@@ -55,4 +55,5 @@ describe('Swap group mutation', () => {
 		// Assert
 		expect(JSON.stringify(result)).toBe(JSON.stringify(expectation));
 	});
+	*/
 });
