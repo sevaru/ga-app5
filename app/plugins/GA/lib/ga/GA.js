@@ -92,7 +92,7 @@ export default class GA {
         const clones = population.slice();
         return clones.map(item => {
             if ( Math.random() < probability ) {
-                item.mutate(this._options);
+                item.mutate();
             }
             return item;
         });
