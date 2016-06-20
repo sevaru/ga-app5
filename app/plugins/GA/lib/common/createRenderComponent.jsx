@@ -32,7 +32,7 @@ export const createRenderComponent = (pluginKey, plugins) => {
 			});
 
 		return (
-			<Panel header={pluginKey + ' options'}>
+			<Panel collapsible header={pluginKey + ' options'}>
                 {options}
             </Panel>
 		);
