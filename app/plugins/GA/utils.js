@@ -1,10 +1,10 @@
+import {merge} from 'lodash';
 import {OPTIONS_CHANGE_ACTION} from './actions/index';
-
 
 export function createDeepProperty({ optionsPath, value }) {
 	const obj = {};
 	const stopIndex = optionsPath.length - 1;
-	return optionsPath.reduce((prev, current, currentIndex, array) => {
+	return optionsPath.reduce((prev, current, currentIndex) => {
 		if (currentIndex === stopIndex) {
 			prev[current] = value;
 			return obj;
@@ -23,8 +23,9 @@ export function createPluginsReducer(namespace, fullState) {
 				} 
 				// NOTE: remove namespace from path;
 				const [, ...optionsPath] = action.optionsPath;
-				console.log(optionsPath)
-				return Object.assign({}, state, createDeepProperty({optionsPath, value: action.value}));
+				const newFragment = createDeepProperty({ optionsPath, value: action.value });
+
+				return merge({...state}, newFragment);
 			}
 			default:
 				return state;
