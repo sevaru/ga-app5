@@ -27,11 +27,13 @@ class BaseControl extends React.Component {
 export class SliderControl extends BaseControl {
     constructor(params) {
         super(params);
-        this.state = { value: this.props.defaultValue };
+        const { field, defaultValue } = this.props;
+        this.state = { value: defaultValue };
+        this.blurBinded = this.onBlur.bind(this, { field, type: 'number' });
     }
 
-    onChange(event) {
-        this.setState({value: event.target.value});
+    onChange = event => {
+        this.setState({ value: event.target.value });
     }
 
 	render() {
@@ -53,8 +55,8 @@ export class SliderControl extends BaseControl {
                 	min={min}
                 	max={max}
                 	step={step}
-                    onChange={this.onChange.bind(this)}
-                	onBlur={this.onBlur.bind(this, {field, type: 'number'})} />
+                    onChange={this.onChange}
+                	onBlur={this.blurBinded} />
             </div>
         );
 	}
