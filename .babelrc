@@ -4,6 +4,14 @@
     	"react"
 	],
 	"plugins": [
+		["typecheck", {
+	      "disable": {
+	        "production": true
+	      }
+	    }],
+		"transform-flow-strip-types",
+		"syntax-flow",
+	
 		"syntax-class-properties",
 		"syntax-decorators",
 		"syntax-object-rest-spread",
