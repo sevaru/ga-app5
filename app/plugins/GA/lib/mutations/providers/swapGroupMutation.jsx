@@ -1,26 +1,37 @@
 import React from 'react';
 import { SliderControl } from '../../../components/UIFactory.jsx';
 import { calculate as run } from './swapGroupMutation/calculate';
-import MusicContext from '../../MusicContext';
-
-const COUNT_OF_GENS = MusicContext.getCompositionLength();
 
 const render = 
-	(state, onblur) => (
-		<SliderControl
-        	defaultValue={state.count}
-        	onBlur={onblur.bind(null, 'count')}
-        	field={'count'} 
-        	title="Count of genes"
-			min={1}
-			max={COUNT_OF_GENS}
-			step={1}
-    	/>
-	);
+	(state, onblur) => {
+		return (
+			<div>
+				<SliderControl
+		        	defaultValue={state.count}
+		        	onBlur={onblur}
+		        	field={'count'} 
+		        	title="Count of groups"
+					min={1}
+					max={10}
+					step={1}
+		    	/>
+		    	<SliderControl
+		        	defaultValue={state.groupSize}
+		        	onBlur={onblur}
+		        	field={'groupSize'} 
+		        	title="Group size in percents"
+					min={1}
+					max={100}
+					step={1}
+		    	/>
+	    	</div>
+		)
+	};
 
 const getInitialState = () => ({
 	weight: 1,
-	count: 10
+	count: 4,
+	groupSize: 4
 });
 
 export default {
