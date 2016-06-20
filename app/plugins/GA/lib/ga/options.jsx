@@ -40,7 +40,7 @@ export const render = (props) => {
 	const createSlider = createSliderFactory(state, onblur);
 	
 	return (
-		<Panel header="Options">
+		<Panel collapsible defaultExpanded header="Options">
 			{createSlider('maxIterations', {max: 500000, min: 100, step: 1})}
 			{createSlider('deathLimit')}
 			{createSlider('count', {max: 500, min: 25, step: 1})}
