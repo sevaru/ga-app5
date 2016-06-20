@@ -12,18 +12,23 @@ export default class BaseCalculateProvider {
 	 * @description Gets run function once
 	 */
 	getRunOnce(options) {
-		return this._getFunction(options).run;
+		return this._getFunction(options).fn.run;
 	}
 
 	getRunRandom(options) {
 		return (...args) => {
-			return this._getFunction(options).run(...args);
+			const { fn, key } = this._getFunction(options);
+			const argsExtended = args.concat(options[key]);
+			return fn.run(...argsExtended);
 		}
 	}
 
 	_getFunction(options) {
 		const key = selectionUtils.getRandomKeyByWeight(options);
-		return this._all[key];
+		return {
+			key,
+			fn: this._all[key] 
+		};
 	}
 
 	_registerInStore(initialState) {
