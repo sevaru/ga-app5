@@ -1,25 +1,4 @@
-const PAUSE = 0;
-const HOLD = -1;
-
-//only for Cmaj in halftones
-const INTERVAL_REFERENCE = [
-	//First octave
-	2, //C-D
-	2, //D-E
-	1, //E-F
-	2, //F-G
-	2, //G-A
-	2, //A-B
-	1, //B-C
-	//Second octave
-	2, //C-D
-	2, //D-E
-	1, //E-F
-	2, //F-G
-	2, //G-A
-	2, //A-B
-	1  //B-C
-];
+import MusicContext, { PAUSE, HOLD } from '../../../MusicContext';
 
 const INTERVAL_TYPE_VALUES = [
 	{
@@ -37,7 +16,6 @@ const INTERVAL_TYPE_VALUES = [
 		GRATER_THAN_OCTAVE: 5
 	}
 ];
-
 
 //0, 1
 function getIntervalValue( interval, type = 0 ) {
@@ -74,24 +52,10 @@ function getIntervalValue( interval, type = 0 ) {
 	return values[interval];
 }
 
-function halfTonesBetween( a , b ) {
-	if ( a > b ) {
-		const temp = a;
-		a = b;
-		b = temp;
-	}
-
-	const arrayToSum = INTERVAL_REFERENCE.slice(a, b);
-
-	return arrayToSum.reduce((prevValue, item) => {
-		return prevValue + item;
-	}, 0);
-}
-
-export function getValueBetweenNotes( noteA, noteB ) {
+export function getValueBetweenNotes( noteA, noteB, mode = 0 ) {
 	// assume that noteA, noteB are not PAUSE or HOLD;
-	const halfTones = halfTonesBetween(noteA, noteB);
-	const intervalValue = getIntervalValue(halfTones);
+	const halfTones = MusicContext.getHalfTonesBetween(noteA, noteB);
+	const intervalValue = getIntervalValue(halfTones, mode);
 	return intervalValue;
 }
 

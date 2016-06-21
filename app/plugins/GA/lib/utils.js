@@ -25,6 +25,14 @@ const numberUtils = {
 		}
 
 		return Math.floor(Math.random() * endIndex) + startIndex;  
+	},
+
+	normalizeValue(value, maxValue) {
+		if (value <= maxValue) {
+			return value;
+		}
+		const rem = value % maxValue;
+		return rem ? rem : maxValue;
 	}
 };
 
