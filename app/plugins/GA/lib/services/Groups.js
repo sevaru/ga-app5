@@ -11,16 +11,42 @@ export class Groups {
 
 	swap(first: Array<number>, second: Array<number>): void {
 		const hash = this._arraysToMap(first, second);
+		const backHash = this._arraysToMap(second, first);
+
+		this._chunks = this._chunks
+						.map((item, index) => {
+							if (hash[index]) {
+								return this._chunks[hash[index]];
+							}
+
+							if (backHash[index]) {
+								return this._chunks[backHash[index]];
+							}
+
+							return item;
+						});
+	}
+
+	copy(first: Array<number>, second: Array<number>): void {
+		const hash = this._arraysToMap(first, second);
 		this._chunks = this._chunks
 						.map((item, index) => 
 							hash[index] == null ? item : this._chunks[hash[index]]);
-	}
+	}	
 
 	length(): number {
 		return this._chunks.length;
 	}
 
-	get() {
+	set(index, value) {
+		this._chunks[index] = value;
+	}
+
+	get(index) {
+		return this._chunks[index];
+	}
+
+	all() {
 		return this._chunks;
 	}
 
