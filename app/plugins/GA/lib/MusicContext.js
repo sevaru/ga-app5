@@ -15,7 +15,6 @@ class MusicContext {
 		return this.getAllCompositions().indexOf(name) === -1;
 	}
 
-
 	save( name, composition ) {
 		return SimpleStorage.save(name, composition);
 	}
@@ -39,3 +38,5 @@ class MusicContext {
 
 export default new MusicContext();
 export const availableValuesInGF = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+export const PAUSE = 0;
+export const HOLD = -1;
