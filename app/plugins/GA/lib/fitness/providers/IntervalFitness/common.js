@@ -1,4 +1,5 @@
-import MusicContext, { PAUSE, HOLD } from '../../../MusicContext';
+import MusicContext from '../../../MusicContext';
+import { PAUSE, HOLD } from '../../../MusicContext';
 
 const INTERVAL_TYPE_VALUES = [
 	{
@@ -54,7 +55,7 @@ function getIntervalValue( interval, type = 0 ) {
 
 export function getValueBetweenNotes( noteA, noteB, mode = 0 ) {
 	// assume that noteA, noteB are not PAUSE or HOLD;
-	const halfTones = MusicContext.getHalfTonesBetween(noteA, noteB);
+	const halfTones = MusicContext.getHalfTonesBeetween(noteA, noteB);
 	const intervalValue = getIntervalValue(halfTones, mode);
 	return intervalValue;
 }
