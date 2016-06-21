@@ -17,7 +17,7 @@ describe('Groups', () => {
 						title,
 						() =>
 							expect(
-								Groups.create(data, size, offset).get()
+								Groups.create(data, size, offset).all()
 							)
 							.toEqual(expectation)
 					);
