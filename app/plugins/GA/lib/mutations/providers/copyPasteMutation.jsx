@@ -1,8 +1,8 @@
 import { createGroupMutation } from './common/createGroupMutation';
 
 export default createGroupMutation(
-	'swap-group-mutation',
+	'copy-paste-mutation',
 	(groups, [fromIndexes, toIndexes]) => {
-		groups.swap(fromIndexes, toIndexes);
+		groups.copy(fromIndexes, toIndexes);
 	}
 );
