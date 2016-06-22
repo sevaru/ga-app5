@@ -54,7 +54,10 @@ class NotesUtils {
 
 			bar.push(ignoreOctaves ? item % 7 : item);
 		});
-		result.push(bar);
+
+		if (bar.length) {
+			result.push(bar);
+		}
 
 		return result;
 	}
