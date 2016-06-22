@@ -12,19 +12,41 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 		const MAX_WEIGHT = Object
 			.keys(options)
 			.map(k => options[k].weight)
-			.reduce((max, weight) =>
-				max > weight ? max : weight, 0);
-
+			.reduce((sum, weight) => sum + weight, 0);
 
 		const keyWeightRaw = _(options)
 			.pickBy(({ weight }) => weight > 0);
 
-		const COUNT = keyWeightRaw.size();
-
-		const keyWeight = 
-			keyWeightRaw
-			.mapValues(v => v.weight / MAX_WEIGHT * COUNT)
+		let keyWeight = keyWeightRaw
+			.mapValues(v => v.weight / MAX_WEIGHT)
 			.value();
+
+		// NOTE: pick first provider with _important key if it's here
+		// TODO: DEBUG {
+		{
+			const debugKeyWeight = 
+				Object
+					.keys(options)
+					.reduce((reducer, key) => {
+						const { _important } = options[key];
+
+						if (reducer.found) {
+							return reducer;
+						}
+
+						if (_important) {
+							reducer.found = true;
+							reducer.value[key] = 1;
+						}
+
+						return reducer;
+					}, { found: false, value: {} })
+					.value;
+			if (!_.isEmpty(debugKeyWeight)) {
+				keyWeight = debugKeyWeight;
+			}
+		}
+		// }
 
 		// TODO: refactor it
 		const fns = Object
@@ -32,10 +54,17 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 			.reduce((reducer, key) => {
 				const settings = options[key];
 				const weight = keyWeight[key];
+				console.log(weight);
 				const fn = this._all[key].run;
 
 				reducer[key] = (...args) => {
-					return fn(...args.concat(settings)) * keyWeight[key];
+					const result = fn(...args.concat(settings)) * weight;
+					console.assert(result >= 0, `Fail on key: ${key}`); 
+					if ( !(result >= 0) ) {
+						debugger;
+						const result2 = fn(...args.concat(settings)) * weight;
+					}
+					return result;
 				};
 				return reducer;
 			}, {});
@@ -44,8 +73,9 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 			return Object
 				.keys(fns)
 				.map(k => fns[k])
-				.reduce((reducer, fn) =>
-					fn(...data), 0);
+				.reduce((reducer, fn) => { 
+					return reducer + fn(...data);
+				}, 0);
 		}
 	}
 
