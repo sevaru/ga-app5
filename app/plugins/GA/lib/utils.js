@@ -49,7 +49,7 @@ const arrayUtils = {
 		return arr;
 	},
 
-	getRandomIndexes( count /*: number */, length /*: number */ ) {
+	getRandomIndexes( count /*: number */, length /*: number */, except ) {
 		const result = [];
 
 		if ( count > length ) {
@@ -59,6 +59,10 @@ const arrayUtils = {
 		while( count > 0 ) {
 			const newIndex = numberUtils.randomBetween(length);
 			if ( result.indexOf(newIndex) !== -1 ) {
+				continue;
+			}
+
+			if ( except && except.includes(newIndex) ) {
 				continue;
 			}
 
