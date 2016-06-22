@@ -1,5 +1,6 @@
 import { getValueBetweenNotes, MAX_AVERAGE_DIFF, MAX_DISPERSION_DIFF } from './common.js';
 import { notesUtils } from '../../../utils.js';
+import { isNumber } from 'lodash';
 
 const defaultOptions = {
 	intervalValuesWeight: 0.5,
@@ -26,7 +27,9 @@ class IntervalFitness {
 			this._referenceValues = this._calculateIntervalValues(referencePitch);
 		}
 
-		return this._calculateFitness(contentValues, options);
+		const result = this._calculateFitness(contentValues, options);
+		console.assert(isNumber(result), 'Result should be a number');
+		return result;
 	}
 
 	_calculateFitness( contentValues, options ) {
@@ -42,15 +45,19 @@ class IntervalFitness {
 
 			averageSum += Math.abs(aRef - average);
 			dispersionSum += Math.abs(dRef - dispersion);
+
 			return false;
 		});
 
 		averageSum = averageSum / this._referenceValues.length;
 		dispersionSum = dispersionSum / this._referenceValues.length;
+		
+		console.assert(isNumber(averageSum), 'AverageSum is a number');
 
 		averageSum = (1 - averageSum / MAX_AVERAGE_DIFF) * options.intervalValuesWeight;
 		dispersionSum = (1 - dispersionSum / MAX_DISPERSION_DIFF) * options.intervalDispersionWeight;
 
+		console.assert(isNumber(averageSum), 'AverageSum is a number');
 		return averageSum + dispersionSum;
 	}
 
@@ -62,6 +69,10 @@ class IntervalFitness {
 		let valuesArray = [];
 		const count = pitchesBar.length;
 		let sum = 0;
+
+		if ( !count ) {
+			return { average: 0, dispersion: 0 };
+		}
 
 		for ( let i = 0; i < count - 1; i++ ) {
 			const a = pitchesBar[i];
