@@ -12,8 +12,9 @@ rootState.GA[NAMESPACE] = {
     count: 25,
     threshold: 0.9, /* End processing when someone near good (best 1) */
     mutationProbability: 0.3,
-    useRandomInitialIndividuals: true,
-    countOfBestToLiveThrought: 2
+    useRandomInitialIndividuals: false,
+    countOfBestToLiveThrought: 2,
+    stopOnEndOfIterations: true
 };
 
 const createSliderFactory =
@@ -51,6 +52,10 @@ export const render = (props) => {
 	            onBlur={onblur}
 	            defaultValue={state['useRandomInitialIndividuals']}
 	            field={'useRandomInitialIndividuals'} />
+            <CheckboxControl
+	            onBlur={onblur}
+	            defaultValue={state['stopOnEndOfIterations']}
+	            field={'stopOnEndOfIterations'} />
         </Panel>
 	);
 };

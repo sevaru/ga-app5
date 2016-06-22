@@ -102,9 +102,13 @@ export default class GA {
     //  3. Selection
     //-----------------------------
     _selection(newPopulation) {
-        const deathLimit = this._options.deathLimit;
-        const goodGuys = newPopulation.filter(item => item.fitnessValue > deathLimit);
-        const count = this._options.countOfBestToLiveThrought;
+        const { deathLimit, stopOnEndOfIterations, countOfBestToLiveThrought: count } = this._options;
+        let goodGuys = newPopulation.filter(item => item.fitnessValue > deathLimit);
+
+        // TODO: it's variations i guess
+        if (stopOnEndOfIterations) {
+            goodGuys = goodGuys.filter(({ fitnessValue }) => fitnessValue !== 1);
+        }
 
         /*
         Если порог прохождения никто не прошел
@@ -162,6 +166,9 @@ export default class GA {
 
     _getBest(population) {
         population = population || this._population;
+        if (!this._bestOne) {
+            this._bestOne = population[0];
+        }
         let bestFitness = this._bestOne ? this._bestOne.fitnessValue : 0;
         population.forEach(item => {
             if ( item.fitnessValue > bestFitness ) {
@@ -196,12 +203,16 @@ export default class GA {
     _run() {
         const {onProgress, onDone, onPause, notifyRate} = this._workerOptions;
         const notify = Boolean(onProgress);
-        const maxIterations = this._options.maxIterations;
+        const { maxIterations, stopOnEndOfIterations } = this._options;
 
         this._createInitialPopulation();
 
         loop(
-            () => (!this._paused && !this._isDone() && this._i < maxIterations),
+            () => (
+                (stopOnEndOfIterations || !this._isDone()) &&
+                !this._paused &&
+                this._i < maxIterations
+            ),
             () => {
                 this._i++;
                 let parents = this._population.slice();
@@ -217,11 +228,10 @@ export default class GA {
                     //TODO: bad calcs this._bestOne and this._bestFitness
                     this._getBest();
                     const percentage = this._formatFitness(this._i, maxIterations);
-                    const best = this._bestOne;
 
                     onProgress({
                         percentage,
-                        best: best.toDTO()
+                        best: this._bestOne.toDTO()
                     });
                 }
             },
