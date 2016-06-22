@@ -1,11 +1,13 @@
 import Note from './Note.js';
 import NotesConverter from './NotesConverter.js';
-import { arrayUtils } from '../utils.js';
-
-const DEFAULT_BAR_LENGTH = 8;
+import MusicContext from '../MusicContext';
 
 export default class Composition {
-	constructor( raw, barLength = DEFAULT_BAR_LENGTH ) {
+	static create(raw, barLength) {
+		return new Composition(raw, barLength);
+	}
+
+	constructor( raw, barLength = MusicContext.getBarLength() ) {
 		if ( !Array.isArray(raw) ) {
 			throw `Invalid argument raw: ${raw}, should be an array of numbers`;
 		}
@@ -31,8 +33,8 @@ export default class Composition {
 			counter += note.length();
 			bar.push(note.clone());
 			
-			console.assert(counter <= 8, `Counter: ${counter} but should be less than 8`);
-			if ( counter === 8 ) {
+			console.assert(counter <= this._barLength, `Counter: ${counter} but should be less than ${this._barLength}`);
+			if ( counter === this._barLength ) {
 				counter = 0;
 				result.push(bar);
 				bar = [];

@@ -8,8 +8,10 @@ const NOTE = PLUGIN + 'utils/Note.js';
 const NOTES_CONVERTER = PLUGIN + 'utils/NotesConverter.js';
 const COMMON = PLUGIN + 'common.js';
 const UTILS = PLUGIN + 'utils.js';
+const MUSIC_CONTEXT = `${PLUGIN}/MusicContext.js`
 
 jest.dontMock(COMPOSITION);
+jest.dontMock(MUSIC_CONTEXT);
 jest.dontMock(UTILS);
 jest.dontMock(NOTE);
 jest.dontMock(COMMON);
