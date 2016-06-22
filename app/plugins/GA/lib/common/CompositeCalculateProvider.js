@@ -60,10 +60,6 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 				reducer[key] = (...args) => {
 					const result = fn(...args.concat(settings)) * weight;
 					console.assert(result >= 0, `Fail on key: ${key}`); 
-					if ( !(result >= 0) ) {
-						debugger;
-						const result2 = fn(...args.concat(settings)) * weight;
-					}
 					return result;
 				};
 				return reducer;
