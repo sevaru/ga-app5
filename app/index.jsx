@@ -1,6 +1,7 @@
 import 'array.prototype.findindex';
 import './main.css';
 import './styles/dashboard.css';
+import './polyfills';
 
 //LIBS
 import React from 'react';

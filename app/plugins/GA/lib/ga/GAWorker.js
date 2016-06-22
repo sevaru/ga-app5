@@ -1,3 +1,4 @@
+import '../../../../polyfills';
 import GA from './GA.js';
 
 /*
