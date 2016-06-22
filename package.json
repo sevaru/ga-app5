@@ -12,7 +12,8 @@
     "lint-js": "eslint . --ext .js --ext .jsx",
     "lint-css": "csslint app --quiet",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "test-debug": "node debug --harmony ./node_modules/jest-cli/bin/jest.js --runInBand"
   },
   "repository": "https://github.com/sevaru/ga-app5",
   "author": "daletune",
