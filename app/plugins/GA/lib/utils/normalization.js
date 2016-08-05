@@ -1,4 +1,4 @@
-import MusicContext from '../MusicContext';
+import MusicContext, { PAUSE, HOLD } from '../MusicContext';
 import { numberUtils } from '../utils';
 
 /**
@@ -8,8 +8,14 @@ import { numberUtils } from '../utils';
 export const normalizeHolds =
 	content => 
 		content
-		.reduce((store, current) => 
-			store.concat(current === -1 ? 0 : current), []);
+			.reduce((store, current) => 
+				store.concat(current === -1 ? 0 : current), []);
+
+export const normalizeRhythm =
+	content =>
+		content
+			.reduce((reducer, current) => 
+				reducer.concat([PAUSE, HOLD].includes(current) ? 0 : 1), []);
 
 /**
  * Replace holds with previous notePitchs/pauses
