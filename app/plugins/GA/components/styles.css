@@ -6,3 +6,7 @@
 .progress-bar-wrapper {
 	margin-top: 10px;
 }
+
+.table tr.selected {
+	background: #f9f592 !important;
+}

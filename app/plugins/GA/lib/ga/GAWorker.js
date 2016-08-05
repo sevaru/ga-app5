@@ -25,7 +25,7 @@ interface IEvent {
 // 3) Pause
 // 4) Resume
 
-function createGA(options) {
+function createGA(options, reference) {
 	const onProgress =
 		data => 
 			postMessage({
@@ -49,7 +49,7 @@ function createGA(options) {
 			close();
 		};
 
-	return new GA(options, { onProgress, onDone, onPause });
+	return new GA(options, { onProgress, onDone, onPause }, reference);
 }
 
 let sharedInstance;
@@ -60,7 +60,7 @@ onmessage = function(event/*: { data: { action: 'start' | 'stop' | 'pause', data
 	console.log(action);
 	switch ( action ) {
 		case 'start':
-			sharedInstance = createGA(data);
+			sharedInstance = createGA(data.options, data.reference);
 			break;
 
 		case 'stop':

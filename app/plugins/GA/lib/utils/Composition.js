@@ -44,6 +44,14 @@ export default class Composition {
 		return result;
 	}
 
+	rawBars() {
+		return this
+			.bars()
+			.map(bar =>
+				bar.reduce((reducer, note) =>
+					[...reducer, ...note.toRaw()], []));
+	}
+
 	raw() {
 		return this._raw.slice();
 	}

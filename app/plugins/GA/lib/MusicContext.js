@@ -10,6 +10,18 @@ export const HOLD = -1;
 
 // TODO: used in composition/s jsx
 class MusicContext {
+	selectComposition(key) {
+		SimpleStorage.setCurrent(key);
+	}
+
+	getCurrentComposition() {
+		return SimpleStorage.getCurrent() || REFERENCE_INDIVIDUAL;
+	}
+
+	getCurrentKey() {
+		return SimpleStorage.getCurrentKey();
+	}
+
 	getCompositionLength() {
 		return 128;
 	}
@@ -57,10 +69,6 @@ class MusicContext {
 	getAvailablePitchValues() {
 		const excludeArray = [PAUSE, HOLD];
 		return availableValuesInGF.filter(x => !excludeArray.includes(x));
-	}
-
-	getInGF() {
-		return REFERENCE_INDIVIDUAL.slice();
 	}
 
 	// TODO: here for now

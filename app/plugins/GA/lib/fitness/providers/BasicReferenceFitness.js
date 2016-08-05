@@ -11,7 +11,7 @@ const run =
 				 item === normReference[index] ? store + point : store, 0);
 	};
 
-const getInitialState = () => ({ weight: 1 });
+const getInitialState = () => ({ weight: 0 });
 
 export default {
 	name: 'basic-reference-fitness',

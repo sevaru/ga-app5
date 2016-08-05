@@ -1,7 +1,7 @@
 // 3d Party
 import React from 'react';
 import { Link } from 'react-router';
-import { Input, Button, Grid, Col, Row, Table, Glyphicon } from 'react-bootstrap';
+import { Input, Button, ButtonGroup, Grid, Col, Row, Table, Glyphicon } from 'react-bootstrap';
 
 // Plugin
 import MusicContext from '../lib/MusicContext.js';
@@ -14,7 +14,8 @@ export default class Compositions extends React.Component {
 		this.state = {
 			compositions: MusicContext.getAllCompositions(),
 			nameRaw: '',
-			name: ''
+			name: '',
+			currentKey: MusicContext.getCurrentKey()
 		};
 	}
 	onNameChange(e) {
@@ -32,9 +33,15 @@ export default class Compositions extends React.Component {
 			compositions: MusicContext.getAllCompositions()
 		});
 	}
+	select = (item) => {
+		MusicContext.selectComposition(item);
+		this.setState({
+			currentKey: item
+		});
+	};
 	renderCompositionItem(item) {
 		return (
-			<tr key={item}>
+			<tr key={item} className={item === this.state.currentKey ? 'selected' : ''}>
 				<td>
 					<Link to={`/compositions/${item}`}>
 						{item}
@@ -44,10 +51,20 @@ export default class Compositions extends React.Component {
 					{
 						item !== DEFAULT ? 
 						(
-							<Button bsStyle="danger" onClick={this.remove.bind(this, item)}>
-								<Glyphicon glyph="remove" />
+							<ButtonGroup>
+								<Button bsStyle="info" onClick={() => this.select(item)}>
+									<Glyphicon glyph="ok-sign" />
+								</Button>
+								<Button bsStyle="danger" onClick={this.remove.bind(this, item)}>
+									<Glyphicon glyph="remove" />
+								</Button>
+							</ButtonGroup>
+						) : 
+						(
+							<Button bsStyle="info" onClick={() => this.select(item)}>
+								<Glyphicon glyph="ok-sign" />
 							</Button>
-						) : null
+						)
 					}
 				</td>
 			</tr>

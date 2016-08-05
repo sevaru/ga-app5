@@ -1,7 +1,7 @@
 import calculator from './IntervalFitness/calculate.js';
 
 const run = calculator.fitness.bind(calculator);
-const getInitialState = () => ({ weight: 0.5 });
+const getInitialState = () => ({ weight: 0 });
 
 // TODO: Сделать отрисовку дополнительных опций для передачи их черех executorFabric
 /*

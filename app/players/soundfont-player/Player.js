@@ -104,6 +104,7 @@ class Player {
 
 	_playInternal() {
 		this._isPlaying = true;
+		this._notes = this._prevNotes.slice();
 		this._playTick();
 	}
 

@@ -61,6 +61,7 @@ const Player = ((Synth) => {
 
         if ( _cursor >= _content.length - 1 ) {
             _stopped = true;
+            _cursor = 0;
         }
 
         if ( _stopped ) {

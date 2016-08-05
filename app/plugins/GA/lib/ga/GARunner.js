@@ -1,4 +1,5 @@
 import Individual from '../Individual.js';
+import MusicContext from '../MusicContext.js';
 import GAWorker from 'worker!./GAWorker.js';
 
 
@@ -10,9 +11,10 @@ import GAWorker from 'worker!./GAWorker.js';
  */
 export default class GARunner {
 	constructor(options, onDone, onProgress, onPause) {
+        const reference = MusicContext.getCurrentComposition();
         this._worker = new GAWorker();
         this._worker.onmessage = this._createOnMessage(onDone, onProgress, onPause);
-        this._worker.postMessage({ data: options, action: 'start' });
+        this._worker.postMessage({ data: { options, reference }, action: 'start' });
         this._worker.onerror = (err) => {
             console.warn(err);
         };

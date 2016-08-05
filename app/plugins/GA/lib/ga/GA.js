@@ -1,5 +1,5 @@
 import Individual from '../Individual';
-import { REFERENCE_INDIVIDUAL } from '../common';
+import MusicContext from '../MusicContext';
 import {run as getCrossover} from '../crossovers/CrossoverProvider';
 import {run as getMutation} from '../mutations/MutationProvider';
 import {run as getFitness} from '../fitness/FitnessProvider';
@@ -19,8 +19,11 @@ const defaultWorkerOptions = {
  * Mostly works in webWorker environment.
  */
 export default class GA {
-	constructor( preferences, workerOptions = {} ) {
-		// 0) Grab and store options
+	constructor( preferences, workerOptions = {}, reference ) {
+		// -1) Grab selected reference
+        this._reference = reference;
+
+        // 0) Grab and store options
         this._options = preferences.options;
         this._workerOptions = Object.assign({}, defaultWorkerOptions, workerOptions);
         
@@ -64,7 +67,7 @@ export default class GA {
 
         for ( var i = 0; i < this._options.count; i++ ) {
             this._population.push(
-            	Individual.create(REFERENCE_INDIVIDUAL, null, null, this._options.useRandomInitialIndividuals, this._context)
+            	Individual.create(this._reference, null, null, this._options.useRandomInitialIndividuals, this._context)
         	);    
         }
     }
@@ -146,7 +149,7 @@ export default class GA {
         // if we need more guys
         if ( need > 0 ) {
             for ( var i = 0; i < need; i++ ) {
-                population.push(Individual.create(REFERENCE_INDIVIDUAL, null, null, this._options.useRandomInitialIndividuals, this._context));
+                population.push(Individual.create(this._reference, null, null, this._options.useRandomInitialIndividuals, this._context));
             }
             return population;
         }
@@ -298,7 +301,7 @@ export default class GA {
         }
 
         // TODO: create Individual factory with preseted context
-        const original = Individual.create(REFERENCE_INDIVIDUAL, null, null, false, this._context);
+        const original = Individual.create(this._reference, null, null, false, this._context);
         population.unshift(original);
         return population.map(x => x.toDTO());
     }

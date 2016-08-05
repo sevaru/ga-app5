@@ -74,11 +74,15 @@ class SimpleStorage {
 		return true;
 	}
 
-	getCurrent() {
-		return localStorage.getItem(CURRENT_KEY);
+	getCurrentKey() {
+		return localStorage.getItem(CURRENT_KEY) || 'default';
 	}
 
-	select( key ) {
+	getCurrent() {
+		return this.getByKey(this.getCurrentKey());
+	}
+
+	setCurrent( key ) {
 		localStorage.setItem(CURRENT_KEY, key);
 	}
 
