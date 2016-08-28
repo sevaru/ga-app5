@@ -4,7 +4,7 @@ import Compositions from './components/Compositions.jsx';
 import Composition from './components/Composition.jsx';
 
 PluginRegister.register({
-	path: '/ga_by_reference',
+	path: '/',
 	component: Index,
 	title: 'Genetic Algorithms (reference)'
 });

@@ -10,6 +10,8 @@ import LayoutMain from './layout/LayoutMain.jsx';
 import Home from './layout/Home.jsx';
 
 
+import Index from '../plugins/GA/components/Index';
+
 export default class App extends React.Component {
 	render() {
 		return (
@@ -19,7 +21,7 @@ export default class App extends React.Component {
 					<Row>
 						<LayoutSideBar nav={nav} />
 						<LayoutMain>
-							{this.props.children || <Home />}
+							{this.props.children || <Index />}
 						</LayoutMain>
 					</Row>
 				</Grid>
