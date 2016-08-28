@@ -95,7 +95,7 @@ const render =
 	);
 
 const getInitialState = () => ({
-	weight: 1,
+	weight: 0.4,
 	count: 7
 });
 

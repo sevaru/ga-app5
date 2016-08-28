@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash';
 import Individual from '../Individual';
 import MusicContext from '../MusicContext';
 import {run as getCrossover} from '../crossovers/CrossoverProvider';
@@ -10,7 +11,7 @@ const defaultWorkerOptions = {
     onProgress: undefined,
     onDone: undefined,
     onPause: undefined,
-    notifyRate: 100
+    notifyRate: 10
 };
 
 /**
@@ -104,9 +105,16 @@ export default class GA {
     //-----------------------------
     //  3. Selection
     //-----------------------------
+    _removeClones(population) {
+        return Object
+            .values(
+                population.reduce((reducer, item) => 
+                    ({ ...reducer, [item.getHash()]: item }), {}));
+    }
     _selection(newPopulation) {
         const { deathLimit, stopOnEndOfIterations, countOfBestToLiveThrought: count } = this._options;
-        let goodGuys = newPopulation.filter(item => item.fitnessValue > deathLimit);
+
+        let goodGuys = this._removeClones(newPopulation).filter(item => item.fitnessValue > deathLimit);
 
         // TODO: it's variations i guess
         if (stopOnEndOfIterations) {
@@ -120,7 +128,7 @@ export default class GA {
          */
         if ( count && goodGuys.length < count ) {
             const bestWeHave = this._getBestWeHave(count, goodGuys.length, newPopulation);
-            goodGuys.concat(bestWeHave);
+            goodGuys = [...goodGuys, ...bestWeHave];
         }
 
         return goodGuys;
@@ -223,7 +231,7 @@ export default class GA {
                 let children = this._crossover();
                 children = this._mutate(children);
 
-                let newPopulation = this._selection([].concat(children, parents));
+                let newPopulation = this._selection([...children, ...parents]);
 
                 this._population = this._createNewPopulation(newPopulation);
 
@@ -239,7 +247,7 @@ export default class GA {
                 }
             },
             () => {
-                const populationDTO = this._snapshot(this._population, this._bestOne);
+                const populationDTO = this._snapshot(this._population);
 
                 if ( this._stopped ) {
                     onDone(populationDTO);
@@ -252,53 +260,8 @@ export default class GA {
         );
     }
 
-    // redo with population as local var not this._population
-	_run_old() {
-        const {onProgress, onDone, onPause, notifyRate} = this._workerOptions;
-        const notify = Boolean(onProgress);
-        const maxIterations = this._options.maxIterations;
-
-        this._createInitialPopulation();
-
-        do {
-            let parents = this._population.slice();
-
-            let children = this._crossover();
-            children = this._mutate(children);
-
-            let newPopulation = this._selection([].concat(children, parents));
-
-            this._population = this._createNewPopulation(newPopulation);
-            this._i++;
-
-            if ( notify && this._i % notifyRate === 0 ) {
-                //TODO: bad calcs this._bestOne and this._bestFitness
-                this._getBest();
-                const percentage = this._formatFitness(this._i, maxIterations);
-                const best = this._bestOne;
-
-                onProgress({
-                    percentage,
-                    best: best.toDTO()
-                });
-            }
-
-        } while ( !this._paused && !this._isDone() && this._i < maxIterations );
-
-        const populationDTO = this._snapshot(this._population, this._bestOne);
-
-        if ( this._paused ) {
-            onPause(populationDTO);
-        } else if ( onDone ) {
-            onDone(populationDTO);
-        }
-	}
-
-    _snapshot(currentPopulation, bestOne) {
+    _snapshot(currentPopulation) {
         const population = this._sortByFitness(currentPopulation);
-        if ( bestOne ) {
-            population.unshift(bestOne);
-        }
 
         // TODO: create Individual factory with preseted context
         const original = Individual.create(this._reference, null, null, false, this._context);

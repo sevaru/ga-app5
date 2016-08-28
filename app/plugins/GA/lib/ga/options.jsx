@@ -7,13 +7,13 @@ import rootState from '../../../../store/initialState';
 const NAMESPACE = 'options';
 
 rootState.GA[NAMESPACE] = {
-	maxIterations: 2500,
-    deathLimit: 0.4,
-    count: 25,
+	maxIterations: 500,
+    deathLimit: 0.2,
+    count: 100,
     threshold: 0.9, /* End processing when someone near good (best 1) */
-    mutationProbability: 0.3,
-    useRandomInitialIndividuals: false,
-    countOfBestToLiveThrought: 2,
+    mutationProbability: 0.5,
+    useRandomInitialIndividuals: true,
+    countOfBestToLiveThrought: 0,
     stopOnEndOfIterations: true
 };
 
@@ -42,7 +42,7 @@ export const render = (props) => {
 	
 	return (
 		<Panel collapsible defaultExpanded header="Options">
-			{createSlider('maxIterations', {max: 500000, min: 100, step: 1})}
+			{createSlider('maxIterations', {max: 10000, min: 50, step: 10})}
 			{createSlider('deathLimit')}
 			{createSlider('count', {max: 500, min: 25, step: 1})}
 			{createSlider('threshold')}

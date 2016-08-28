@@ -5,5 +5,5 @@ import { normalizeNotesDiscrete } from '../../utils/normalization';
 export default {
 	name: 'cluster-fitness',
 	run: fitnessExecutor(clusterMask)(barEqualityComparer),
-	getInitialState: () => ({ weight: 0.5, _important: false })
+	getInitialState: () => ({ weight: 0.1, _important: false })
 };

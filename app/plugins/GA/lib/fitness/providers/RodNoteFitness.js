@@ -14,5 +14,5 @@ export default {
 							subReducer + subStep : subReducer, 0) + reducer;
 			}, 0);
 	}),
-	getInitialState: () => ({ weight: 0.5, _important: false })
+	getInitialState: () => ({ weight: 0, _important: false })
 };

@@ -15,7 +15,7 @@ const run = (content, reference, options) => {
 };
 
 const getInitialState = () => ({ 
-	weight: 1,
+	weight: 0.3,
 	_important: false
 });
 
