@@ -56,14 +56,7 @@ export default class Index extends React.Component {
 
 	run() {
 		// Update UI with default values
-		this.setState({
-			working: true,
-			selected: null,
-			population: [],
-			statistics: [],
-			best: 0,
-			percentage: 0
-		});
+		this.setState({ ...DEFAULT_STATE, statistics: [{ x: 0, y: 0 }] });
 
 		// Delete old runner if it is
 		if ( this.runner ) {
@@ -161,18 +154,17 @@ export default class Index extends React.Component {
 			const viewBoxObject = {
 			    x: 0,
 			    y: 0,
-			    width: 500,
+			    width: 900,
 			    height: 400
 			};
 			lineChart = (
 				<Panel header="Graph">
 					<LineChart
-					  legend={true}
+					  legend={false}
 					  data={this._createLineChartData(this.state.statistics)}
-					  width={800}
-					  height={400}
+					  width={viewBoxObject.width}
+					  height={viewBoxObject.height}
 					  viewBoxObject={viewBoxObject}
-					  title="Line Chart"
 					  yAxisLabel="Altitude"
 					  xAxisLabel="Elapsed Time (sec)"
 					  gridHorizontal={true}
