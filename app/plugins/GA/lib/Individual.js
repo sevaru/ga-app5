@@ -65,6 +65,10 @@ export default class Individual {
 		return this._fitnessValue;
 	}
 
+	getHash() {
+		return this._content.join();
+	}
+
 	toDTO() {
 		return {
 			_fitnessValue: this._fitnessValue,
