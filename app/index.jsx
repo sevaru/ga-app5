@@ -6,23 +6,25 @@ import './polyfills';
 //LIBS
 import React from 'react';
 import { render } from 'react-dom'
-import { Route, DefaultRoute, Link, RouteHandler } from 'react-router';
-import Router from 'react-router';
-
+import Router, { Route, DefaultRoute, Link, RouteHandler } from 'react-router';
+import { throttle } from 'lodash';
 
 //APP
 import './plugins/all.jsx';
 import Root from './containers/root';
 import configureStore from './store/configureStore'
 import initialState from './store/initialState';
+import { storage } from './store/persistStorage';
 
-console.log(initialState);
-const store = configureStore(initialState);
+const STATE_KEY = '__APP_STATE__';
+// TODO: add migrations;
+const store = configureStore(storage.get(STATE_KEY) || initialState);
 
-window.store = store;
+store.subscribe(
+	throttle(() =>
+		storage.set(STATE_KEY, store.getState()), 1000));
 
 render(
 	<Root store={store} />,
 	document.getElementById('root')
 );
-
