@@ -6,7 +6,7 @@
   "scripts": {
     "stats": "webpack --profile --json > stats.json",
     "build": "webpack --progress --display-error-details",
-    "publish": "npm run build && node publish.js",
+    "gh-pages": "npm run build && node publish.js",
     "start": "webpack-dev-server  --watch-poll --inline",
     "start:hmr": "webpack-dev-server  --watch-poll --inline --hot",
     "lint": "npm run lint-js && npm run lint-css",

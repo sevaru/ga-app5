@@ -50,7 +50,7 @@ const common = {
         ]),
         new HtmlwebpackPlugin({
             inject: true,
-            title: 'Melody composer app',
+            title: 'GENOM',
             template: 'template.html'
         }),
         new OpenBrowserPlugin()
