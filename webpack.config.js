@@ -6,7 +6,7 @@ const merge = require('webpack-merge');
 const Clean = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const TARGET = process.env.npm_lifecycle_event;
 const ROOT_PATH = path.resolve(__dirname);
@@ -42,6 +42,12 @@ const common = {
         ]
     },
     plugins: [
+        new CopyWebpackPlugin([
+            {
+                from: './app/plugins/GA/vendors/abcjs.js',
+                to: './abcjs.js'
+            }
+        ]),
         new HtmlwebpackPlugin({
             inject: true,
             title: 'Melody composer app',
@@ -100,7 +106,7 @@ if ( TARGET === 'build' || TARGET === 'stats' ) {
                 }
             ]
         },
-        plugins: [
+        plugins: [            
             new Clean(['build']),
             new ExtractTextPlugin('style.[chunkhash].css'),
             new webpack.optimize.CommonsChunkPlugin(
