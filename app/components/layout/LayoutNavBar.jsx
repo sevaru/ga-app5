@@ -9,7 +9,7 @@ export default class LayoutNavBar extends React.Component {
 			<Navbar inverse fixedTop toggleNavKey={0}>
 				<NavBrand>
 					<Link to="#/">
-						GA-APP 5
+						GENOM
 					</Link>
 				</NavBrand>
 				<PlayerControls />
