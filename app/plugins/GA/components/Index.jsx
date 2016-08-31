@@ -56,7 +56,7 @@ export default class Index extends React.Component {
 
 	run() {
 		// Update UI with default values
-		this.setState({ ...DEFAULT_STATE, statistics: [{ x: 0, y: 0 }] });
+		this.setState({ ...DEFAULT_STATE, statistics: [{ x: 0, y: 0 }], working: true });
 
 		// Delete old runner if it is
 		if ( this.runner ) {
