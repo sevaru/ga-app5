@@ -4,6 +4,7 @@
   "description": "my composer is an app for experiments in modeling of music creativity",
   "main": "index.js",
   "scripts": {
+    "fix-git-creds": "git config --global credential.helper wincred",
     "stats": "webpack --profile --json > stats.json",
     "build": "webpack --progress --display-error-details",
     "gh-pages": "npm run build && node publish.js",
