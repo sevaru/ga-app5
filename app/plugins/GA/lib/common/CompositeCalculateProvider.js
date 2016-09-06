@@ -48,13 +48,49 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 		}
 		// }
 
+		const fnsAndWeight =
+			Object
+				.keys(keyWeight)
+				.reduce((reducer, key) => {
+					const settings = options[key];
+					const weight = keyWeight[key];
+					const fn = this._all[key].run;
+
+					return {
+						...reducer,
+						[key]: {
+							key,
+							weight,
+							fn: (...args) => fn(...[...args,settings])
+						}
+					};
+				}, {});
+
+		return (...data) =>
+			Object
+				.keys(fnsAndWeight)
+				.map(k => fnsAndWeight[k])
+				.reduce((reducer, { fn, weight, key }) => {
+					const value = fn(...data) * weight;
+					return {
+						value: value + reducer.value,
+						full: {
+							...reducer.full,
+							[key]: value
+						}
+					};
+				}, {
+					value: 0,
+					full: {}	
+				});
+
+/*
 		// TODO: refactor it
 		const fns = Object
 			.keys(keyWeight)
 			.reduce((reducer, key) => {
 				const settings = options[key];
 				const weight = keyWeight[key];
-				console.log(weight);
 				const fn = this._all[key].run;
 
 				reducer[key] = (...args) => {
@@ -72,7 +108,8 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 				.reduce((reducer, fn) => { 
 					return reducer + fn(...data);
 				}, 0);
-		}
+		};
+*/
 	}
 
 	getRunRandom() {

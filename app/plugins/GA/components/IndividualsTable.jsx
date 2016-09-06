@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button, ButtonGroup } from 'react-bootstrap';
+import Player from '../../../players/soundfont-player/Player.js';
 
 //TODO:
 // Переделать так, чтобы можно было отловить вход новых population
@@ -18,7 +19,7 @@ export default class IndividualsTable extends React.Component {
 			<Table striped bordered condensed hover>
 				<thead>
 					<tr>
-						<th>#</th>
+						<th></th>
 						<th>Name</th>
 						<th>Fitness</th>
 					</tr>
@@ -32,15 +33,57 @@ export default class IndividualsTable extends React.Component {
 
 	renderItem( item, index ) {
 		const classes = ( this.state.selectedIndex === index ) ? 'highlight' : '';
-		const fitness = item.fitnessValue.toFixed(3);
+		const fitness =
+			([
+				{ 
+					key: 'total',
+					className: 'total',
+					value: item.fitness.value
+				}
+			])
+			.concat(
+				Object
+					.keys(item.fitness.full)
+					.map(key => ({ key, value: item.fitness.full[key] }))
+			)
+			.map(({ key, value, className }) => (
+				<tr key={key} className={className}>
+					<td>{key}</td>
+					<td>{value.toFixed(3)}</td>
+				</tr>
+			));
+
 		return (
 			<tr className={classes} key={index} onClick={this.onSelect.bind(this, item, index)}>
-				<td>{index}</td>
+				<td>
+					<ButtonGroup>
+						<Button bsStyle="info" onClick={this.play.bind(this, item.content)}>
+							<span className="glyphicon glyphicon-play"></span>
+						</Button>
+						<Button bsStyle="info" onClick={this.stop}>
+							<span className="glyphicon glyphicon-stop"></span>
+						</Button>
+					</ButtonGroup>
+				</td>
 				<td>{'name' + index}</td>
-				<td>{fitness}</td>
+				<td>
+					<Table condensed border style={{ marginBottom: 0 }}>
+						<tbody>
+							{fitness}
+						</tbody>
+					</Table>
+				</td>
 			</tr>
 		);
 	}
+
+	play(content) {
+		Player.play(content);
+	}
+
+	stop = () => {
+		Player.stop();
+	};
 
 	onSelect(item, index) {
 		this.setState({

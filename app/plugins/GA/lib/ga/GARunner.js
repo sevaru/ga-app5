@@ -41,7 +41,7 @@ export default class GARunner {
             console.log(`onmessage from worker ${action}`);
             // TODO: Symbol('done');
             if ( action === 'done') {
-                const population = data.map(obj => Individual.fromDTO(obj));
+                const population = data;
                 onProgress({ percentage: 100, best: population[1] });
                 onDone(population);
                 return;
@@ -51,13 +51,13 @@ export default class GARunner {
             if ( onProgress && action === 'progress') {
                 onProgress({
                     percentage: data.percentage,
-                    best: Individual.fromDTO(data.best)
+                    best: data.best
                 });
             }
 
             // TODO: Symbol('pause');
             if ( onPause && action === 'pause' ) {
-                const population = data.map(obj => Individual.fromDTO(obj));
+                const population = data;
                 onPause(population);
             }
         };

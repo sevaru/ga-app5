@@ -20,6 +20,7 @@ const DEFAULT_STATE = {
 	working: false, // calculate process is execution
 	paused: false,
 	selected: null,
+	// Population is IFullFitnessDTO { content: number[], fitness: { value: number, full: { [key: string]: number } }
 	population: [],
 	statistics: [],
 	percentage: 0,
@@ -71,7 +72,7 @@ export default class Index extends React.Component {
 
 			statistics.push({
 				x: percentage,
-				y: (best.fitnessValue * 100)
+				y: (best.fitness.value * 100)
 			});
 
 			this.setState({ best, percentage, statistics });
@@ -91,7 +92,7 @@ export default class Index extends React.Component {
 	pause() {
 		this.setState({
 			paused: true
-		})
+		});
 		this.runner && this.runner.pause();
 	}
 
@@ -144,7 +145,7 @@ export default class Index extends React.Component {
         	best = (
         		<div className="progress-bar-wrapper">
         			<h3>Best: </h3>
-	                <ProgressBar bsStyle="success" now={(this.state.best.fitnessValue * 100)|0} label="%(percent)s%" key="1" />
+	                <ProgressBar bsStyle="success" now={(this.state.best.fitness.value * 100)|0} label="%(percent)s%" key="1" />
 	            </div>
     		);
         }
@@ -165,8 +166,8 @@ export default class Index extends React.Component {
 					  width={viewBoxObject.width}
 					  height={viewBoxObject.height}
 					  viewBoxObject={viewBoxObject}
-					  yAxisLabel="Altitude"
-					  xAxisLabel="Elapsed Time (sec)"
+					  yAxisLabel="Best"
+					  xAxisLabel="Elapsed Iteration"
 					  gridHorizontal={true}
 					></LineChart>
 				</Panel>
@@ -224,7 +225,7 @@ export default class Index extends React.Component {
 	_createLineChartData(data) {
 		return [
 			{
-				name: 'series1',
+				//name: '',
 				values: data,
 				strokeWidth: 3,
 				strokeDashArray: '5,5'

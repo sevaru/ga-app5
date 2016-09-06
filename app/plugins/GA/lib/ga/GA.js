@@ -242,7 +242,7 @@ export default class GA {
 
                     onProgress({
                         percentage,
-                        best: this._bestOne.toDTO()
+                        best: this._bestOne.toFullFitnessDTO()
                     });
                 }
             },
@@ -262,11 +262,10 @@ export default class GA {
 
     _snapshot(currentPopulation) {
         const population = this._sortByFitness(currentPopulation);
-
         // TODO: create Individual factory with preseted context
         const original = Individual.create(this._reference, null, null, false, this._context);
         population.unshift(original);
-        return population.map(x => x.toDTO());
+        return population.map(x => x.toFullFitnessDTO());
     }
 
     _formatFitness(iteration, maxIterations) {

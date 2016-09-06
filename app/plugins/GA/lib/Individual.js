@@ -38,13 +38,13 @@ export default class Individual {
 		// -----------------------------
 		// 2) Content to start
 		// -----------------------------
-		this._fitnessValue = fitnessValue == null ? this.fitness() : fitnessValue;
+		this._fitnessValue = fitnessValue == null ? this.fitness().value : fitnessValue;
 	}
 
 	// Mutate and recalculate inner fitnessValue
 	mutate(options) {
 		this._content = this._context.mutation(this._content);
-		this._fitnessValue = this.fitness();
+		this._fitnessValue = this.fitness().value;
 	}
 
 	crossover( someone ) {
@@ -75,6 +75,13 @@ export default class Individual {
 			_reference: this._reference.slice(),
 			_content: this._content.slice()
 		}
+	}
+
+	toFullFitnessDTO() {
+		return {
+			fitness: this.fitness(),
+			content: this._content.slice()
+		};
 	}
 
 	// TODO: find out better way of getting private fields, maybe create toDTO (in worker) and fromDTO (in UI tread)

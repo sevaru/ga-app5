@@ -63,7 +63,7 @@ const common = {
 
 if ( TARGET === 'start' || !TARGET ) {
     module.exports = merge(common, {
-        devtool: 'eval-source-map',
+        devtool: 'source-map',//'eval-source-map',
         devServer: {
             historyApiFallback: true,
             hot: false, // true to HMR
