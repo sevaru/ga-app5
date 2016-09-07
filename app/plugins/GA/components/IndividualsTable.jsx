@@ -31,27 +31,44 @@ export default class IndividualsTable extends React.Component {
 		);
 	}
 
-	renderItem( item, index ) {
-		const classes = ( this.state.selectedIndex === index ) ? 'highlight' : '';
+	renderFitnessInfoItems(items) {
+		return items.map(({ key, value, className }) => (
+			<tr key={key} className={className}>
+				<td>{key}</td>
+				<td>{value.toFixed(3)}</td>
+			</tr>
+		));
+	}
+
+	renderFitnessInfo(item) {
 		const fitness =
-			([
-				{ 
-					key: 'total',
-					className: 'total',
-					value: item.fitness.value
-				}
-			])
-			.concat(
-				Object
-					.keys(item.fitness.full)
-					.map(key => ({ key, value: item.fitness.full[key] }))
-			)
-			.map(({ key, value, className }) => (
-				<tr key={key} className={className}>
-					<td>{key}</td>
-					<td>{value.toFixed(3)}</td>
-				</tr>
-			));
+	 		this.renderFitnessInfoItems(
+				([
+					{ 
+						key: 'total',
+						className: 'total',
+						value: item.fitness.value
+					}
+				])
+				.concat(
+					Object
+						.keys(item.fitness.full)
+						.map(key => ({ key, value: item.fitness.full[key] }))
+				)
+			);
+		return (
+			<Table condensed border style={{ marginBottom: 0 }}>
+				<tbody>
+					{fitness}
+				</tbody>
+			</Table>
+		);
+	}
+
+	renderItem( item, index ) {
+		const selected = this.state.selectedIndex === index;
+		const classes = selected ? 'highlight' : '';
+		const fitnessFrag = selected ? this.renderFitnessInfo(item) : item.fitness.value; 
 
 		return (
 			<tr className={classes} key={index} onClick={this.onSelect.bind(this, item, index)}>
@@ -67,11 +84,7 @@ export default class IndividualsTable extends React.Component {
 				</td>
 				<td>{'name' + index}</td>
 				<td>
-					<Table condensed border style={{ marginBottom: 0 }}>
-						<tbody>
-							{fitness}
-						</tbody>
-					</Table>
+					{fitnessFrag}
 				</td>
 			</tr>
 		);

@@ -3,6 +3,10 @@
 	color: white !important;
 }
 
+.table .highlight .total {
+	font-weight: bold;
+}
+
 .progress-bar-wrapper {
 	margin-top: 10px;
 }
