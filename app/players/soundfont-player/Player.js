@@ -2,6 +2,8 @@ import Soundfont from 'soundfont-player';
 import instrumentNames from './instrumentNames.js';
 import { REFERENCE_TABLE } from '../common.js';
 
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 function isHold(val) {
 	return val === -1
 }
@@ -45,11 +47,13 @@ class Converter {
 	}
 }
 
+
 //this._instrument.play(note, time, duration);
 class Player {
 	constructor(instrumentName = instrumentNames.acoustic_grand_piano) {
 		this._callbacks = [];
-		this._ctx = new AudioContext();
+		this._ctx = new window.AudioContext();
+
 		this._ready = false;
 		this._notes = [];
 		this._prevNotes = [];
