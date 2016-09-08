@@ -14,3 +14,9 @@
 .table tr.selected {
 	background: #f9f592 !important;
 }
+
+.individuals-table-wrapper {
+	margin-top: 2em;
+	max-height: 400px;
+	overflow-y: auto;
+}

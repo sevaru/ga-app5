@@ -16,18 +16,20 @@ export default class IndividualsTable extends React.Component {
 
 	render() {
 		return (
-			<Table striped bordered condensed hover>
-				<thead>
-					<tr>
-						<th></th>
-						<th>Name</th>
-						<th>Fitness</th>
-					</tr>
-				</thead>
-				<tbody>
-					{this.props.population.map(this.renderItem.bind(this))}
-				</tbody>
-			</Table>
+			<div className="individuals-table-wrapper">
+				<Table striped bordered condensed hover>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Fitness</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.props.population.map(this.renderItem.bind(this))}
+					</tbody>
+				</Table>
+			</div>
 		);
 	}
 
