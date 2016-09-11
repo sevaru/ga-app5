@@ -2,6 +2,7 @@ import React from 'react';
 import PlayerControls from '../PlayerControls.jsx';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, NavBrand } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { APP_VERSION } from '../../VERSION';
 
 export default class LayoutNavBar extends React.Component {
 	render() {
@@ -9,7 +10,7 @@ export default class LayoutNavBar extends React.Component {
 			<Navbar inverse fixedTop toggleNavKey={0}>
 				<NavBrand>
 					<Link to="#/">
-						GENOM
+						GENOM {APP_VERSION || ''}
 					</Link>
 				</NavBrand>
 				<PlayerControls />
