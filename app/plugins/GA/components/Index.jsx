@@ -4,6 +4,7 @@ import styles from './styles.css';
 //libs
 import React from 'react';
 import { Table, Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
+import Dimensions from 'react-dimensions'
 import { LineChart } from 'react-d3';
 import ABCJS from 'ABCJS';
 import {connect} from 'react-redux';
@@ -26,6 +27,45 @@ const DEFAULT_STATE = {
 	percentage: 0,
 	best: null	
 };
+
+class Graph extends React.Component {
+	render() {
+		const { data, containerWidth, containerHeight } = this.props;
+		if (!data || !data.length) {
+			return null;
+		}
+		const width = containerWidth - 40;
+		const viewBoxObject = {
+		    x: 0,
+		    y: 0,
+		    width,
+		    height: width / 2 
+		};
+		console.log('hes', containerWidth, containerHeight);
+		return (
+			<Panel header="Graph">
+				<LineChart
+					legend={false}
+					data={[
+						{
+							values: data,
+							strokeWidth: 3,
+							strokeDashArray: '5,5'
+						}
+					]}
+					width={viewBoxObject.width}
+					height={viewBoxObject.height}
+					viewBoxObject={viewBoxObject}
+					yAxisLabel="Best"
+					xAxisLabel="Elapsed Iteration"
+					gridHorizontal={true}/>
+			</Panel>
+		);
+	}
+}
+
+const DimensionGraph = Dimensions()(Graph);
+
 
 // TODO: read crossover options from redux state
 export default class Index extends React.Component { 
@@ -109,7 +149,6 @@ export default class Index extends React.Component {
 
         let scoresPanel = null;
         let progressBar = null;
-        let lineChart = null;
         let best = null;
         let individualsTable = null;
 
@@ -150,35 +189,11 @@ export default class Index extends React.Component {
     		);
         }
 
-        // Graph of Progress
-		if ( this.state.statistics && this.state.statistics.length ) {
-			const viewBoxObject = {
-			    x: 0,
-			    y: 0,
-			    width: 900,
-			    height: 400
-			};
-			lineChart = (
-				<Panel header="Graph">
-					<LineChart
-					  legend={false}
-					  data={this._createLineChartData(this.state.statistics)}
-					  width={viewBoxObject.width}
-					  height={viewBoxObject.height}
-					  viewBoxObject={viewBoxObject}
-					  yAxisLabel="Best"
-					  xAxisLabel="Elapsed Iteration"
-					  gridHorizontal={true}
-					></LineChart>
-				</Panel>
-			);
-		}
-
 		return (
 			<Grid fluid>
 				<Row>
 					<Col sm={8} md={8}>
-						{lineChart}
+						{this.state.statistics.length ? <DimensionGraph data={this.state.statistics}/> : null} 
 						{scoresPanel}
 						<GAOptions store={store} />
 					</Col>
@@ -219,18 +234,6 @@ export default class Index extends React.Component {
 				</Row>
 			</Grid>
 		);
-	}
-
-	// TODO: move to separate module wrapper on linechart
-	_createLineChartData(data) {
-		return [
-			{
-				//name: '',
-				values: data,
-				strokeWidth: 3,
-				strokeDashArray: '5,5'
-			}
-		];
 	}
 }
 // TODO: redo with react-redux connect later on
