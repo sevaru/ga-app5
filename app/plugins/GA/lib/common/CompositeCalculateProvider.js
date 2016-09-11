@@ -83,33 +83,6 @@ export default class CompositeCalculateProvider extends BaseCalculateProvider {
 					value: 0,
 					full: {}	
 				});
-
-/*
-		// TODO: refactor it
-		const fns = Object
-			.keys(keyWeight)
-			.reduce((reducer, key) => {
-				const settings = options[key];
-				const weight = keyWeight[key];
-				const fn = this._all[key].run;
-
-				reducer[key] = (...args) => {
-					const result = fn(...args.concat(settings)) * weight;
-					console.assert(result >= 0, `Fail on key: ${key}`); 
-					return result;
-				};
-				return reducer;
-			}, {});
-
-		return (...data) => {
-			return Object
-				.keys(fns)
-				.map(k => fns[k])
-				.reduce((reducer, fn) => { 
-					return reducer + fn(...data);
-				}, 0);
-		};
-*/
 	}
 
 	getRunRandom() {
