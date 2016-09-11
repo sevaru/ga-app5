@@ -49,7 +49,7 @@ const arrayUtils = {
 		return arr;
 	},
 
-	getRandomIndexes( count /*: number */, length /*: number */, except ) {
+	getRandomIndexes( count /*: number */, length /*: number */, except /*: Array<number> //indexes */ ) {
 		const result = [];
 
 		if ( count > length ) {
