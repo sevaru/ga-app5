@@ -55,7 +55,6 @@ export default class Composition extends React.Component {
 		const composition = this.state.composition;
 		const name = this.props.params.composition;
 		MusicContext.save(name, composition);
-		window.location = '/#/compositions';
 	}
 
 	onChange(e) {
