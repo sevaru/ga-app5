@@ -1,4 +1,6 @@
+build
 coverage
+out
 node_modules
 *.sublime-workspace
 *.sublime-project
