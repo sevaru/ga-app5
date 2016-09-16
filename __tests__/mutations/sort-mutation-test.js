@@ -3,15 +3,15 @@ import {PLUGIN} from '../consts';
 const SORT_PATH = `../${PLUGIN}/mutations/providers/sortMutation/calculate.js`;
 const UTILS_PATH = `../${PLUGIN}/utils.js`;
 jest.dontMock(SORT_PATH);
-jest.mock(UTILS_PATH, () => {
-	return {
-		numberUtils: {
-			randomBetween: () => {
-				return 3;
-			}
+//jest.mock(UTILS_PATH);
+jest.setMock(UTILS_PATH, {
+	numberUtils: {
+		randomBetween: () => {
+			return 3;
 		}
 	}
 });
+
 
 describe('Sort mutation', () => {
 	const sortMutation = require(SORT_PATH).calculate;
