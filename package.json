@@ -23,6 +23,7 @@
   "dependencies": {
     "array.prototype.findindex": "^2.0.0",
     "babel-polyfill": "^6.8.0",
+    "html-webpack-plugin": "^1.7.0",
     "lodash": "^4.13.1",
     "react": "0.14.0",
     "react-bootstrap": "0.27.2",
@@ -34,7 +35,8 @@
     "react-router-bootstrap": "0.19.2",
     "redux": "3.3.1",
     "setimmediate": "^1.0.4",
-    "soundfont-player": "0.4.0"
+    "soundfont-player": "0.4.0",
+    "webpack-merge": "^0.14.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -74,7 +76,7 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.10",
     "webpack-dev-server": "^1.12.1",
-    "webpack-merge": "^0.2.0",
+    "webpack-merge": "^0.14.1",
     "worker-loader": "^0.7.0"
   },
   "jest": {
