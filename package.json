@@ -12,7 +12,6 @@
     "start:hmr": "webpack-dev-server  --watch-poll --inline --hot",
     "lint": "npm run lint-js && npm run lint-css",
     "lint-js": "eslint . --ext .js --ext .jsx",
-    "lint-css": "csslint app --quiet",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-debug": "node debug --harmony ./node_modules/jest-cli/bin/jest.js --runInBand",
