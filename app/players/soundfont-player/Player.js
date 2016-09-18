@@ -54,15 +54,17 @@ class Player {
 		this._callbacks = [];
 		this._ctx = new window.AudioContext();
 
-		this._ready = false;
 		this._notes = [];
 		this._prevNotes = [];
-		this._soundfont = new Soundfont(this._ctx);
-		this._instrument = this._soundfont.instrument(instrumentName);
 		this._timeout = null;
+		this._instrument = null;
 	
 		this._isPlaying = false;
-		this._instrument.onready(() => this._ready = true);
+
+		Soundfont
+			.instrument(this._ctx, instrumentName)
+			.then((instrument) =>
+				this._instrument = instrument);
 	}
 
 	set(notes) {
@@ -93,10 +95,10 @@ class Player {
 			this.set(notes);
 		}
 
-		if ( this._ready ) {
+		if ( this._instrument ) {
 			this._playInternal();
 		} else {
-			this._instrument.onready(() => this._playInternal());
+			console.warn('Instruments not loaded yet');
 		}
 	}
 

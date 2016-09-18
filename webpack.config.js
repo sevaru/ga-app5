@@ -25,6 +25,7 @@ const common = {
         filename: 'bundle.js'
     },
     module: {
+        noParse: /node_modules\/midimessage\/dist\/index.min.js/, // SOUNDFONT player dependency use compiled file in package.json
         preLoaders: [
             {
                 test: /\.jsx?$/,
