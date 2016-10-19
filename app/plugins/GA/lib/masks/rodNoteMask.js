@@ -27,4 +27,4 @@ export const rodNoteForBar =
  * @description holds in rod notes became nulls
  * @type {Array<number>}
  */
-export const rodNoteAnalyzer = maskFactory(maskFactory);
+export const rodNoteAnalyzer = maskFactory(rodNoteForBar);
