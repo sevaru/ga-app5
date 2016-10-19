@@ -1,16 +1,42 @@
-import { PAUSE } from '../MusicContext';
-import { maskFactory } from './helpers';
+import { last } from 'lodash';
+import { PAUSE, HOLD } from '../MusicContext';
+import Composition from '../utils/Composition';
 
-export const signMask = 
-	maskFactory(bar => 
-		bar.reduce((reducer, value) => {
+const filterBar = bar => bar.filter(x => ![PAUSE, HOLD].includes(x));
 
-			
-
+/**
+ * @internal Exported for tests 
+ */
+export function barAnalyzer([bar, prevBar = []], options) {
+	return filterBar(bar).reduce(({ prev, data }, note) => {
+		if (prev == null) {
 			return {
-				prev: value,
-				data: []
+				data: [],
+				prev: note
 			};
+		}
 
-		}, { data: [], prev: null })
-	);
+		const diff = note - prev;
+
+		let value = 0;
+		if (diff > 0) {
+			value = 1
+		} else if (diff < 0) {
+			value = -1
+		}
+
+		return {
+			data: [...data, value],
+			prev: note
+		};
+
+	}, { data: [], prev: last(filterBar(prevBar)) }).data;
+}
+
+export const signMask =
+	(data, options) =>
+		Composition
+			.create(data)
+			.rawBars()
+			.reduce((reducer, bar, index, array) =>
+				[...reducer, barAnalyzer([bar, index ? array[index - 1] : undefined], options)], []);
