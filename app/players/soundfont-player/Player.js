@@ -50,7 +50,7 @@ class Converter {
 // NOTE: copy paste from soundfont-player
 function nameToUrl(name, sf = 'MusyngKite', format = 'mp3') {
 	const protocol = window.location.protocol;
-  	return `${protocol}//gleitz.github.io/midi-js-soundfonts/` + sf + '/' + name + '-' + format + '.js'
+  	return `${protocol}//gleitz.github.io/midi-js-soundfonts/` + sf + '/' + name + '-' + format + '.js';
 }
 
 //this._instrument.play(note, time, duration);
