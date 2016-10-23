@@ -2,7 +2,7 @@ import { last } from 'lodash';
 import { PAUSE, HOLD } from '../MusicContext';
 import Composition from '../utils/Composition';
 
-const filterBar = bar => bar.filter(x => ![PAUSE, HOLD].includes(x));
+const filterBar = bar => bar.map(x => x === HOLD ? PAUSE : x);
 
 /**
  * @internal Exported for tests 
