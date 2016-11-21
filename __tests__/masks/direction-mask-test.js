@@ -1,4 +1,4 @@
-import {PLUGIN} from '../consts'; 
+import {PLUGIN} from '../consts';
 
 const DIRECTION_MASK_PATH = `../${PLUGIN}/masks/directionMask.js`;
 const COMPOSITION_PATH = `../${PLUGIN}/utils/Composition.js`;
@@ -7,9 +7,9 @@ jest.dontMock(DIRECTION_MASK_PATH);
 jest.dontMock(COMPOSITION_PATH);
 
 const { directionForBar, DIRECTION } = require(DIRECTION_MASK_PATH);
-const makeIt = 
+const makeIt =
 	(title, sample, expectation, options) =>
-		it(title, () => 
+		it(title, () =>
 			expect(directionForBar(sample, options)).toEqual(expectation));
 
 describe('Direction mask', () => {

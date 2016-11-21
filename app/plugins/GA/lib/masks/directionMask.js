@@ -1,3 +1,4 @@
+import '../../../../polyfills'; // For Object.entries in jest tests
 import { max } from 'lodash';
 import { PAUSE, HOLD } from '../MusicContext';
 import { maskFactory } from './helpers';
@@ -59,7 +60,7 @@ function calculateFrequencies(bar, { size }) {
 		} else {
 			if (chain.length > size) {
 				storage[currentDirection || DIRECTION.NONE] += 1;
-			}	
+			}
 			chain = [value];
 			currentDirection = null;
 			continue;
@@ -76,13 +77,13 @@ function calculateFrequencies(bar, { size }) {
  */
 export function directionForBar(bar, { size = DEFAULT_SIZE, spread = MIN_SPREAD } = {}) {
 	const cleanedBar =
-		bar.reduce((reducer, current) => 
+		bar.reduce((reducer, current) =>
 			current === HOLD ?
 				reducer :
 				[...reducer, current], []);
 
 	const frequencies = calculateFrequencies(cleanedBar, { size, spread });
-	
+
 	const descSortedFrequencies =
  		Object
 			.entries(frequencies)
@@ -99,6 +100,6 @@ export function directionForBar(bar, { size = DEFAULT_SIZE, spread = MIN_SPREAD 
 
 /**
  * @type {Array<number>}
- * @return {Array<DIRECTION>} 
+ * @return {Array<DIRECTION>}
  */
 export const directionAnalyzer = maskFactory(directionForBar);
