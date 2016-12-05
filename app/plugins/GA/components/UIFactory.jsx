@@ -1,5 +1,4 @@
 import React from 'react';
-import { Input, Grid, Col, Row } from 'react-bootstrap';
 import { stringUtils } from '../lib/utils.js';
 
 
@@ -37,8 +36,6 @@ export class SliderControl extends BaseControl {
     }
 
 	render() {
-		//required
-		const field = this.props.field;
 		//optional
 		const title = this.props.title || stringUtils.camelCaseToHuman(this.props.field);
 		const min = this.props.min || 0;
@@ -49,7 +46,6 @@ export class SliderControl extends BaseControl {
             <div className="form-group">
                 <label>{title} - {this.state.value}</label>
                 <input 
-                    defaultValue={this.props.defaultValue}
                 	type="range"
                 	value={this.state.value}
                 	min={min}
@@ -73,7 +69,7 @@ export class CheckboxControl extends BaseControl {
     }
 
 	render() {
-        const {field, defaultValue, onBlur, title} = this.props;
+        const {field, defaultValue, title} = this.props;
 		const actualTitle = title || stringUtils.camelCaseToHuman(field);
 		return (
             <div className="checkbox">

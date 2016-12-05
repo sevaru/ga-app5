@@ -5,7 +5,6 @@ import routes from '../routes';
 
 export default class Root extends Component {
     render() {
-        const { store } = this.props.store;
         return (
             <Provider store={this.props.store}>
                 <Router routes={routes} />

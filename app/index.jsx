@@ -6,7 +6,6 @@ import './polyfills';
 //LIBS
 import React from 'react';
 import { render } from 'react-dom'
-import Router, { Route, DefaultRoute, Link, RouteHandler } from 'react-router';
 import { throttle } from 'lodash';
 
 //APP
