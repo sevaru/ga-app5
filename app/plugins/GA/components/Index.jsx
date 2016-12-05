@@ -1,13 +1,11 @@
 //styles
-import styles from './styles.css';
+import './styles.css';
 
 //libs
 import React from 'react';
-import { Table, Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
+import { Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
 import Dimensions from 'react-dimensions'
 import { LineChart } from 'react-d3';
-import ABCJS from 'ABCJS';
-import {connect} from 'react-redux';
 
 import Player from '../../../players/soundfont-player/Player.js';
 
@@ -88,7 +86,7 @@ export default class Index extends React.Component {
 		);
 	}
 	
-	select( item, index ) {
+	select( item ) {
 		Player.set(item.content);
 		this.setState({
 			selected: item.content
@@ -142,9 +140,6 @@ export default class Index extends React.Component {
 
 	render() {
 		const {store} = this.context;
-		const style = {
-            marginTop: '10px'
-        };
         const {paused, working} = this.state;
 
         let scoresPanel = null;
@@ -171,20 +166,22 @@ export default class Index extends React.Component {
 
         // ProgressBar
         if ( this.state.percentage ) {
+			const currentPercent = (this.state.percentage) | 0;
         	progressBar = (
         		<div className="progress-bar-wrapper">
         			<h3>Progress: </h3>
-	                <ProgressBar now={(this.state.percentage)|0} label="%(percent)s%" />
+	                <ProgressBar now={currentPercent} label={`${currentPercent}%`} />
 	            </div>
     		);
         }
 
         // Best Guys ProgressBar
         if ( this.state.best ) {
+			const bestValue = (this.state.best.fitness.value * 100) | 0;
         	best = (
         		<div className="progress-bar-wrapper">
         			<h3>Best: </h3>
-	                <ProgressBar bsStyle="success" now={(this.state.best.fitness.value * 100)|0} label="%(percent)s%" key="1" />
+	                <ProgressBar bsStyle="success" now={bestValue} label={`${bestValue}%`} key="1" />
 	            </div>
     		);
         }
