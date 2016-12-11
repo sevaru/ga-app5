@@ -3,7 +3,7 @@
 1/8 as a default length
 c maj as a default key
 */
-const n = '\n';
+const NEW_LINE = '\n';
 
 const defaultHeader = `
 X:1
@@ -66,7 +66,7 @@ export default function convertToABC( source ) {
 		}
 
 		if ( i && i % 32 === 0 ) {
-			answer += '\n';
+			answer += NEW_LINE;
 		}
 	}
 	
