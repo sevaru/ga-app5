@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { Col, Nav, NavItem, Button } from 'react-bootstrap';
+import { Col, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default class LayoutSideBar extends React.Component {

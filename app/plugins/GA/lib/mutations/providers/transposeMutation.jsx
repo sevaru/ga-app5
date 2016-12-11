@@ -1,5 +1,4 @@
 import React from 'react';
-import { last } from 'lodash';
 import { SliderControl } from '../../../components/UIFactory.jsx';
 import { calculate as run } from './transposeMutation/calculate';
 

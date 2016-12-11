@@ -1,4 +1,3 @@
-import Note from './Note.js';
 import NotesConverter from './NotesConverter.js';
 import MusicContext from '../MusicContext';
 

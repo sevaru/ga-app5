@@ -1,10 +1,7 @@
 // 3d Party
 import React from 'react';
-import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';
 
 // Local
-import { SliderControl, CheckboxControl } from './UIFactory.jsx';
-
 import {Component as CrossoverProvider} from '../lib/crossovers/CrossoverProvider';
 import {Component as MutationProvider} from '../lib/mutations/MutationProvider';
 import {Component as FitnessProvider} from '../lib/fitness/FitnessProvider';

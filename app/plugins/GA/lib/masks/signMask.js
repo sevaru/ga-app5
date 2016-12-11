@@ -7,7 +7,7 @@ const filterBar = bar => bar.map(x => x === HOLD ? PAUSE : x);
 /**
  * @internal Exported for tests 
  */
-export function barAnalyzer([bar, prevBar = []], options) {
+export function barAnalyzer([bar, prevBar = []]) {
 	return filterBar(bar).reduce(({ prev, data }, note) => {
 		if (prev == null) {
 			return {

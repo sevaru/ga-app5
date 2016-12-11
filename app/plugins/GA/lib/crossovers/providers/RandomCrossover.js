@@ -1,9 +1,5 @@
 import { arrayUtils } from '../../utils';
 
-function createPortion(source, point) {
-	return [source.slice(0, point), source.slice(point)];
-}
-
 function crossover(a, b) {
 	const clone = b.slice();
 	const indexes = arrayUtils.getRandomIndexes(a.length / 2, a.length);

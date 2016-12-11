@@ -1,6 +1,4 @@
-import { sortBy } from 'lodash';
 import Individual from '../Individual';
-import MusicContext from '../MusicContext';
 import {run as getCrossover} from '../crossovers/CrossoverProvider';
 import {run as getMutation} from '../mutations/MutationProvider';
 import {run as getFitness} from '../fitness/FitnessProvider';

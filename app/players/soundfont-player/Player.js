@@ -12,10 +12,6 @@ function isPause(val) {
 	return val === 0
 }
 
-function isNote(val) {
-	return val > 1 && val < 15;
-}
-
 const NOTE_LENGTH = 0.2; // 1/8 is 300ms const for now TODO: move to options
 
 class Converter {

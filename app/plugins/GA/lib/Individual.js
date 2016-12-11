@@ -1,7 +1,5 @@
-import { arrayUtils, objUtils, numberUtils } from './utils';
+import { arrayUtils } from './utils';
 import { availableValues } from './common';
-import MutationProvider from './mutations/MutationProvider.js';
-import FitnessProvider from './fitness/FitnessProvider.js';
 
 export default class Individual {
 	// TODO: extract logic of creation to factory

@@ -25,7 +25,7 @@
   },
   "rules": {
     "no-mixed-spaces-and-tabs": 0,
-    "no-unused-vars": 0,
+    "no-unused-vars": 1,
 
     "no-console": 0,
     "new-cap": 0,

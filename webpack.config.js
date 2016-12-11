@@ -80,10 +80,7 @@ if ( TARGET === 'start' || !TARGET ) {
                     include: APP_PATH
                 }
             ]
-        },
-        plugins: [
-            new webpack.HotModuleReplacementPlugin()
-        ]
+        }
     });
 }
 

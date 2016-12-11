@@ -1,7 +1,7 @@
 // 3d Party
 import React from 'react';
 import { Link } from 'react-router';
-import { Input, Button, ButtonGroup, Grid, Col, Row, Table, Glyphicon } from 'react-bootstrap';
+import { FormControl, Button, ButtonGroup, Grid, Table, Glyphicon } from 'react-bootstrap';
 
 // Plugin
 import MusicContext from '../lib/MusicContext.js';
@@ -80,7 +80,7 @@ export default class Compositions extends React.Component {
 					</tbody>
 				</Table>
 				<h2>New</h2>
-				<Input type="text" label="Name" onChange={this.onNameChange.bind(this)} value={this.state.nameRaw} />
+				<FormControl type="text" label="Name" onChange={this.onNameChange.bind(this)} value={this.state.nameRaw} />
 		 		<Link to={`/compositions/${this.state.name}`} >
 				 	<Button bsStyle="info" disabled={!this.state.name}>
 			 			New

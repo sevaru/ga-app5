@@ -1,7 +1,3 @@
-const STEP = 1/8;
-const WHOLE_LENGTH = 128; //in STEP
-const BAR = WHOLE_LENGTH * STEP; // in STEPS
-
 const BIT_VALUES = [4, 2, 3, 1];
 const MAX_DISTANCE = 4;
 //each bar has 10 balls to normalize we need to /16 and it's 1 ball for bar and /8 (8 bars)

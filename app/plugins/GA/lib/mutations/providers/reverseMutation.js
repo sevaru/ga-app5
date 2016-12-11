@@ -1,6 +1,4 @@
 import { createGroupMutation } from './common/createGroupMutation';
-import { sortBy } from 'lodash';
-import { randomUtils } from '../../utils';
 
 export default createGroupMutation(
 	'reverse-mutation',

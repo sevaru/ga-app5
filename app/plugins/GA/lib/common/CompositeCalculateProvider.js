@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { selectionUtils } from '../utils.js';
 import BaseCalculateProvider from './BaseCalculateProvider';
 
 export default class CompositeCalculateProvider extends BaseCalculateProvider {

@@ -1,33 +1,24 @@
 import React from 'react';
 import PlayerControls from '../PlayerControls.jsx';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, NavBrand } from 'react-bootstrap';
+import { Navbar, NavbarBrand, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { APP_VERSION } from '../../VERSION';
+import { resetState } from '../../resetState';
 
 export default class LayoutNavBar extends React.Component {
 	render() {
 		return (
-			<Navbar inverse fixedTop toggleNavKey={0}>
-				<NavBrand>
+			<Navbar inverse fixedTop>
+				<NavbarBrand>
 					<Link to="#/">
 						GENOM {APP_VERSION || ''}
 					</Link>
-				</NavBrand>
+				</NavbarBrand>
 				<PlayerControls />
-				{/*
-				<Nav right eventKey={0}>
-					<NavItem eventKey={1} href="#">Link</NavItem>
-					<NavItem eventKey={2} href="#">Link</NavItem>
-					<NavDropdown eventKey={3} title="Dropdown" id="collapsible-navbar-dropdown">
-						<MenuItem eventKey="1">Action</MenuItem>
-						<MenuItem eventKey="2">Another action</MenuItem>
-						<MenuItem eventKey="3">Something else here</MenuItem>
-						<MenuItem divider />
-						<MenuItem eventKey="4">Separated link</MenuItem>
-					</NavDropdown>
-				</Nav>*/
-				}
+				<Button style={{ marginTop: 6 }} onClick={this.onResetState}>Reset state</Button>
 		  	</Navbar>
 		);
 	}
+
+	onResetState = () => resetState();
 }

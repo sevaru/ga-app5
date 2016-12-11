@@ -63,7 +63,7 @@ export const REFERENCE_INDIVIDUAL = [
 ];
 
 */
-const SOVIET = [
+export const SOVIET = [
 	8, 6, -1, 8, -1, 9, -1, 12,
 	-1, 11, -1, -1, -1, -1, -1, 11,
 

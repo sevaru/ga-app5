@@ -1,6 +1,6 @@
 // 3d Party
-import React, {ReactDOM} from 'react';
-import { Input, Button, Grid, Col, Row, ListGroup, ListGroupItem, ButtonGroup } from 'react-bootstrap';
+import React from 'react';
+import { FormControl, Button, Grid, Col, Row } from 'react-bootstrap';
 
 // Framework
 import Player from '../../../players/soundfont-player/Player.js';
@@ -86,7 +86,7 @@ export default class Composition extends React.Component {
 				<h3>{compositionKey}</h3>
 				<Row>
 					<Col sm={4} md={4}>
-					 	<Input type="textarea" style={{ height: 230 }} label="Notes" onChange={this.onChange.bind(this)} value={this.state.compositionRaw} />
+					 	<FormControl componentClass="textarea" style={{ height: 230 }} label="Notes" onChange={this.onChange.bind(this)} value={this.state.compositionRaw} />
 				 		<Button disabled={this.state.isDefault || this.state.invalidComposition} bsStyle="success" onClick={this.save.bind(this)}>Save</Button>
 					</Col>
 					<Col sm={4} md={4}>
