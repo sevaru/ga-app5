@@ -11,7 +11,7 @@ import { throttle } from 'lodash';
 //APP
 import './plugins/all.jsx';
 import { APP_VERSION } from './VERSION';
-import Root from './containers/root';
+import { Root } from './containers/root';
 import configureStore from './store/configureStore'
 import initialState from './store/initialState';
 import { storage } from './store/persistStorage';
