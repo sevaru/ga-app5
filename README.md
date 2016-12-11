@@ -16,7 +16,7 @@
 Simple platform for experiments in modeling of musical creativity (GA part)
 
 # Prerequirments
-node (5.10.1 tested), npm
+node (6.9.1 tested), npm
 
 # Install 
 at root project directory
