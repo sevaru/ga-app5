@@ -5,19 +5,16 @@ import './polyfills';
 
 //LIBS
 import React from 'react';
-import { render } from 'react-dom'
+import { render } from 'react-dom';
 import { throttle } from 'lodash';
 
 //APP
 import './plugins/all.jsx';
-import { APP_VERSION } from './VERSION';
+import { APP_VERSION, VERSION_KEY, STATE_KEY } from './VERSION';
 import { Root } from './containers/root';
-import configureStore from './store/configureStore'
+import configureStore from './store/configureStore';
 import initialState from './store/initialState';
 import { storage } from './store/persistStorage';
-
-const STATE_KEY = '__APP_STATE__';
-const VERSION_KEY = '__APP_VERSION__';
 
 function migrate(persistedState, currentState) {
 	if (storage.get(VERSION_KEY) === APP_VERSION) {

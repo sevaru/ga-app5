@@ -1,8 +1,9 @@
 import React from 'react';
 import PlayerControls from '../PlayerControls.jsx';
-import { Navbar, NavbarBrand } from 'react-bootstrap';
+import { Navbar, NavbarBrand, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { APP_VERSION } from '../../VERSION';
+import { resetState } from '../../resetState';
 
 export default class LayoutNavBar extends React.Component {
 	render() {
@@ -14,7 +15,10 @@ export default class LayoutNavBar extends React.Component {
 					</Link>
 				</NavbarBrand>
 				<PlayerControls />
+				<Button style={{ marginTop: 6 }} onClick={this.onResetState}>Reset state</Button>
 		  	</Navbar>
 		);
 	}
+
+	onResetState = () => resetState();
 }
