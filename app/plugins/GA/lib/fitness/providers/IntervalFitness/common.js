@@ -1,5 +1,4 @@
 import MusicContext from '../../../MusicContext';
-import { PAUSE, HOLD } from '../../../MusicContext';
 
 const INTERVAL_TYPE_VALUES = [
 	{

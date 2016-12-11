@@ -1,7 +1,6 @@
-import {combineReducers} from 'redux';
-import {OPTIONS_CHANGE_ACTION} from '../actions/index';
+import { combineReducers } from 'redux';
 import initialState from '../../../store/initialState';
-import {createDeepProperty, createPluginsReducer} from '../utils';
+import { createPluginsReducer } from '../utils';
 
 const crossover = createPluginsReducer('crossover', initialState.GA);
 const mutation = createPluginsReducer('mutation', initialState.GA);

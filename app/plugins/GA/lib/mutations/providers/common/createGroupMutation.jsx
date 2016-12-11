@@ -1,6 +1,5 @@
 import React from 'react';
 import { SliderControl } from '../../../../components/UIFactory.jsx';
-import { arrayUtils } from '../../../utils.js';
 import { createGroupsWithRandomOffset } from '../../../services/createGroupsWithRandomOffset';
 import { validateGroupsInput, fromPercentToValue, getGroupsIndexes } from '../common.js';
 

@@ -1,4 +1,4 @@
-import { range, chunk, flatten } from 'lodash';
+import { chunk, flatten } from 'lodash';
 
 export class Groups {
 	static create(data: Array<number>, size: number, offset: number = 0) {

@@ -9,9 +9,6 @@ const defaultOptions = {
 	count: 64
 };
 
-const PAUSE = 0;
-const HOLD = -1;
-
 // TODO: class vs functions combination
 class ChangeDuration {
 	mutate( data, options = {} ) {

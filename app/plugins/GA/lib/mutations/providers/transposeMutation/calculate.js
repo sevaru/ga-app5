@@ -1,7 +1,6 @@
 import { last } from 'lodash';
 import { createCalculate } from '../common/createGroupMutation';
 import { availableValuesInGF, PAUSE, HOLD } from '../../../MusicContext';
-import { randomUtils } from '../../../utils';
 
 const MAX_GEN_VALUE = last(availableValuesInGF);
 

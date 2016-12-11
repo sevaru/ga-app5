@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';
-import { SliderControl, CheckboxControl } from '../../components/UIFactory.jsx';
+import { Panel } from 'react-bootstrap';
+import { SliderControl } from '../../components/UIFactory.jsx';
 import {changeOptions} from '../../actions/index';
 
 /**

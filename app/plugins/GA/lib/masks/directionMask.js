@@ -1,5 +1,4 @@
 import '../../../../polyfills'; // For Object.entries in jest tests
-import { max } from 'lodash';
 import { PAUSE, HOLD } from '../MusicContext';
 import { maskFactory } from './helpers';
 

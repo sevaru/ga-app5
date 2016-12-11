@@ -1,8 +1,4 @@
-import React from 'react';
-import { Table, Button, Grid, Col, Row, ButtonGroup, Panel } from 'react-bootstrap';
 import { numberUtils } from '../../utils';
-import { SliderControl, CheckboxControl } from '../../../components/UIFactory.jsx';
-
 
 function createPortion(source, point) {
 	return [source.slice(0, point), source.slice(point)];

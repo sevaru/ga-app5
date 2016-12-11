@@ -1,9 +1,5 @@
-import Individual from '../Individual.js';
 import MusicContext from '../MusicContext.js';
 import GAWorker from 'worker!./GAWorker.js';
-
-
-
 
 /**
  * @class Creates GA worker instance and passes options to it.

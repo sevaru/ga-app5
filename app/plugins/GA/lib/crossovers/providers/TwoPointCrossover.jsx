@@ -18,7 +18,7 @@ function crossover(a, b) {
 	if ( firstPoint > secondPoint ) {
 		const temp = firstPoint;
 		firstPoint = secondPoint;
-		secondPoint = firstPoint;
+		secondPoint = temp;
 	}
 
 	const aPortions = createPortion(a, firstPoint, secondPoint);
