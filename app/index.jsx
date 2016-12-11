@@ -17,7 +17,7 @@ import initialState from './store/initialState';
 import { storage } from './store/persistStorage';
 
 function migrate(persistedState, currentState) {
-	if (storage.get(VERSION_KEY) === APP_VERSION) {
+	if (persistedState && storage.get(VERSION_KEY) === APP_VERSION) {
 		return persistedState;
 	}
 	storage.set(VERSION_KEY, APP_VERSION);
