@@ -1,4 +1,10 @@
 import createProvider from '../common/createProvider';
+import OnePointCrossover from './providers/OnePointCrossover';
+import TwoPointCrossover from './providers/TwoPointCrossover';
+import RandomCrossover from './providers/RandomCrossover';
 
-const context = require.context('./providers', false, /Crossover.js/);
-export const {run, Component} = createProvider('crossover', context);
+export const { run, Component } = createProvider('crossover', [
+    OnePointCrossover,
+    TwoPointCrossover,
+    RandomCrossover
+]);
