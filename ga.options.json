@@ -1,0 +1,137 @@
+// $all - all "properties"
+// $root - root schema object
+{
+    "title": "Genom GA options schema",
+    "type": "object",
+    "properties": {
+        "evolution": {
+            "type": "object",
+            "properties": {
+                // TODO: describe concrete evolution models
+                "[name]-evolution": {
+                    "weight": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    }
+                }
+            }
+        },
+        "options": {
+            "type": "object",
+            "properties": {
+                "maxIterations": {
+                    "type": "number",
+                    "default": 500,
+                    "minimum": 100,
+                    "maximum": 10000
+                },
+                "deathLimit": {
+                    "type": "number",
+                    "multiplyOf": 0.1,
+                    "default": 0.2,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "count": {
+                    "type": "number",
+                    "default": 100,
+                    "minimum": 1,
+                    "maximum": 1000
+                },
+                "threshold": {
+                    "type": "number",
+                    "multiplyOf": 0.1,
+                    "default": 0.9,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "mutationProbability": {
+                    "type": "number",
+                    "multiplyOf": 0.1,
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "useRandomInitialIndividuals": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "countOfBestToLiveThrought": {
+                    "type": "number",
+                    "multiplyOf": 1,
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": "$root.options.count"
+                },
+                "stopOnEndOfIterations": {
+                    "type": "boolean",
+                    "default": true
+                }
+            },
+            "required": [
+                "$all"
+            ]
+        },
+        "crossover": {
+            "type": "object",
+            "patternProperties": {
+                "[name]-crossover": {
+                    "type": "object",
+                    "properties": {
+                        "weight": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        }
+                    },
+                    "required": [
+                        "weight"
+                    ]
+                }
+            }
+        },
+        "mutation": {
+            "type": "object",
+            "patternProperties": {
+                "[name]-mutation": {
+                    "type": "object",
+                    "properties": {
+                        "weight": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "any": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "weight"
+                    ]
+                }
+            }
+        },
+        "fitness": {
+            "type": "object",
+            "patternProperties": {
+                "[name]-mutation": {
+                    "type": "object",
+                    "properties": {
+                        "weight": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "_important": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "weight"
+                    ]
+                }
+            }
+        }
+    }
+}
