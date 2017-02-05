@@ -1,5 +1,5 @@
 import '../../../../polyfills';
-import GA from './GA.js';
+import { BrowserGA } from './GA.js';
 
 /*
 interface IWorkerOptions {
@@ -16,14 +16,6 @@ interface IEvent {
 	data: IEventData
 }
 */
-
-// Сейчас на каждый мессадж создается новый GA
-// Требуется поправить так, чтобы GA создавался только по мере надобности 
-//
-// 1) Start
-// 2) Stop
-// 3) Pause
-// 4) Resume
 
 function createGA(options, reference) {
 	const onProgress =
@@ -49,32 +41,38 @@ function createGA(options, reference) {
 			close();
 		};
 
-	return new GA(options, { onProgress, onDone, onPause }, reference);
+	return new BrowserGA(options, { onProgress, onDone, onPause }, reference);
 }
 
-let sharedInstance;
+let gaInstance;
 
 onmessage = function(event/*: { data: { action: 'start' | 'stop' | 'pause', data: any } } */) { // eslint-disable-line
-	const { data, action } = event.data;
+	const { data: { options, reference, migrants } = {}, action } = event.data;
 
 	console.log(action);
 	switch ( action ) {
 		case 'start':
-			sharedInstance = createGA(data.options, data.reference);
+			gaInstance = createGA(options, reference);
 			break;
 
 		case 'stop':
-			sharedInstance.stop();
+			gaInstance.stop();
 			// TODO: creepy way to let websocket send message on onDone back and only than close socket; 
 			setTimeout(close, 100);
 			break;
 
 		case 'pause':
-			sharedInstance.pause();
+			gaInstance.pause();
 			break;
 
 		case 'resume':
-			sharedInstance.resume();
+			gaInstance.resume();
+			break;
+
+		case 'migrate':
+			if (migrants && gaInstance.migrate) {
+				gaInstance.migrate(migrants);
+			}
 			break;
 
 		default:

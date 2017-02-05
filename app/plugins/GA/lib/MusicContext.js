@@ -1,4 +1,4 @@
-import SimpleStorage from './SimpleStorage.js';
+import SimpleStorage from './SimpleStorage';
 import {REFERENCE_INDIVIDUAL} from './common';
 
 const DEFAULT_BAR_LENGTH = 8;

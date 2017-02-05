@@ -14,7 +14,8 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "test-debug": "node debug --harmony ./node_modules/jest-cli/bin/jest.js --runInBand",
-    "reinstall": "rmdir .\\node_modules /S /q && npm i"
+    "reinstall": "rmdir .\\node_modules /S /q && npm i",
+    "server": "babel-node server/index.js --iter=100"
   },
   "repository": "https://github.com/sevaru/ga-app5",
   "author": "daletune",

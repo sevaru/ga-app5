@@ -2,18 +2,20 @@ import { arrayUtils } from './utils';
 import { availableValues } from './common';
 
 export default class Individual {
-	// TODO: extract logic of creation to factory
-	// createFromReference
-	// createRandom
-	// createDTO
-	// factory = new IndividualFactory(context);
+	/**
+	 * @param {Array<number>} referenceIndividual
+	 * @param {Array<number>} contentToStart
+	 * @param {number} fitnessValue
+	 * @param {boolean} useRandomToStart
+	 * @param {Object} context
+	 * @param {Function} context.crossover
+	 * @param {Function} context.mutation
+	 * @param {Function} context.fitness
+	 */
 	constructor(referenceIndividual, contentToStart, fitnessValue, useRandomToStart = true, context) {
 		// -----------------------------
-		// -1) Save context IContext { crossover }
+		// -1) Save context
 		// -----------------------------
-		if (!context) {
-			console.log('Called without context, probably only for presentation purpose');
-		}
 		this._context = context;
 
 
@@ -25,10 +27,10 @@ export default class Individual {
 		// -----------------------------
 		// 1) Content to start
 		// -----------------------------
-		if ( contentToStart ) {
+		if (contentToStart) {
 			this._content = contentToStart;
 		} else {
-			this._content = useRandomToStart ? 
+			this._content = useRandomToStart ?
 				this._reference.map(() => arrayUtils.randomElement(availableValues)) :
 				referenceIndividual.slice();
 		}
@@ -39,22 +41,29 @@ export default class Individual {
 		this._fitnessValue = fitnessValue == null ? this.fitness().value : fitnessValue;
 	}
 
-	// Mutate and recalculate inner fitnessValue
-	mutate(options) {
+	/**
+	 * @description Mutate and recalculate inner fitnessValue
+	 */
+	mutate(options) { // TODO: pass options to this._context.mutation(..., options) ???
+		this._checkContext();
 		this._content = this._context.mutation(this._content);
 		this._fitnessValue = this.fitness().value;
 	}
 
-	crossover( someone ) {
+	crossover(someone) {
+		this._checkContext();
 		const newContent = this._context.crossover(this.content, someone.content);
 		return new Individual(this._reference, newContent, null, false, this._context);
 	}
 
 	fitness() {
+		this._checkContext();
 		return this._context.fitness(this.content, this._reference);
 	}
 
-	// Always return by value!
+	/**
+	 * @description NOTE: Always returns by value
+	 */
 	get content() {
 		return this._content.slice();
 	}
@@ -82,13 +91,14 @@ export default class Individual {
 		};
 	}
 
-	// TODO: find out better way of getting private fields, maybe create toDTO (in worker) and fromDTO (in UI tread)
-	static fromDTO({_reference, _content, _fitnessValue}) {
-		return new Individual(_reference, _content, _fitnessValue, false);
+	_checkContext() {
+		if (!this._context) {
+			throw new Error('Context is not defined, created via fromDTO');
+		}
 	}
 
-	//TODO: redo with decorator
-	static create(a, b, c, d, e) {
-		return new Individual(a, b, c, d, e);
+	// TODO: find out better way of getting private fields, maybe create toDTO (in worker) and fromDTO (in UI tread)
+	static fromDTO({ _reference, _content, _fitnessValue }) {
+		return new Individual(_reference, _content, _fitnessValue, false);
 	}
 }

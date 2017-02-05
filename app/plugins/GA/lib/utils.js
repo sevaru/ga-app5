@@ -14,6 +14,7 @@ const numberUtils = {
 	/**
 	 * @param {number} startIndex
 	 * @param {number} endIndex not included
+	 * @returns {number}
 	 */
 	randomBetween( startIndex, endIndex ) {
 		if (startIndex < 0 || endIndex < 0) {
