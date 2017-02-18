@@ -1,8 +1,7 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import { LineChart } from 'react-d3';
-import Dimensions from 'react-dimensions'
-import { isEmpty } from 'lodash';
+import Dimensions from 'react-dimensions';
 
 class SimpleGraph extends React.Component {
 	render() {
