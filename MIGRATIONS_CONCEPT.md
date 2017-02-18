@@ -25,6 +25,7 @@ _GI_
 1) receives migration rate options
 2) on GA iteration checks rate and if needed push and requests migrants 
 3) **Host** collect and share migrants requests and _GI_ **IDs** and sends migrants from **pool**
+---
 
 # Migration options
 1) Migration rate (in eras?)

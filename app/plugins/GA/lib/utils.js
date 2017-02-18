@@ -1,11 +1,11 @@
-function checkArray( arr ) {
-	if ( !Array.isArray(arr) ) {
+function checkArray(arr) {
+	if (!Array.isArray(arr)) {
 		throw new TypeError(`arr should be an array ${arr} given.`);
 	}
 }
 
-function checkObj( obj ) {
-	if ( !obj || typeof obj !== 'object' ) {
+function checkObj(obj) {
+	if (!obj || typeof obj !== 'object') {
 		throw new TypeError(`obj should be an object ${obj} given`);
 	}
 }
@@ -16,16 +16,16 @@ const numberUtils = {
 	 * @param {number} endIndex not included
 	 * @returns {number}
 	 */
-	randomBetween( startIndex, endIndex ) {
+	randomBetween(startIndex, endIndex) {
 		if (startIndex < 0 || endIndex < 0) {
 			throw 'wft randomBetween';
 		}
-		if ( endIndex === undefined ) {
+		if (endIndex === undefined) {
 			endIndex = startIndex;
 			startIndex = 0;
 		}
 
-		return Math.floor(Math.random() * endIndex) + startIndex;  
+		return Math.floor(Math.random() * endIndex) + startIndex;
 	},
 
 	normalizeValue(value, maxValue) {
@@ -38,32 +38,32 @@ const numberUtils = {
 };
 
 const arrayUtils = {
-	last( array ) {
+	last(array) {
 		return array[array.length - 1];
 	},
 
-	make( value, length ) {
+	make(value, length) {
 		let arr = [];
-		while( length-- ) {
+		while (length--) {
 			arr[length] = value;
 		}
 		return arr;
 	},
 
-	getRandomIndexes( count /*: number */, length /*: number */, except /*: Array<number> //indexes */ ) {
+	getRandomIndexes(count /*: number */, length /*: number */, except /*: Array<number> //indexes */) {
 		const result = [];
 
-		if ( count > length ) {
+		if (count > length) {
 			throw new Error('Count can\'t be more that length');
 		}
 
-		while( count > 0 ) {
+		while (count > 0) {
 			const newIndex = numberUtils.randomBetween(length);
-			if ( result.indexOf(newIndex) !== -1 ) {
+			if (result.indexOf(newIndex) !== -1) {
 				continue;
 			}
 
-			if ( except && except.includes(newIndex) ) {
+			if (except && except.includes(newIndex)) {
 				continue;
 			}
 
@@ -74,23 +74,23 @@ const arrayUtils = {
 		return result;
 	},
 
-	randomKey( arr ) {
+	randomKey(arr) {
 		checkArray(arr);
 		return numberUtils.randomBetween(arr.length);
 	},
-	
-	randomElement( arr ) {
+
+	randomElement(arr) {
 		const randomKey = arrayUtils.randomKey(arr);
 		return arr[randomKey];
 	},
-	
-	findObjectByKey( array, field, value ) {
+
+	findObjectByKey(array, field, value) {
 		return array.find(element => element.hasOwnProperty(field) && element[field] === value);
 	}
 };
 
 const objectUtils = {
-	randomElement( obj ) {
+	randomElement(obj) {
 		checkObj(obj);
 		const keys = Object.keys(obj);
 		const randomKey = arrayUtils.randomElement(keys);
@@ -118,7 +118,7 @@ const stringUtils = {
 }
 
 const selectionUtils = {
-	getRandomKeyByWeight( obj ) {
+	getRandomKeyByWeight(obj) {
 		const keys = Object.keys(obj);
 		const weights = Object.keys(obj).map(key => obj[key].weight * 100);
 		return selectionUtils._roulette(keys, weights);
@@ -126,7 +126,7 @@ const selectionUtils = {
 
 	_roulette(keys, weights) /*: string (key)*/ {
 		let rouletteArray = [];
-		
+
 		keys.forEach((key, i) => {
 			rouletteArray = rouletteArray.concat(arrayUtils.make(key, weights[i]));
 		});
@@ -138,13 +138,16 @@ const selectionUtils = {
 
 const randomUtils = {
 	headsOrTails() {
-		return Math.random() > 0.5;	
+		return Math.random() > 0.5;
 	}
 };
 
 export { default as notesUtils } from './utils/NotesUtils.js';
 
-export { 
+// https://gist.github.com/jed/982883
+export const uuid = a => a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, uuid);
+
+export {
 	objectUtils as objUtils,
 	arrayUtils,
 	numberUtils,

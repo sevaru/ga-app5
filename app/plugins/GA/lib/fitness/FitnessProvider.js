@@ -12,7 +12,6 @@ import RhythmLineFitness from './providers/RhythmLineFitness';
 import RodNoteFitness from './providers/RodNoteFitness';
 import SignSequenceFitness from './providers/SignSequenceFitness';
 
-
 export const { run, Component } = createCompositeProvider('fitness', [
     BasicReferenceFitness,
     ClusterFitness,

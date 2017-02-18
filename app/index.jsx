@@ -17,6 +17,11 @@ import initialState from './store/initialState';
 import { storage } from './store/persistStorage';
 
 function migrate(persistedState, currentState) {
+	// NOTE: Do not use localStorage in development.
+	if (process.env.NODE_ENV === 'development') {
+		return currentState;
+	}
+
 	if (persistedState && storage.get(VERSION_KEY) === APP_VERSION) {
 		return persistedState;
 	}
@@ -24,7 +29,6 @@ function migrate(persistedState, currentState) {
 	return currentState;
 }
 
-// TODO: add migrations;
 const store = configureStore(migrate(storage.get(STATE_KEY), initialState));
 
 store.subscribe(

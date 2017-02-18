@@ -3,13 +3,13 @@ import { stringUtils } from '../lib/utils.js';
 
 
 class BaseControl extends React.Component {
-	render() {
-		throw new Error('Abstract class');
-	}
+    render() {
+        throw new Error('Abstract class');
+    }
 
-    onBlur({ field, type = 'number' }, e ) {
+    onBlur({ field, type = 'number' }, e) {
         let value;
-        switch ( type ) {
+        switch (type) {
             case 'number':
                 value = Number(e.target.value);
                 break;
@@ -35,27 +35,27 @@ export class SliderControl extends BaseControl {
         this.setState({ value: event.target.value });
     }
 
-	render() {
-		//optional
-		const title = this.props.title || stringUtils.camelCaseToHuman(this.props.field);
-		const min = this.props.min || 0;
-		const max = this.props.max || 1;
-		const step = this.props.step || 0.01;
+    render() {
+        //optional
+        const title = this.props.title || stringUtils.camelCaseToHuman(this.props.field);
+        const min = this.props.min || 0;
+        const max = this.props.max || 1;
+        const step = this.props.step || 0.01;
 
-		return (
+        return (
             <div className="form-group">
                 <label>{title} - {this.state.value}</label>
-                <input 
-                	type="range"
-                	value={this.state.value}
-                	min={min}
-                	max={max}
-                	step={step}
+                <input
+                    type="range"
+                    value={this.state.value}
+                    min={min}
+                    max={max}
+                    step={step}
                     onChange={this.onChange}
-                	onBlur={this.blurBinded} />
+                    onBlur={this.blurBinded} />
             </div>
         );
-	}
+    }
 }
 
 export class CheckboxControl extends BaseControl {
@@ -68,20 +68,43 @@ export class CheckboxControl extends BaseControl {
         this.setState({ value: event.target.value });
     }
 
-	render() {
+    render() {
         const {field, defaultValue, title} = this.props;
-		const actualTitle = title || stringUtils.camelCaseToHuman(field);
-		return (
+        const actualTitle = title || stringUtils.camelCaseToHuman(field);
+        return (
             <div className="checkbox">
                 <label>
-                    <input 
-                    	type="checkbox"
-                    	defaultChecked={defaultValue}
+                    <input
+                        type="checkbox"
+                        defaultChecked={defaultValue}
                         onChange={this.onChange.bind(this)}
-                    	onBlur={this.onBlur.bind(this, {field, type: 'boolean'})} />
-                	{actualTitle}
+                        onBlur={this.onBlur.bind(this, { field, type: 'boolean' })} />
+                    {actualTitle}
                 </label>
             </div>
         );
-	}
+    }
 }
+
+export const createSliderFactory =
+    (state, onblur) =>
+        (fields) =>
+            fields.map(
+                ({
+                    field,
+                    title = stringUtils.camelCaseToHuman(field),
+                    min = 1,
+                    max = 100,
+                    step = 1
+                }) => (
+                        <SliderControl
+                            key={field}
+                            defaultValue={state[field]}
+                            onBlur={onblur.bind(null, field)}
+                            field={field}
+                            title={title}
+                            min={min}
+                            max={max}
+                            step={step}
+                        />
+                    ));

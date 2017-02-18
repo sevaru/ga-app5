@@ -6,7 +6,7 @@ import Player from '../../../players/soundfont-player/Player.js';
 // Переделать так, чтобы можно было отловить вход новых population
 // сейчас componentWillReceiveProps вызывается при каждом клике на таблицу при выделении
 // так как под собой это несет this.props.onSelect который меняет state парента и поэтому происходит процесс перерасчета
-export default class IndividualsTable extends React.Component {
+export class IndividualsTable extends React.Component {
 	constructor(params) {
 		super(params);
 		this.state = {
@@ -59,7 +59,7 @@ export default class IndividualsTable extends React.Component {
 				)
 			);
 		return (
-			<Table condensed border style={{ marginBottom: 0 }}>
+			<Table condensed style={{ marginBottom: 0 }}>
 				<tbody>
 					{fitness}
 				</tbody>

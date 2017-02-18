@@ -3,226 +3,194 @@ import './styles.css';
 
 //libs
 import React from 'react';
+import { isEmpty } from 'lodash';
 import { Button, Grid, Col, Row, ButtonGroup, Panel, ProgressBar } from 'react-bootstrap';
-import Dimensions from 'react-dimensions'
-import { LineChart } from 'react-d3';
-
+import { Graph } from './Graph';
 import Player from '../../../players/soundfont-player/Player.js';
 
 //Components
 import GAOptions from './GAOptions.jsx';
-import GARunner from '../lib/ga/GARunner.js';
+import { GARunner } from '../lib/ga/GARunner.js';
+import { IndividualsTable } from './IndividualsTable';
 import Sheet from './Sheet.jsx';
-import IndividualsTable from './IndividualsTable.jsx';
+
+
+const DEFAULT_STATISTICS = [
+	{
+		name: 'darwin-evolution',
+		values: [
+			{ x: 0, y: 0 }
+		]
+	}
+];
 
 const DEFAULT_STATE = {
-	working: false, // calculate process is execution
+	/**
+	 * @description App state
+	 */
+	working: false,
 	paused: false,
+
+	/**
+	 * @description Used to draw Music Scores 
+	 */
 	selected: null,
-	// Population is IFullFitnessDTO { content: number[], fitness: { value: number, full: { [key: string]: number } }
+
+
+
+	/**
+	 * @description Old population holder for single evolution 
+	 * @deprecated
+	 * @type {{ content: number[], fitness: { value: number, full: { [key: string]: number } }}[]
+	 */
 	population: [],
+
+	/**
+	 * @description Populations hash for evolutions
+	 * @type { { [evolutionName: string]: { content: number[], fitness: { value: number, full: { [key: string]: number } } }[] }
+	 */
+	populations: {},
+
+	/**
+	 * @type { { name: string, values: { x: number, y: number }[] }[] }
+	 */
 	statistics: [],
+
+
+	/**
+	 * @description Used with multiple evolutions to display multiple progress bars
+	 * @type {{[evolutionName: string]: number}}
+	 */
+	percentages: {},
+
+	/**
+	 * @description Progress
+	 */
 	percentage: 0,
-	best: null	
+
+	/**
+	 * @description Best one of all evolutions
+	 * @type {{fitness: { value: number }}}
+	 */
+	best: null
 };
 
-class Graph extends React.Component {
-	render() {
-		const { data, containerWidth, containerHeight } = this.props;
-		if (!data || !data.length) {
-			return null;
-		}
-		const width = containerWidth - 40;
-		const viewBoxObject = {
-		    x: 0,
-		    y: 0,
-		    width,
-		    height: width / 2 
-		};
-		console.log('hes', containerWidth, containerHeight);
-		return (
-			<Panel header="Graph">
-				<LineChart
-					legend={false}
-					data={[
-						{
-							values: data,
-							strokeWidth: 3,
-							strokeDashArray: '5,5'
-						}
-					]}
-					width={viewBoxObject.width}
-					height={viewBoxObject.height}
-					viewBoxObject={viewBoxObject}
-					yAxisLabel="Best"
-					xAxisLabel="Elapsed Iteration"
-					gridHorizontal={true}/>
-			</Panel>
-		);
-	}
-}
+export default class Index extends React.Component {
+	state = { ...DEFAULT_STATE };
+	/**
+	 * @type {GARunner}
+	 */
+	runner = null
 
-const DimensionGraph = Dimensions()(Graph);
-
-
-// TODO: read crossover options from redux state
-export default class Index extends React.Component { 
-	constructor(params, context) {
-		super(params);
-		this.runner = null;
-
-		const state = context.store.getState();
-
-		// TODO: put options state in namespace? or grab it from?
-		this.state = Object.assign(
-			{},
-			DEFAULT_STATE,
-			// TODO: why i put this in state?
-			{
-				crossover: state.GA.crossover,
-				mutation: state.GA.mutation,
-				options: state.GA.options
-		 	}
-		);
-	}
-	
-	select( item ) {
+	select(item) {
 		Player.set(item.content);
 		this.setState({
 			selected: item.content
 		});
 	}
 
-	run() {
+	run = () => {
 		// Update UI with default values
-		this.setState({ ...DEFAULT_STATE, statistics: [{ x: 0, y: 0 }], working: true });
+		this.setState({ ...DEFAULT_STATE, statistics: [...DEFAULT_STATISTICS], working: true });
 
-		// Delete old runner if it is
-		if ( this.runner ) {
+		if (this.runner) {
 			this.runner.destroy();
 		}
 
-		// New Runner
-		const onDone = population => this.setState({ population, working: false, paused: false }); // onDone back to default state
-		const onPause = population => this.setState({ population });
-		const onProgress = ({ percentage, best }) => {
-			const statistics = this.state.statistics;
+		this.runner = this._createRunner();
+	};
 
-			statistics.push({
-				x: percentage,
-				y: (best.fitness.value * 100)
-			});
-
-			this.setState({ best, percentage, statistics });
-		};
-
-		const options = this.context.store.getState().GA;
-		this.runner = new GARunner(options, onDone, onProgress, onPause);
-	}
-
-	resume() {
+	resume = () => {
 		this.setState({
 			paused: false
 		});
 		this.runner && this.runner.resume();
-	}
+	};
 
-	pause() {
+	pause = () => {
 		this.setState({
 			paused: true
 		});
 		this.runner && this.runner.pause();
-	}
+	};
 
-	stop() {
+	stop = () => {
 		this.runner && this.runner.stop();
-	}
+	};
 
 	render() {
 		const {store} = this.context;
-        const {paused, working} = this.state;
 
-        let scoresPanel = null;
-        let progressBar = null;
-        let best = null;
-        let individualsTable = null;
+		let scoresPanel = null;
+		let progressBar = null;
+		let best = null;
+		let individualsTable = null;
 
-        if ( this.state.population.length ) {
-        	individualsTable = (
-        		<IndividualsTable
-        			population={this.state.population}
-        			onSelect={this.select.bind(this)} />
-    		);
-        }
+		if (this.state.population.length) {
+			// TODO: create table for each worker, or use different colors for rows?
+			individualsTable = (
+				<IndividualsTable
+					population={this.state.population}
+					onSelect={this.select.bind(this)} />
+			);
+		}
 
-        // Panels
-        if ( this.state.selected ) {
-        	scoresPanel = (
-        		<Panel header="Scores">
+		// Panels
+		if (this.state.selected) {
+			scoresPanel = (
+				<Panel header="Scores">
 					<Sheet data={this.state.selected} />
 				</Panel>
-    		);
-        }
+			);
+		}
 
-        // ProgressBar
-        if ( this.state.percentage ) {
+		// ProgressBar
+		if (this.state.percentage) {
 			const currentPercent = (this.state.percentage) | 0;
-        	progressBar = (
-        		<div className="progress-bar-wrapper">
-        			<h3>Progress: </h3>
-	                <ProgressBar now={currentPercent} label={`${currentPercent}%`} />
-	            </div>
-    		);
-        }
+			progressBar = (
+				<div className="progress-bar-wrapper">
+					<h3>Progress: </h3>
+					<ProgressBar now={currentPercent} label={`${currentPercent}%`} />
+				</div>
+			);
+		}
+		if (!isEmpty(this.state.percentages)) {
+			progressBar = (
+				<div>
+					{Object.entries(this.state.percentages)
+						.map(([name, percent]) => [name.replace('-evolution', ''), percent | 0])
+						.map(([name, percent]) => (
+							<div key={name} className="progress-bar-wrapper">
+								<h3>Progress ({name}):</h3>
+								<ProgressBar now={percent} label={`${percent}%`} />
+							</div>
+						))}
+				</div>
+			);
+		}
 
-        // Best Guys ProgressBar
-        if ( this.state.best ) {
+		// Best Guys ProgressBar
+		if (this.state.best) {
 			const bestValue = (this.state.best.fitness.value * 100) | 0;
-        	best = (
-        		<div className="progress-bar-wrapper">
-        			<h3>Best: </h3>
-	                <ProgressBar bsStyle="success" now={bestValue} label={`${bestValue}%`} key="1" />
-	            </div>
-    		);
-        }
+			best = (
+				<div className="progress-bar-wrapper">
+					<h3>Best: </h3>
+					<ProgressBar bsStyle="success" now={bestValue} label={`${bestValue}%`} key="1" />
+				</div>
+			);
+		}
 
 		return (
 			<Grid fluid>
 				<Row>
 					<Col sm={8} md={8}>
-						{this.state.statistics.length ? <DimensionGraph data={this.state.statistics}/> : null} 
+						{this.state.statistics.length ? <Graph series={this.state.statistics} /> : null}
 						{scoresPanel}
 						<GAOptions store={store} />
 					</Col>
 					<Col sm={4} md={4}>
 						<Panel header="Population">
-							{/* extract to <GACalculationControls play pause resume stop working paused>*/}
-							<ButtonGroup>
-								{
-									working ?
-									(
-										paused ?
-										(
-											<Button bsStyle="success" onClick={this.resume.bind(this)}>
-												<span className="glyphicon glyphicon-play"></span>
-											</Button>
-										):
-										(
-											<Button bsStyle="warning" onClick={this.pause.bind(this)}>
-												<span className="glyphicon glyphicon-pause"></span>
-											</Button>
-										)
-									) :
-									(
-										<Button bsStyle="success" onClick={this.run.bind(this)}>
-											<span className="glyphicon glyphicon-play"></span>
-										</Button>
-									)
-								}
-								<Button bsStyle="danger" onClick={this.stop.bind(this)}>
-									<span className="glyphicon glyphicon-stop"></span>
-								</Button>
-							</ButtonGroup>
+							{this._renderButtons()}
 							{best}
 							{progressBar}
 							{individualsTable}
@@ -231,6 +199,110 @@ export default class Index extends React.Component {
 				</Row>
 			</Grid>
 		);
+	}
+
+	_renderButtons() {
+		return (
+			<ButtonGroup>
+				{this._renderFirstButton()}
+				<Button bsStyle="danger" onClick={this.stop}>
+					<span className="glyphicon glyphicon-stop"></span>
+				</Button>
+			</ButtonGroup>
+		);
+	}
+
+	_renderFirstButton() {
+		const { paused, working } = this.state;
+
+		if (working && !paused) {
+			return (
+				<Button bsStyle="warning" onClick={this.pause}>
+					<span className="glyphicon glyphicon-pause"></span>
+				</Button>
+			);
+		}
+
+		return (
+			<Button bsStyle="success" onClick={working ? this.resume : this.run}>
+				<span className="glyphicon glyphicon-play"></span>
+			</Button>
+		);
+	}
+
+	_createRunner() {
+		const options = this.context.store.getState().GA;
+
+		if (options.options.useEvolutionStrategies) {
+			return this._createEvolutionRunner(options);
+		} else {
+			return this._createDefaultRunner(options);
+		}
+	}
+
+	_createDefaultRunner(options) {
+		const onDone = ({ data: population }) => this.setState({ population, working: false, paused: false }); // onDone back to default state
+		const onPause = ({ data: population }) => this.setState({ population });
+		const onProgress = ({ percentage, best }) => {
+			const statistics = this.state.statistics;
+
+			statistics[0].values.push({
+				x: percentage,
+				y: (best.fitness.value * 100)
+			});
+
+			this.setState({ best, percentage, statistics });
+		};
+		return new GARunner(options, { onDone, onProgress, onPause });
+	}
+
+	_createEvolutionRunner(options) {
+		// TODO: handle population which leaves in individuals table
+		const statistics = this.state.statistics;
+		const onDone = ({ data: population }) => this.setState({ population, working: false, paused: false }); // onDone back to default state
+		const onPause = ({ data: population }) => this.setState({ population });
+		const onProgress = ({ id, percentage, best }) => {
+			const prevBestFitnessValue = this.state.best && this.state.best.fitness.value || 0;
+			const currentBestFitnessValue = best.fitness.value;
+			const percentages = this.state.percentages;
+
+			const name = id.split('_')[0];
+			const series = statistics.find(x => x.name === name);
+			const item = {
+				x: percentage,
+				y: (currentBestFitnessValue * 100)
+			};
+
+			if (series) {
+				series.values.push(item);
+			} else {
+				statistics.push({
+					name,
+					values: [
+						{
+							x: 0,
+							y: 0
+						},
+						item
+					]
+				});
+			}
+
+			const newState = {
+				statistics,
+				percentages: {
+					...percentages,
+					[name]: percentage
+				}
+			};
+
+			if (currentBestFitnessValue > prevBestFitnessValue) {
+				newState.best = best;
+			}
+
+			this.setState(newState);
+		};
+		return new GARunner(options, { onDone, onProgress, onPause });
 	}
 }
 // TODO: redo with react-redux connect later on
