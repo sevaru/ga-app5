@@ -2,10 +2,6 @@ import React from 'react';
 import { Table, Button, ButtonGroup } from 'react-bootstrap';
 import Player from '../../../players/soundfont-player/Player.js';
 
-//TODO:
-// Переделать так, чтобы можно было отловить вход новых population
-// сейчас componentWillReceiveProps вызывается при каждом клике на таблицу при выделении
-// так как под собой это несет this.props.onSelect который меняет state парента и поэтому происходит процесс перерасчета
 export class IndividualsTable extends React.Component {
 	constructor(params) {
 		super(params);
@@ -17,6 +13,7 @@ export class IndividualsTable extends React.Component {
 	render() {
 		return (
 			<div className="individuals-table-wrapper">
+				<h3>Population {this.props.name}:</h3>
 				<Table striped bordered condensed hover>
 					<thead>
 						<tr>
@@ -26,11 +23,40 @@ export class IndividualsTable extends React.Component {
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.population.map(this.renderItem.bind(this))}
+						{this._renderPopulation()}
 					</tbody>
 				</Table>
 			</div>
 		);
+	}
+
+	renderItem( item, index ) {
+		const selected = this.state.selectedIndex === index;
+		const classes = selected ? 'highlight' : '';
+		const fitnessFrag = selected ? this.renderFitnessInfo(item) : item.fitness.value; 
+
+		return (
+			<tr className={classes} key={index} onClick={this.onSelect.bind(this, item, index)}>
+				<td>
+					<ButtonGroup>
+						<Button bsStyle="info" onClick={this.play.bind(this, item.content)}>
+							<span className="glyphicon glyphicon-play"></span>
+						</Button>
+						<Button bsStyle="info" onClick={this.stop}>
+							<span className="glyphicon glyphicon-stop"></span>
+						</Button>
+					</ButtonGroup>
+				</td>
+				<td>{'name' + index}</td>
+				<td>
+					{fitnessFrag}
+				</td>
+			</tr>
+		);
+	}
+
+	_renderPopulation() {
+		return this.props.population.map((x, i) => this.renderItem(x, i));
 	}
 
 	renderFitnessInfoItems(items) {
@@ -64,31 +90,6 @@ export class IndividualsTable extends React.Component {
 					{fitness}
 				</tbody>
 			</Table>
-		);
-	}
-
-	renderItem( item, index ) {
-		const selected = this.state.selectedIndex === index;
-		const classes = selected ? 'highlight' : '';
-		const fitnessFrag = selected ? this.renderFitnessInfo(item) : item.fitness.value; 
-
-		return (
-			<tr className={classes} key={index} onClick={this.onSelect.bind(this, item, index)}>
-				<td>
-					<ButtonGroup>
-						<Button bsStyle="info" onClick={this.play.bind(this, item.content)}>
-							<span className="glyphicon glyphicon-play"></span>
-						</Button>
-						<Button bsStyle="info" onClick={this.stop}>
-							<span className="glyphicon glyphicon-stop"></span>
-						</Button>
-					</ButtonGroup>
-				</td>
-				<td>{'name' + index}</td>
-				<td>
-					{fitnessFrag}
-				</td>
-			</tr>
 		);
 	}
 

@@ -37,7 +37,6 @@ const DEFAULT_STATE = {
 	selected: null,
 
 
-
 	/**
 	 * @description Old population holder for single evolution 
 	 * @deprecated
@@ -82,7 +81,7 @@ export default class Index extends React.Component {
 	 */
 	runner = null
 
-	select(item) {
+	select = (item) => {
 		Player.set(item.content);
 		this.setState({
 			selected: item.content
@@ -90,7 +89,6 @@ export default class Index extends React.Component {
 	}
 
 	run = () => {
-		// Update UI with default values
 		this.setState({ ...DEFAULT_STATE, statistics: [...DEFAULT_STATISTICS], working: true });
 
 		if (this.runner) {
@@ -119,7 +117,7 @@ export default class Index extends React.Component {
 	};
 
 	render() {
-		const {store} = this.context;
+		const { store } = this.context;
 
 		let scoresPanel = null;
 		let progressBar = null;
@@ -131,11 +129,26 @@ export default class Index extends React.Component {
 			individualsTable = (
 				<IndividualsTable
 					population={this.state.population}
-					onSelect={this.select.bind(this)} />
+					onSelect={this.select} />
+			);
+		}
+		if (!isEmpty(this.state.populations)) {
+			individualsTable = (
+				<div>
+					{Object.entries(this.state.populations)
+						.map(([name, population]) => {
+							return (
+								<IndividualsTable
+									key={name}
+									name={name}
+									population={population}
+									onSelect={this.select} />
+							)
+						})}
+				</div>
 			);
 		}
 
-		// Panels
 		if (this.state.selected) {
 			scoresPanel = (
 				<Panel header="Scores">
@@ -144,7 +157,10 @@ export default class Index extends React.Component {
 			);
 		}
 
-		// ProgressBar
+		/**
+		 * @deprecated
+		 * @description Display progress bar for single evolution
+		 */
 		if (this.state.percentage) {
 			const currentPercent = (this.state.percentage) | 0;
 			progressBar = (
@@ -154,19 +170,11 @@ export default class Index extends React.Component {
 				</div>
 			);
 		}
+		/**
+		 * @description Display progress bar for multiple evolutions
+		 */
 		if (!isEmpty(this.state.percentages)) {
-			progressBar = (
-				<div>
-					{Object.entries(this.state.percentages)
-						.map(([name, percent]) => [name.replace('-evolution', ''), percent | 0])
-						.map(([name, percent]) => (
-							<div key={name} className="progress-bar-wrapper">
-								<h3>Progress ({name}):</h3>
-								<ProgressBar now={percent} label={`${percent}%`} />
-							</div>
-						))}
-				</div>
-			);
+			progressBar = this._renderProgressBarForEvolutions();
 		}
 
 		// Best Guys ProgressBar
@@ -198,6 +206,21 @@ export default class Index extends React.Component {
 					</Col>
 				</Row>
 			</Grid>
+		);
+	}
+
+	_renderProgressBarForEvolutions() {
+		return (
+			<div>
+				{Object.entries(this.state.percentages)
+					.map(([name, percent]) => [name.replace('-evolution', ''), percent | 0])
+					.map(([name, percent]) => (
+						<div key={name} className="progress-bar-wrapper">
+							<h3>Progress ({name}):</h3>
+							<ProgressBar now={percent} label={`${percent}%`} />
+						</div>
+					))}
+			</div>
 		);
 	}
 
@@ -259,14 +282,34 @@ export default class Index extends React.Component {
 	_createEvolutionRunner(options) {
 		// TODO: handle population which leaves in individuals table
 		const statistics = this.state.statistics;
-		const onDone = ({ data: population }) => this.setState({ population, working: false, paused: false }); // onDone back to default state
-		const onPause = ({ data: population }) => this.setState({ population });
+		const onDone = ({ id, data: population }) => {
+			const { populations } = this.state;
+			const name = this._getNameFromId(id);
+			this.setState({
+				populations: {
+					...populations,
+					[name]: population
+				},
+				working: false,
+				paused: false
+			});
+		};
+		const onPause = ({ id, data: population }) => {
+			const { populations } = this.state;
+			const name = this._getNameFromId(id);
+			this.setState({
+				populations: {
+					...populations,
+					[name]: population
+				}
+			});
+		};
 		const onProgress = ({ id, percentage, best }) => {
 			const prevBestFitnessValue = this.state.best && this.state.best.fitness.value || 0;
 			const currentBestFitnessValue = best.fitness.value;
 			const percentages = this.state.percentages;
 
-			const name = id.split('_')[0];
+			const name = this._getNameFromId(id);
 			const series = statistics.find(x => x.name === name);
 			const item = {
 				x: percentage,
@@ -303,6 +346,10 @@ export default class Index extends React.Component {
 			this.setState(newState);
 		};
 		return new GARunner(options, { onDone, onProgress, onPause });
+	}
+
+	_getNameFromId(id) {
+		return id.split('_')[0];
 	}
 }
 // TODO: redo with react-redux connect later on
