@@ -36,8 +36,8 @@ function createEvolutionProvider(evolution) {
 
 export const { Component, plugins } = createEvolutionProvider([
     DarwinEvolution,
-    // LamarkEvolution,
+    LamarkEvolution,
     // VriesEvolution,
-    KimuraEvolution,
+    // KimuraEvolution,
     // PunctuatedEquilibriumEvolution
 ]);

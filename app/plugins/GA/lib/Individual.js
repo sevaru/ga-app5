@@ -41,6 +41,10 @@ export default class Individual {
 		this._fitnessValue = fitnessValue == null ? this.fitness().value : fitnessValue;
 	}
 
+	clone() {
+		return new Individual(this._reference, this.content, this.fitnessValue, false, this._context);
+	}
+
 	/**
 	 * @description Mutate and recalculate inner fitnessValue
 	 */

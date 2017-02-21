@@ -22,6 +22,7 @@ export class BaseGA {
 
         // 0) Grab and store options
         this._options = preferences.options;
+        this._evolution = preferences.evolution;
         this._workerOptions = Object.assign({}, defaultWorkerOptions, workerOptions);
 
         // 1) Create context for individuals
@@ -138,9 +139,11 @@ export class BaseGA {
         return result;
     }
 
-    //-----------------------------
-    //  4. Create New Population
-    //-----------------------------
+    /**
+     * @description 4. Creates sorted by fitness population 
+     * @param { Array<Individual> } newPopulation
+     * @returns { Array<Individual> }
+     */
     _createNewPopulation(newPopulation) {
         const population = newPopulation.slice();
         const need = this._options.count - population.length;
@@ -225,37 +228,13 @@ export class BaseGA {
      * @description 2. GA loop algorithm one iteration's body
      */
     _oneEra() {
-        const { onProgress, notifyRate, onMigration } = this._workerOptions;
-        const { maxIterations, migrationRate } = this._options;
-        const notify = Boolean(onProgress);
-
         this._i++;
         const parents = this._population.slice();
-
         const children = this._mutate(this._crossover());
-
         const newPopulation = this._selection([...children, ...parents]);
-
         this._population = this._createNewPopulation(newPopulation);
-
-        if (notify && this._i % notifyRate === 0) {
-            //TODO: bad calcs this._bestOne and this._bestFitness
-            this._getBest();
-            const percentage = this._formatFitness(this._i, maxIterations);
-
-            onProgress({
-                id: this._id,
-                percentage,
-                best: this._bestOne.toFullFitnessDTO()
-            });
-        }
-
-        if (onMigration && this._i & migrationRate === 0) {
-            onMigration({
-                id: this._id,
-                migrants: this._getMigrants()
-            });
-        }
+        this._notificationProcess();
+        this._migrationProcess();
     }
 
     /**
@@ -282,6 +261,37 @@ export class BaseGA {
                 data: populationDTO
             });
         }
+    }
+
+    _notificationProcess() {
+        const { onProgress, notifyRate } = this._workerOptions;
+        const { maxIterations } = this._options;
+        const notify = Boolean(onProgress);
+
+        if (notify && this._i % notifyRate === 0) {
+            //TODO: bad calcs this._bestOne and this._bestFitness
+            this._getBest();
+            const percentage = this._formatFitness(this._i, maxIterations);
+
+            onProgress({
+                id: this._id,
+                percentage,
+                best: this._bestOne.toFullFitnessDTO()
+            });
+        }
+    }
+
+    _migrationProcess() {
+        return;
+        // const { onMigration } = this._workerOptions;
+        // const { migrationRate } = this._options;
+
+        // if (onMigration && this._i % migrationRate === 0) {
+        //     onMigration({
+        //         id: this._id,
+        //         migrants: this._getMigrants()
+        //     });
+        // }
     }
 
     _getMigrants() {

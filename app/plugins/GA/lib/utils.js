@@ -37,7 +37,7 @@ const numberUtils = {
 	}
 };
 
-const arrayUtils = {
+export const arrayUtils = {
 	last(array) {
 		return array[array.length - 1];
 	},
@@ -50,7 +50,13 @@ const arrayUtils = {
 		return arr;
 	},
 
-	getRandomIndexes(count /*: number */, length /*: number */, except /*: Array<number> //indexes */) {
+	/**
+	 * @param {number} count
+	 * @param {number} length
+	 * @param {Array<number>} except - except indexes
+	 * @returns {Array<number>}
+	 */
+	getRandomIndexes(count, length, except) {
 		const result = [];
 
 		if (count > length) {
@@ -136,7 +142,7 @@ const selectionUtils = {
 	}
 };
 
-const randomUtils = {
+export const randomUtils = {
 	headsOrTails() {
 		return Math.random() > 0.5;
 	}
@@ -149,9 +155,7 @@ export const uuid = a => a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([
 
 export {
 	objectUtils as objUtils,
-	arrayUtils,
 	numberUtils,
 	stringUtils,
-	selectionUtils,
-	randomUtils
+	selectionUtils
 };

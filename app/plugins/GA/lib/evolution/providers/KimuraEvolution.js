@@ -14,8 +14,15 @@ const render =
         </div>
     );
 
+class KimuraExecutor extends GA {
+    _oneEra() {
+        throw 'Not implemented yet';
+    }
+}
+
+
 export default {
-    executor: GA,
+    executor: KimuraExecutor,
     render,
     name: 'kimura-evolution',
     getInitialState: () => ({

@@ -89,7 +89,20 @@ export default class Index extends React.Component {
 	}
 
 	run = () => {
-		this.setState({ ...DEFAULT_STATE, statistics: [...DEFAULT_STATISTICS], working: true });
+		const newState = {
+			...DEFAULT_STATE,
+			statistics: [
+				{
+					name: 'darwin-evolution',
+					values: [
+						{ x: 0, y: 0 }
+					]
+				}
+			],
+			working: true
+		};
+
+		this.setState(newState);
 
 		if (this.runner) {
 			this.runner.destroy();
@@ -280,8 +293,6 @@ export default class Index extends React.Component {
 	}
 
 	_createEvolutionRunner(options) {
-		// TODO: handle population which leaves in individuals table
-		const statistics = this.state.statistics;
 		const onDone = ({ id, data: population }) => {
 			const { populations } = this.state;
 			const name = this._getNameFromId(id);
@@ -305,6 +316,8 @@ export default class Index extends React.Component {
 			});
 		};
 		const onProgress = ({ id, percentage, best }) => {
+			const statistics = this.state.statistics;
+			
 			const prevBestFitnessValue = this.state.best && this.state.best.fitness.value || 0;
 			const currentBestFitnessValue = best.fitness.value;
 			const percentages = this.state.percentages;

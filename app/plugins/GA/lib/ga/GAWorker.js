@@ -9,12 +9,16 @@ const USER_REQUEST_EVENTS = {
 };
 
 /**
- * @param { {  } } options
+ * @param { { evolution: any } } options
  * @param { Array<number> } reference
  * @param { string } id - worker identifier
  */
 function createGA(options, reference, id, evolutionName = 'darwin-evolution') {
 	const { executor } = plugins[evolutionName];
+	const instanceOptions = {
+		...options,
+		evolution: options.evolution[evolutionName]
+	};
 
 	const onProgress =
 		data =>
@@ -60,7 +64,7 @@ function createGA(options, reference, id, evolutionName = 'darwin-evolution') {
 
 	};
 
-	return new executor(options, workerOptions, reference, id);
+	return new executor(instanceOptions, workerOptions, reference, id);
 }
 
 let gaInstance;
