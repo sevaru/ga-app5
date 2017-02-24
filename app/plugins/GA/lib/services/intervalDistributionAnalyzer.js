@@ -1,7 +1,6 @@
-import { chunk, range, last, initial } from 'lodash';
-import Composition from '../utils/Composition';
+import { chunk, last, initial } from 'lodash';
 import { normalizeHolds } from '../utils/normalization';
-import MusicContext, { PAUSE, HOLD } from '../MusicContext';
+import MusicContext, { PAUSE } from '../MusicContext';
 
 // TODO: test this module it
 

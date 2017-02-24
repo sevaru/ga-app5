@@ -5,9 +5,9 @@ import rootState from '../../../../store/initialState';
 // NOTE: list of available evolutions
 import DarwinEvolution from './providers/DarwinEvolution';
 import LamarkEvolution from './providers/LamarkEvolution';
-import VriesEvolution from './providers/VriesEvolution';
-import KimuraEvolution from './providers/KimuraEvolution';
-import PunctuatedEquilibriumEvolution from './providers/PunctuatedEquilibriumEvolution';
+// import VriesEvolution from './providers/VriesEvolution';
+// import KimuraEvolution from './providers/KimuraEvolution';
+// import PunctuatedEquilibriumEvolution from './providers/PunctuatedEquilibriumEvolution';
 
 const EVOLUTION_KEY = 'evolution';
 

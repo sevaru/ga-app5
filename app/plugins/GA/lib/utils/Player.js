@@ -6,35 +6,9 @@ const Player = ((Synth) => {
     var _content = [];
     var _stopped = true;
 	var _timerId = null;
-
-    var _options = {
-        tempo: 128,
-        grid: 8,
-        scale: 'Cmaj',
-        octaves: 2
-    };
-
     var _referenceTable = {
         0: false
     };
-
-    function options() {
-        switch ( arguments.length ) {
-            case 0:
-                return;
-
-            case 1:
-                if ( typeof arguments[0] === 'object' ) {
-                    _options = arguments[0];
-                } 
-                break;
-
-            case 2:
-                _options[arguments[0]] = arguments[1];
-                break;
-        }
-        _prepareReferenceTable();
-    }
 
     function _prepareReferenceTable() {
         _referenceTable = {

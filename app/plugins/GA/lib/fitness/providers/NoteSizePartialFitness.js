@@ -1,7 +1,7 @@
 import { noteSizeDistributionAnalyzer } from '../../services/noteSizeDistributionAnalyzer';
 import { calculateError } from './NoteSizePartialFitness/calculateError';
 
-const run = (content, reference, options) => {
+const run = (content, reference, _options) => {
 	console.assert(content.length === reference.length);
 
 	const referenceAnalysis = noteSizeDistributionAnalyzer(reference);

@@ -48,7 +48,7 @@ export default class Individual {
 	/**
 	 * @description Mutate and recalculate inner fitnessValue
 	 */
-	mutate(options) { // TODO: pass options to this._context.mutation(..., options) ???
+	mutate(_options) { // TODO: pass options to this._context.mutation(..., options) ???
 		this._checkContext();
 		this._content = this._context.mutation(this._content);
 		this._fitnessValue = this.fitness().value;

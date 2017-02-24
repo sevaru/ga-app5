@@ -46,9 +46,9 @@ const browserExp = () => {
         const start = clock();
         new BrowserGA(options, {
             onProgress: ({ best }) => {
-                //console.log('Browser best', best.fitness.value);
+                console.log('Browser best', best.fitness.value);
             },
-            onDone: (e) => {
+            onDone: (_e) => {
                 writer.writeLine(`Browser done; ${clock(start)};`);
                 resolve();
             }
@@ -61,9 +61,9 @@ const nodeExp = (rate) => {
         const start = clock();
         new NodeGA(options, {
             onProgress: ({ best }) => {
-                //console.log('Node best', best.fitness.value);
+                console.log('Node best', best.fitness.value);
             },
-            onDone: (e) => {
+            onDone: (_e) => {
                 writer.writeLine(`Node done; ${clock(start)};`);
                 resolve();
             }
