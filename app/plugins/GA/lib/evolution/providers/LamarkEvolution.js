@@ -77,7 +77,6 @@ class LamarkExecutor extends GA {
     _changeEnvironment() {
         const { crossover, mutation, fitness } = this._preference;
         const { changeWeight } = this._evolution;
-
         this._context = {
             crossover: getCrossover(this._changeWeights(crossover, changeWeight)),
             mutation: getMutation(this._changeWeights(mutation, changeWeight)),
@@ -112,7 +111,7 @@ export default {
         maxChildren: 4,
 
         // Environment change
-        environmentChangeRate: 100,
+        environmentChangeRate: 70,
         changeWeight: 0.2
     })
 };
