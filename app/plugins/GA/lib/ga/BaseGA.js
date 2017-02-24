@@ -16,6 +16,12 @@ const defaultWorkerOptions = {
 
 export class BaseGA {
     _context;
+    _options;
+
+    /**
+     * @type {{ options: {}, evolution: {}, crossover: {}, mutation: {}, fitness: {} }}
+     */
+    _preference;
 
     /**
      * @param {{ options: {}, evolution: {}, crossover: {}, mutation: {}, fitness: {} }} preferences
@@ -27,6 +33,7 @@ export class BaseGA {
         this._reference = reference;
 
         // 0) Grab and store options
+        this._preference = preferences;
         this._options = options;
         this._evolution = evolution;
         this._workerOptions = Object.assign({}, defaultWorkerOptions, workerOptions);
