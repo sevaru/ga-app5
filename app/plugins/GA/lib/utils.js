@@ -61,7 +61,14 @@ export const arrayUtils = {
 		return array[array.length - 1];
 	},
 
+	/**
+	 * @param {T} value
+	 * @param {number} length - int or float
+	 * @returns {T[]}
+	 */
 	make(value, length) {
+		// NOTE: length converted to int to prevent infinite loop in while
+		length = length | 0;
 		let arr = [];
 		while (length--) {
 			arr[length] = value;
