@@ -1,6 +1,7 @@
 import MusicContext from '../MusicContext.js';
 import GAWorker from 'worker!./GAWorker.js';
-import { uuid } from '../utils';
+import { uuid, arrayUtils } from '../utils';
+import { remove } from 'lodash';
 
 /**
  * @class Creates GA worker instance and passes options to it.
@@ -8,6 +9,10 @@ import { uuid } from '../utils';
  */
 export class GARunner {
     workersPool = {};
+
+    /**
+     * @type {Array<number[]>} - an array of Individuals content
+     */
     migrationPool = [];
     _useEvolutionStrategies = false;
 
@@ -160,8 +165,10 @@ export class GARunner {
             }
 
             if (action === 'migrate') {
+                const { migrants, id } = data;
+
                 // Send migrants back
-                const migrantsToSend = this._getMigrants(/*pass count from instance.options.migrantsCount*/);
+                const migrantsToSend = this._getMigrants(migrants.length);
                 if (migrantsToSend) {
                     instance.postMessage({
                         action: 'migrate',
@@ -170,7 +177,7 @@ export class GARunner {
                 }
 
                 // Store received migrants
-                this.migrationPool.push(data.data);
+                this.migrationPool.push(...migrants);
             }
         };
     }
@@ -199,10 +206,17 @@ export class GARunner {
         };
     }
 
-    _getMigrants() {
-        // TODO:
-        // 1. Grab migrants from migrationPool
-        // 2. How much? from options of instance size
-        throw 'Not implemented';
+    /**
+     * @description Grab random migrants from pool.
+     * NOTE! it could even be previous migrants from this exact evolution
+     * @param {number} count 
+     */
+    _getMigrants(count) {
+        console.log(this.migrationPool.length);
+        const indexes = arrayUtils.getRandomIndexes(count, this.migrationPool.length);
+        const result = indexes.map(i => this.migrationPool[i]);
+        remove(this.migrationPool, (_, index) => indexes.includes(index));
+        console.log(this.migrationPool.length);
+        return result;
     }
 }

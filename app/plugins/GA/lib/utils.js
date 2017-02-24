@@ -86,7 +86,7 @@ export const arrayUtils = {
 		const result = [];
 
 		if (count > length) {
-			throw new Error('Count can\'t be more that length');
+			count = length;
 		}
 
 		while (count > 0) {

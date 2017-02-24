@@ -1,4 +1,5 @@
 import Individual from '../Individual';
+import { sampleSize } from 'lodash';
 import { run as getCrossover } from '../crossovers/CrossoverProvider';
 import { run as getMutation } from '../mutations/MutationProvider';
 import { run as getFitness } from '../fitness/FitnessProvider';
@@ -50,6 +51,20 @@ export class BaseGA {
 
         // 3) Perform initial run
         this._run();
+    }
+
+    /**
+     * @description Called from GARunner on migration event
+     * @params {Array<number[]>} migrants - array of migrants of type Individual.content
+     */
+    migrate(migrants) {
+        console.log('new migrants is here', migrants);
+
+        /**
+         * 1. recreate Individuals from migrants
+         * 2. store them in temp place
+         * 3. on next iteration in newPopulation use them instead of randoms
+         */
     }
 
     resume() {
@@ -295,20 +310,24 @@ export class BaseGA {
     }
 
     _migrationProcess() {
-        return;
-        // const { onMigration } = this._workerOptions;
-        // const { migrationRate } = this._options;
+        const { onMigration } = this._workerOptions;
+        const { migrationRate } = this._options;
 
-        // if (onMigration && this._i % migrationRate === 0) {
-        //     onMigration({
-        //         id: this._id,
-        //         migrants: this._getMigrants()
-        //     });
-        // }
+        if (onMigration && this._i % migrationRate === 0) {
+            onMigration({
+                id: this._id,
+                migrants: this._getMigrants()
+            });
+        }
     }
 
+    /**
+     * @returns {Array<number[]>} - array of Individual contents
+     */
     _getMigrants() {
-        throw 'Implement me _getMigrants';
+        const { migrationSize, count } = this._options;
+        const migrantsCount = (count * migrationSize) | 0;
+        return migrantsCount ? sampleSize(this._population, migrantsCount).map(x => x.content) : [];
     }
 
     _snapshot(currentPopulation) {

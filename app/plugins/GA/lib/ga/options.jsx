@@ -19,7 +19,10 @@ rootState.GA[NAMESPACE] = {
 
 	useEvolutionStrategies: true,
 	migrationRate: 20,
-	migrationSize: 10,
+	/**
+	 * @type {number} from 0 - 1 in percents
+	 */
+	migrationSize: 0.1,
 	groupCount: 4
 };
 
@@ -70,8 +73,8 @@ export const render = (props) => {
 				field={'useEvolutionStrategies'} />
 
 			{createSlider('migrationRate', { max: 500, min: 0, step: 1 })}
-			{createSlider('migrationSize', {max: 100, min: 0, step: 1})}
-			{createSlider('groupCount', {max: 25, min: 0, step: 1})}
+			{createSlider('migrationSize', { title: 'Migration Size (in percents of population)', max: 1, min: 0, step: 0.01 })}
+			{createSlider('groupCount', { max: 25, min: 0, step: 1 })}
 		</Panel>
 	);
 };
