@@ -13,7 +13,7 @@ export class IndividualsTable extends React.Component {
 	render() {
 		return (
 			<div className="individuals-table-wrapper">
-				<h3>Population {this.props.name}:</h3>
+				<h4>Population {this.props.name}:</h4>
 				<Table striped bordered condensed hover>
 					<thead>
 						<tr>

@@ -61,7 +61,13 @@ const DEFAULT_STATE = {
 	 * @description Best one of all evolutions
 	 * @type {{fitness: { value: number }}}
 	 */
-	best: null
+	best: null,
+
+	/**
+	 * @description Best for each evolutions
+	 * @type { [evolutionName: string]: {fitness: { value: number }} }
+ 	*/
+	bests: {}
 };
 
 export default class Index extends React.Component {
@@ -81,6 +87,7 @@ export default class Index extends React.Component {
 	run = () => {
 		const newState = {
 			...DEFAULT_STATE,
+			bests: {},
 			statistics: [
 				{
 					name: 'darwin-evolution',
@@ -216,15 +223,24 @@ export default class Index extends React.Component {
 		return (
 			<div>
 				{Object.entries(this.state.percentages)
-					.map(([name, percent]) => [name.replace('-evolution', ''), percent | 0])
+					.map(([name, percent]) => [this._getEvolutionProgressHeaderText(name), percent | 0])
 					.map(([name, percent]) => (
 						<div key={name} className="progress-bar-wrapper">
-							<h3>Progress ({name}):</h3>
+							<h5>Progress {name}:</h5>
 							<ProgressBar now={percent} label={`${percent}%`} />
 						</div>
 					))}
 			</div>
 		);
+	}
+
+	_getEvolutionProgressHeaderText(evolutionKey) {
+		const name = evolutionKey.replace('-evolution', ''); 
+		const best = this.state.bests[evolutionKey];
+		if (!best) {
+			return `(${name})`;
+		}
+		return `(${name}) ${best.fitness.value * 100 | 0}%`;
 	}
 
 	_renderButtons() {
@@ -306,8 +322,8 @@ export default class Index extends React.Component {
 			});
 		};
 		const onProgress = ({ id, percentage, best }) => {
-			const statistics = this.state.statistics;
-			
+			const { statistics, bests } = this.state;
+
 			const prevBestFitnessValue = this.state.best && this.state.best.fitness.value || 0;
 			const currentBestFitnessValue = best.fitness.value;
 			const percentages = this.state.percentages;
@@ -336,6 +352,10 @@ export default class Index extends React.Component {
 
 			const newState = {
 				statistics,
+				bests: {
+					...bests,
+					[name]: best
+				},
 				percentages: {
 					...percentages,
 					[name]: percentage
