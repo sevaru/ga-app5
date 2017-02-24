@@ -20,6 +20,11 @@ export class BaseGA {
     _options;
 
     /**
+     * @type {Array<Individual> | null}
+     */
+    _migrants = null;
+
+    /**
      * @type {{ options: {}, evolution: {}, crossover: {}, mutation: {}, fitness: {} }}
      */
     _preference;
@@ -58,13 +63,8 @@ export class BaseGA {
      * @params {Array<number[]>} migrants - array of migrants of type Individual.content
      */
     migrate(migrants) {
-        console.log('new migrants is here', migrants);
-
-        /**
-         * 1. recreate Individuals from migrants
-         * 2. store them in temp place
-         * 3. on next iteration in newPopulation use them instead of randoms
-         */
+        this._migrants = migrants.map(x => 
+            new Individual(this._reference, x, null, false, this._context));
     }
 
     resume() {
@@ -258,6 +258,12 @@ export class BaseGA {
     _oneEra() {
         this._i++;
         const parents = this._population.slice();
+
+        if (this._migrants) {
+            parents.push(...this._migrants);
+            this._migrants = null;
+        }
+
         const children = this._mutate(this._crossover());
         const newPopulation = this._selection([...children, ...parents]);
         this._population = this._createNewPopulation(newPopulation);
@@ -312,6 +318,9 @@ export class BaseGA {
     _migrationProcess() {
         const { onMigration } = this._workerOptions;
         const { migrationRate } = this._options;
+        if (!migrationRate) {
+            return;
+        }
 
         if (onMigration && this._i % migrationRate === 0) {
             onMigration({
