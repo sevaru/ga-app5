@@ -34,6 +34,25 @@ const numberUtils = {
 		}
 		const rem = value % maxValue;
 		return rem ? rem : maxValue;
+	},
+
+	/**
+	 * @param {number} basis
+	 * @param {number} percent - from 0 to 1
+	 * @param {{min: number, max: number}}
+	 */
+	fluctuate(basis, percent = 0.2, { min = 0, max = 1 } = {}) {
+		const newValue = basis + (percent * Math.random()) * (randomUtils.headsOrTails() ? 1 : -1);
+
+		if (newValue >= max) {
+			return max;
+		}
+
+		if (newValue < min) {
+			return min;
+		}
+		
+		return newValue;
 	}
 };
 
