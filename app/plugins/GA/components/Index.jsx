@@ -14,16 +14,6 @@ import { GARunner } from '../lib/ga/GARunner.js';
 import { IndividualsTable } from './IndividualsTable';
 import Sheet from './Sheet.jsx';
 
-
-const DEFAULT_STATISTICS = [
-	{
-		name: 'darwin-evolution',
-		values: [
-			{ x: 0, y: 0 }
-		]
-	}
-];
-
 const DEFAULT_STATE = {
 	/**
 	 * @description App state

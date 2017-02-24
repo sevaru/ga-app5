@@ -2,6 +2,9 @@ import React from 'react';
 import { createSliderFactory } from '../../../components/UIFactory';
 import { GA } from '../../ga/GA';
 import { arrayUtils, numberUtils } from '../../utils';
+import { run as getCrossover } from '../../crossovers/CrossoverProvider';
+import { run as getMutation } from '../../mutations/MutationProvider';
+import { run as getFitness } from '../../fitness/FitnessProvider';
 
 const render =
     (state, onblur) => (
@@ -55,12 +58,12 @@ class LamarkExecutor extends GA {
 
         // If we have good adaptants create childrens from them
         if (goodAdaptants.length >= 2) {
-            while(goodAdaptants.length > 1) {
+            while (goodAdaptants.length > 1) {
                 let childrenCount = numberUtils.randomBetween(1, maxChildren);
                 const mama = goodAdaptants.pop();
                 const papa = goodAdaptants.pop();
 
-                while(childrenCount > 0) {
+                while (childrenCount > 0) {
                     childrenCount--;
                     this._population.push(papa.crossover(mama))
                 }

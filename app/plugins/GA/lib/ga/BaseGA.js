@@ -15,21 +15,27 @@ const defaultWorkerOptions = {
 };
 
 export class BaseGA {
+    _context;
+
+    /**
+     * @param {{ options: {}, evolution: {}, crossover: {}, mutation: {}, fitness: {} }} preferences
+     */
     constructor(preferences, workerOptions = {}, reference, id) {
+        const { crossover, mutation, fitness, options, evolution } = preferences;
         this._id = id;
         // -1) Grab selected reference
         this._reference = reference;
 
         // 0) Grab and store options
-        this._options = preferences.options;
-        this._evolution = preferences.evolution;
+        this._options = options;
+        this._evolution = evolution;
         this._workerOptions = Object.assign({}, defaultWorkerOptions, workerOptions);
 
         // 1) Create context for individuals
         this._context = {
-            crossover: getCrossover(preferences.crossover),
-            mutation: getMutation(preferences.mutation),
-            fitness: getFitness(preferences.fitness)
+            crossover: getCrossover(crossover),
+            mutation: getMutation(mutation),
+            fitness: getFitness(fitness)
         };
 
         // 2) Set current state variables

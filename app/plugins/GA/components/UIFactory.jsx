@@ -100,7 +100,7 @@ export const createSliderFactory =
                         <SliderControl
                             key={field}
                             defaultValue={state[field]}
-                            onBlur={onblur.bind(null, field)}
+                            onBlur={onblur}
                             field={field}
                             title={title}
                             min={min}

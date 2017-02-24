@@ -12,7 +12,7 @@ import { throttle } from 'lodash';
 import './plugins/all.jsx';
 import { APP_VERSION, VERSION_KEY, STATE_KEY } from './VERSION';
 import { Root } from './containers/root';
-import configureStore from './store/configureStore';
+import { configureStore } from './store/configureStore';
 import initialState from './store/initialState';
 import { storage } from './store/persistStorage';
 
@@ -30,6 +30,11 @@ function migrate(persistedState, currentState) {
 }
 
 const store = configureStore(migrate(storage.get(STATE_KEY), initialState));
+
+if (process.env.NODE_ENV === 'development' && window) {
+	// NOTE: to debug
+	window.store = store; 
+}
 
 store.subscribe(
 	throttle(() =>
