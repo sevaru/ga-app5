@@ -19,7 +19,6 @@ function registerInStore(providerName, initialState, plugins) {
         .map(key => plugins[key])
         .forEach(({ name, getInitialState }) =>
             initialState[providerName][name] = getInitialState());
-    console.log(initialState);
 }
 
 
