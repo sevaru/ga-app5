@@ -14,7 +14,8 @@ const render =
                     { field: 'adaptationRate' },
                     { field: 'adaptationPercent' },
                     { field: 'maxChildren', max: 10 },
-                    { field: 'environmentChangeRate', max: 1000 }
+                    { field: 'environmentChangeRate', max: 1000 },
+                    { field: 'changeWeight', min: 0, max: 1, step: 0.01 }
                 ])
             }
         </div>
@@ -74,7 +75,26 @@ class LamarkExecutor extends GA {
     }
 
     _changeEnvironment() {
-        console.log('_changeEnvironment();');
+        const { crossover, mutation, fitness } = this._preference;
+        const { changeWeight } = this._evolution;
+
+        this._context = {
+            crossover: getCrossover(this._changeWeights(crossover, changeWeight)),
+            mutation: getMutation(this._changeWeights(mutation, changeWeight)),
+            fitness: getFitness(this._changeWeights(fitness, changeWeight))
+        };
+    }
+
+    /**
+     * @description Change weight property of GO options by reference
+     */
+    _changeWeights(geneticOperatorOptions, fluctuateRate) {
+        Object
+            .values(geneticOperatorOptions)
+            .forEach(x => {
+                x.weight = numberUtils.fluctuate(x.weight, fluctuateRate);
+            });
+        return geneticOperatorOptions;
     }
 }
 
@@ -85,10 +105,14 @@ export default {
     name: 'lamark-evolution',
     getInitialState: () => ({
         weight: 0.3,
+
+        // Adaptation
         adaptationRate: 10,
         adaptationPercent: 20,
         maxChildren: 4,
-        environmentChangeRate: 100
-        // TODO: add change weight how much changed
+
+        // Environment change
+        environmentChangeRate: 100,
+        changeWeight: 0.2
     })
 };
