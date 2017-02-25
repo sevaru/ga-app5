@@ -10,8 +10,6 @@ if (!Object.entries) {
           y.push([z, x[z]]) && y, []);
 }
 
-
-// EDGE doesnot has it :( 
 if (!Array.prototype.includes) {
   Array.prototype.includes = function(searchElement /*, fromIndex*/) {
     if (this == null) {
