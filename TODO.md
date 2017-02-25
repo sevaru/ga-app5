@@ -1,30 +1,10 @@
-# Migration
+# Kimura 2.0 concept
 
-0) Create inline worker? for browser|node smoothness
+1) Multiple reference compositions
+2) Multiple masks fitness of those compositions, e.g. ref1 (f1, f2); ref2(f1, f4); ...
+3) Each individual try to be some of those species
 
 
-1) Стратегия опций
-GAOptions = {
-    ...,
-    migrationSize,
-    migrationRate,
-    groupCount //determines by weights of evolutions
-}
-[evolutions]: {
-    weights
-}
-
-2) GARunner 
-- hosts workers
-- hosts migrangs
-
-Workers choose GA algorithm by string key 'strategy' in 'start' action
-
-start => ({
-    action: 'start',
-    data: {
-        'strategy': 'darwin' | 'lamark' | ...
-    }
-})
-
-3) Hash of GAs to start workers!!!!
+To implements we need to have multiple references
+- UI for it
+- fitness integration for it
