@@ -86,6 +86,8 @@ export class CheckboxControl extends BaseControl {
     }
 }
 
+export const probabilitySlider = (field) => ({ field, min: 0, max: 1, step: 0.01 });
+
 export const createSliderFactory =
     (state, onblur) =>
         (fields) =>
