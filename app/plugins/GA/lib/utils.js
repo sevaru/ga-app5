@@ -37,22 +37,30 @@ const numberUtils = {
 	},
 
 	/**
+	 * @param {number} value - float or int
+	 * @param {{ max: number, min: number }} options
+	 * @returns {number}
+	 */
+	strip(value, { min = 0, max = 1 } = {}) {
+		if (value < min) {
+			return min;
+		}
+
+		if (value >= max) {
+			return max;
+		}
+
+		return value;
+	},
+
+	/**
 	 * @param {number} basis
 	 * @param {number} percent - from 0 to 1
 	 * @param {{min: number, max: number}}
 	 */
 	fluctuate(basis, percent = 0.2, { min = 0, max = 1 } = {}) {
 		const newValue = basis + (percent * Math.random()) * (randomUtils.headsOrTails() ? 1 : -1);
-
-		if (newValue >= max) {
-			return max;
-		}
-
-		if (newValue < min) {
-			return min;
-		}
-		
-		return newValue;
+		return numberUtils.strip(newValue, { min, max });
 	}
 };
 
@@ -150,10 +158,19 @@ const stringUtils = {
 }
 
 const selectionUtils = {
-	getRandomKeyByWeight(obj) {
+	/**
+	 * @param {Object} obj
+	 * @param {(field: object) => number} fn - weight getter. Should be between 0 and 1
+	 * @returns {string}
+	 */
+	getRandomKey(obj, fn = x => x) {
 		const keys = Object.keys(obj);
-		const weights = Object.keys(obj).map(key => obj[key].weight * 100);
+		const weights = Object.values(obj).map(value => fn(value) * 100);
 		return selectionUtils._roulette(keys, weights);
+	},
+
+	getRandomKeyByWeight(obj) {
+		return selectionUtils.getRandomKey(obj, x => x.weight);
 	},
 
 	_roulette(keys, weights) /*: string (key)*/ {
