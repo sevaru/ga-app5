@@ -5,6 +5,7 @@ import { arrayUtils, numberUtils } from '../../utils';
 import { run as getCrossover } from '../../crossovers/CrossoverProvider';
 import { run as getMutation } from '../../mutations/MutationProvider';
 import { run as getFitness } from '../../fitness/FitnessProvider';
+import { EnvironmentChanger } from '../common';
 
 const render =
     (state, onblur) => (
@@ -22,17 +23,23 @@ const render =
     );
 
 class LamarkExecutor extends GA {
+    _environmentChanger = new EnvironmentChanger();
     _oneEra() {
         super._oneEra();
         const { adaptationRate, environmentChangeRate } = this._evolution;
 
-        if (this._i % adaptationRate === 0) {
+        if (this._isOccur(adaptationRate)) {
             this._adaptate();
         }
 
-        if (this._i % environmentChangeRate === 0) {
+        if (this._isOccur(environmentChangeRate)) {
             this._changeEnvironment();
         }
+    }
+
+    _changeEnvironment() {
+        const { changeWeight } = this._evolution;
+        this._context = this._environmentChanger.createContext(this._preference, changeWeight);
     }
 
     _adaptate() {
@@ -72,28 +79,6 @@ class LamarkExecutor extends GA {
 
             this._population = this._createNewPopulation(this._population);
         }
-    }
-
-    _changeEnvironment() {
-        const { crossover, mutation, fitness } = this._preference;
-        const { changeWeight } = this._evolution;
-        this._context = {
-            crossover: getCrossover(this._changeWeights(crossover, changeWeight)),
-            mutation: getMutation(this._changeWeights(mutation, changeWeight)),
-            fitness: getFitness(this._changeWeights(fitness, changeWeight))
-        };
-    }
-
-    /**
-     * @description Change weight property of GO options by reference
-     */
-    _changeWeights(geneticOperatorOptions, fluctuateRate) {
-        Object
-            .values(geneticOperatorOptions)
-            .forEach(x => {
-                x.weight = numberUtils.fluctuate(x.weight, fluctuateRate);
-            });
-        return geneticOperatorOptions;
     }
 }
 

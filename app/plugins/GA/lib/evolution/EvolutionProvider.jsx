@@ -5,7 +5,7 @@ import rootState from '../../../../store/initialState';
 // NOTE: list of available evolutions
 import DarwinEvolution from './providers/DarwinEvolution';
 import LamarkEvolution from './providers/LamarkEvolution';
-// import VriesEvolution from './providers/VriesEvolution';
+import VriesEvolution from './providers/VriesEvolution';
 // import KimuraEvolution from './providers/KimuraEvolution';
 // import PunctuatedEquilibriumEvolution from './providers/PunctuatedEquilibriumEvolution';
 
@@ -36,7 +36,7 @@ function createEvolutionProvider(evolution) {
 export const { Component, plugins } = createEvolutionProvider([
     DarwinEvolution,
     LamarkEvolution,
-    // VriesEvolution,
+    VriesEvolution,
     // KimuraEvolution,
     // PunctuatedEquilibriumEvolution
 ]);

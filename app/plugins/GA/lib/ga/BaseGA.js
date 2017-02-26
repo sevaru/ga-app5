@@ -353,4 +353,11 @@ export class BaseGA {
     _loop(/* cond, body, done */) {
         throw new Error('Abstract GA class');
     }
+
+    /**
+     * @param {number} rate - integer
+     */
+    _isOccur(rate) {
+        return this._i % rate === 0;
+    }
 }
