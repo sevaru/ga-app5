@@ -88,7 +88,7 @@ export default {
     render,
     name: 'lamark-evolution',
     getInitialState: () => ({
-        weight: 0.3,
+        weight: 0, //0.3,
 
         // Adaptation
         adaptationRate: 10,
