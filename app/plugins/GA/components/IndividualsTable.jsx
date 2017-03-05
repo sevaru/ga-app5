@@ -33,7 +33,7 @@ export class IndividualsTable extends React.Component {
 	renderItem( item, index ) {
 		const selected = this.state.selectedIndex === index;
 		const classes = selected ? 'highlight' : '';
-		const fitnessFrag = selected ? this.renderFitnessInfo(item) : item.fitness.value; 
+		const fitnessFrag = selected ? this.renderFitnessInfo(item) : item.fitness.value.toFixed(3); 
 
 		return (
 			<tr className={classes} key={index} onClick={this.onSelect.bind(this, item, index)}>
