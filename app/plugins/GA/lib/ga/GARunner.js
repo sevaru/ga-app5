@@ -75,7 +75,7 @@ export class GARunner {
             .forEach(([evolutionName, evolutionOptions]) => {
                 const randomKey = `${evolutionName}_${uuid()}`;
                 const worker = this.workersPool[randomKey] = new GAWorker();
-                worker.onmessage = this._createOnMessageForEvolution(workerOptions, evolutionOptions, worker);
+                worker.onmessage = this._createOnMessageForEvolution(workerOptions, evolutionOptions, worker, evolutionName);
                 worker.onerror = err => console.warn(err);
 
                 worker.postMessage({
@@ -137,9 +137,9 @@ export class GARunner {
         }
     }
 
-    _createOnMessageForEvolution({ onDone, onProgress, onPause }, evolutionOptions, instance) {
+    _createOnMessageForEvolution({ onDone, onProgress, onPause }, evolutionOptions, instance, evolutionName) {
         return ({ data: { data, action } }) => {
-            console.log(`onmessage from worker ${action}`);
+            console.log(`Evolutions: onmessage from worker ${evolutionName}, ${action}`);
 
             if (action === 'done') {
                 const population = data.data;
