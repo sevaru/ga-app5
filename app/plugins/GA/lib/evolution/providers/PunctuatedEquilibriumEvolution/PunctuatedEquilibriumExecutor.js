@@ -47,6 +47,8 @@ export class PunctuatedEquilibriumExecutor {
      */
     _doneFlags = {};
 
+    _best = null;
+
     /**
      * @param {{ options: {}, evolution: { groupsCount: number, environmentChangeWeight: number, environmentChangeRate: number, environmentDifferenceWeight: number }, crossover: {}, mutation: {}, fitness: {} }} preferences
      * @param { { onDone: Function, onProgress: Function, onPause: Function } } workerOptions
@@ -160,6 +162,10 @@ export class PunctuatedEquilibriumExecutor {
         this.currentIteration += 1;
 
         const event = this._getCurrentIterationEvent();
+        if (!event) {
+            return;
+        }
+
         this.workerOptions.onProgress({
             ...event,
             id: this.evolutionId
@@ -208,6 +214,7 @@ export class PunctuatedEquilibriumExecutor {
          * @type {Array<Individual>}
          */
         const individuals = populationSorter(raw.map(x => new Individual(this.reference, x, null, false, context))).map(x => x.toFullFitnessDTO());
+        individuals.unshift(this._best.toFullFitnessDTO());
         individuals.unshift(original);
 
         return {
@@ -228,15 +235,28 @@ export class PunctuatedEquilibriumExecutor {
         const events = Object.values(this.progressEvents).filter(x => x);
         const percentage = events.reduce((value, { percentage }) => percentage > value ? value : percentage, events[0].percentage);
 
+        // NOTE: for the end we don't wanna have two 100 points on graph so we wait for done
+        if (percentage === 100) {
+            return null;
+        }
+
         const bestGuys = events
             .map(event =>
                 new Individual(this.reference, event.best.content, null, false, context));
 
+        if (!this._best) {
+            this._best = bestGuys[0];
+        }
+
         const best =
             bestGuys.reduce((bestOne, individual) => bestOne.fitnessValue > individual.fitnessValue ? bestOne : individual, bestGuys[0]);
+        
+        if (best.fitnessValue > this._best.fitnessValue) {
+            this._best = best;
+        }
 
         return {
-            best: best.toFullFitnessDTO(),
+            best: this._best.toFullFitnessDTO(),
             percentage
         };
     }
