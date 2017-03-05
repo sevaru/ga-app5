@@ -20,7 +20,7 @@ export class SimpleGARunner {
     }
 
     /**
-    * @param { Object } options
+     * @param { Object } options
      * @param { { onDone: Function, onProgress: Function, onPause: Function } } workerOptions
      * @param {*} reference 
      */
@@ -49,7 +49,7 @@ export class SimpleGARunner {
 
     _createOnMessage({ onDone, onProgress, onPause }) {
         return ({ data: { data, action } }) => {
-            console.log(`onmessage from worker ${action}`);
+            console.log(`SimpleGARunner: onmessage from worker ${action}`);
 
             if (action === 'done') {
                 const population = data.data;
