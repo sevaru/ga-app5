@@ -1,7 +1,7 @@
 import { arrayUtils } from './utils';
 import { availableValues } from './common';
 
-export default class Individual {
+export class Individual {
 	/**
 	 * @param {Array<number>} referenceIndividual
 	 * @param {Array<number>} contentToStart
@@ -106,3 +106,5 @@ export default class Individual {
 		return new Individual(_reference, _content, _fitnessValue, false);
 	}
 }
+
+export default Individual;
