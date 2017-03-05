@@ -2,9 +2,6 @@ import React from 'react';
 import { createSliderFactory } from '../../../components/UIFactory';
 import { GA } from '../../ga/GA';
 import { arrayUtils, numberUtils } from '../../utils';
-import { run as getCrossover } from '../../crossovers/CrossoverProvider';
-import { run as getMutation } from '../../mutations/MutationProvider';
-import { run as getFitness } from '../../fitness/FitnessProvider';
 import { EnvironmentChanger } from '../common';
 
 const render =
@@ -88,7 +85,7 @@ export default {
     render,
     name: 'lamark-evolution',
     getInitialState: () => ({
-        weight: 0, //0.3,
+        weight: 0.5,
 
         // Adaptation
         adaptationRate: 10,

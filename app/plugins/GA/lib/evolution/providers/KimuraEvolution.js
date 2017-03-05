@@ -26,7 +26,7 @@ export default {
     render,
     name: 'kimura-evolution',
     getInitialState: () => ({
-        weight: 0.3,
+        weight: 0.5,
         distance: 0.2,
         speciesCount: 3
     })

@@ -29,5 +29,5 @@ export default {
     executor: PunctuatedEquilibriumExecutor,
     render: getRenderFromMeta(META),
     name: 'punctuated-equilibrium-evolution',
-    getInitialState: getInitialStateFromMeta(META, 1)
+    getInitialState: getInitialStateFromMeta(META, .5)
 };

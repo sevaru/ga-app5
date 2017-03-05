@@ -115,7 +115,7 @@ export default {
     executor: VriesExecutor,
     name: 'vries-evolution',
     getInitialState: () => ({
-        weight: 0, // 0.2
+        weight: 0.5,
         catastropheRate: 10,
         mutationCatastropheProbability: 0.2,
         mutationCatastropheWeight: 0.3,
