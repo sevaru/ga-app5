@@ -1,5 +1,6 @@
 import Individual from '../Individual';
 import { sampleSize } from 'lodash';
+import { populationSorter } from '../utils/populationSorter';
 import { run as getCrossover } from '../crossovers/CrossoverProvider';
 import { run as getMutation } from '../mutations/MutationProvider';
 import { run as getFitness } from '../fitness/FitnessProvider';
@@ -63,7 +64,7 @@ export class BaseGA {
      * @params {Array<number[]>} migrants - array of migrants of type Individual.content
      */
     migrate(migrants) {
-        this._migrants = migrants.map(x => 
+        this._migrants = migrants.map(x =>
             new Individual(this._reference, x, null, false, this._context));
     }
 
@@ -213,16 +214,7 @@ export class BaseGA {
     }
 
     _sortByFitness(population, desc = 1) {
-        return population.slice().sort((a, b) => {
-            const af = a.fitnessValue;
-            const bf = b.fitnessValue;
-
-            if (af === bf) {
-                return 0;
-            }
-
-            return af > bf ? -desc : desc;
-        });
+        return populationSorter(population, desc);
     }
 
     _cleanState() {
