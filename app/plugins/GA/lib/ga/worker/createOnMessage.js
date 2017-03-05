@@ -19,11 +19,11 @@ export function createOnMessageSimple() {
 function createOnMessageBase({ executor, executorProvider }) {
     let gaInstance;
     return (event/*: { data: { action: 'start' | 'stop' | 'pause', data: any } } */) => { // eslint-disable-line
-        const { data: { options, reference, migrants, id, evolutionName } = {}, action } = event.data;
+        const { data: { options, reference, migrants, id, evolutionName } = {}, action, _from } = event.data;
 
-        console.log(event);
+        const normalizedAction = action || _from;
 
-        switch (action) {
+        switch (normalizedAction) {
             case USER_REQUEST_EVENTS.START:
                 if (executor) {
                     gaInstance = createGA(options, reference, id, executor, evolutionName);
@@ -50,6 +50,10 @@ function createOnMessageBase({ executor, executorProvider }) {
                 if (migrants && gaInstance.migrate) {
                     gaInstance.migrate(migrants);
                 }
+                break;
+
+            // NOTE: Subworker deals for Google chrome...
+            case _from:
                 break;
 
             default:
