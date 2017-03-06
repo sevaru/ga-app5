@@ -1,4 +1,3 @@
-import MusicContext from '../MusicContext.js';
 import GAWorker from 'worker!./SimpleGAWorker.js';
 
 /**
@@ -14,8 +13,8 @@ export class SimpleGARunner {
      * @param { Object } options
      * @param { { onDone: Function, onProgress: Function, onPause: Function } } workerOptions
      */
-    constructor(options, workerOptions) {
-        const reference = MusicContext.getCurrentComposition();
+    constructor(options, workerOptions, reference, onMigration) {
+        this.onMigration = onMigration;
         this._setupDefault(options, workerOptions, reference);
     }
 
@@ -26,7 +25,7 @@ export class SimpleGARunner {
      */
     _setupDefault(options, workerOptions, reference) {
         this._worker = new GAWorker();
-        this._worker.onmessage = this._createOnMessage(workerOptions);
+        this._worker.onmessage = this._createOnMessage(workerOptions, this._worker);
         this._worker.onerror = err => console.warn(err);
         this._worker.postMessage({ data: { options, reference }, action: 'start' });
     }
@@ -47,7 +46,10 @@ export class SimpleGARunner {
         this._worker.terminate();
     }
 
-    _createOnMessage({ onDone, onProgress, onPause }) {
+    /**
+     * @description To react on worker postMessages
+     */
+    _createOnMessage({ onDone, onProgress, onPause }, instance) {
         return ({ data: { data, action } }) => {
             console.log(`SimpleGARunner: onmessage from worker ${action}`);
 
@@ -67,6 +69,16 @@ export class SimpleGARunner {
 
             if (onPause && action === 'pause') {
                 onPause(data);
+            }
+
+            if (action === 'migrate') {
+                const migrantsToSendBack = this.onMigration(data.migrants);
+                if (migrantsToSendBack) {
+                    instance.postMessage({
+                        action: 'migrate',
+                        data: { migrants: migrantsToSendBack }
+                    });
+                }
             }
         };
     }
