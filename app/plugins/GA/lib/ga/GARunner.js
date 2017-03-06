@@ -64,13 +64,6 @@ export class GARunner {
                 }
             );
 
-
-        // 3. onmessage should consider worker key?
-        // 4. GAWorker should consider GAEvolutionModel as a string key?
-
-
-        // TODO: how to deal with EvolutionOptions.weight??? 
-        // This should be used as migration cound multiplier?
         normalizedPopulation
             .forEach(([evolutionName, evolutionOptions]) => {
                 const randomKey = `${evolutionName}_${uuid()}`;
