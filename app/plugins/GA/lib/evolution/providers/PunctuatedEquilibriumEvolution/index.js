@@ -3,16 +3,17 @@ import { getInitialStateFromMeta } from '../../../common/getInitialStateFromMeta
 import { getRenderFromMeta } from '../../../common/getRenderFromMeta';
 
 const META = {
-    environmentChangeWeight: {
-        value: 0.3,
-        min: 0,
-        max: 1
-    },
-    environmentChangeRate: {
-        value: 10,
-        min: 0,
-        max: 100
-    },
+    // NOTE: not implemented for now
+    // environmentChangeWeight: {
+    //     value: 0.3,
+    //     min: 0,
+    //     max: 1
+    // },
+    // environmentChangeRate: {
+    //     value: 10,
+    //     min: 0,
+    //     max: 100
+    // },
     environmentDifferenceWeight: {
         value: 0.3,
         min: 0,
