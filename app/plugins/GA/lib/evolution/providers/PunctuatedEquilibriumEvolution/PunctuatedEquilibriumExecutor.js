@@ -65,17 +65,6 @@ export class PunctuatedEquilibriumExecutor {
      * @param { { onDone: Function, onProgress: Function, onPause: Function } } workerOptions
      */
     constructor(preferences, workerOptions = {}, reference, id) {
-        /**
-         * 
-         * 1. create multiple garunners (for each group)
-         * 2. how to handle many onDone, onPause, onProgress?
-         * 3. store current populations .. and send new on every progress from
-         * 
-         * 
-         * for pause use flags ?
-         * 
-         */
-
         const groupsCount = preferences.evolution.groupsCount;
 
         this.preferences = preferences;
