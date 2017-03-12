@@ -235,7 +235,7 @@ export default class Index extends React.Component {
 	}
 
 	_getEvolutionProgressHeaderText(evolutionKey) {
-		const name = evolutionKey.replace('-evolution', ''); 
+		const name = evolutionKey.replace('-evolution', '');
 		const best = this.state.bests[evolutionKey];
 		if (!best) {
 			return `(${name})`;
@@ -276,6 +276,8 @@ export default class Index extends React.Component {
 		const options = this.context.store.getState().GA;
 
 		if (options.options.useEvolutionStrategies) {
+			Object.values(options.evolution).forEach(x => { x.weight = 0; })
+			options.evolution['kimura-evolution'].weight = 1;
 			return this._createEvolutionRunner(options);
 		} else {
 			return this._createDefaultRunner(options);

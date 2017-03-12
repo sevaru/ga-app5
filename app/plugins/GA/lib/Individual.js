@@ -60,6 +60,14 @@ export class Individual {
 		return new Individual(this._reference, newContent, null, false, this._context);
 	}
 
+	get reference() {
+		return this._reference.slice();
+	}
+
+	get context() {
+		return this._context;
+	}
+
 	fitness() {
 		this._checkContext();
 		return this._context.fitness(this.content, this._reference);
