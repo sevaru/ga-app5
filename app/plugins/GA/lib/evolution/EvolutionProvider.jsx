@@ -6,7 +6,7 @@ import rootState from '../../../../store/initialState';
 import DarwinEvolution from './providers/DarwinEvolution';
 import LamarkEvolution from './providers/LamarkEvolution';
 import VriesEvolution from './providers/VriesEvolution';
-// import KimuraEvolution from './providers/KimuraEvolution';
+import KimuraEvolution from './providers/KimuraEvolution';
 import PunctuatedEquilibriumEvolution from './providers/PunctuatedEquilibriumEvolution';
 
 const EVOLUTION_KEY = 'evolution';
@@ -37,6 +37,6 @@ export const { Component, plugins } = createEvolutionProvider([
     DarwinEvolution,
     LamarkEvolution,
     VriesEvolution,
-    // KimuraEvolution,
+    KimuraEvolution,
     PunctuatedEquilibriumEvolution
 ]);
