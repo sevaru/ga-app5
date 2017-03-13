@@ -3,11 +3,6 @@ import { getInitialStateFromMeta } from '../../../common/getInitialStateFromMeta
 import { getRenderFromMeta } from '../../../common/getRenderFromMeta';
 
 const META = {
-    similarityThreshold: {
-        value: 0.3,
-        min: 0,
-        max: 1
-    },
     speciesCount: {
         value: 2,
         min: 2,

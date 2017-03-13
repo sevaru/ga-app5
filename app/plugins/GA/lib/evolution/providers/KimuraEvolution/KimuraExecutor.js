@@ -1,10 +1,10 @@
+import clusterfck from 'clusterfck';
 import { GA } from '../../../ga/GA';
-import { fullFitnessCalculator } from '../../../fitness/fullFitnessCalculator';
-import { KimuraIndividual } from './KimuraIndividual'
+import { Individual } from '../../../Individual';
 
 export class KimuraExecutor extends GA {
     /**
-     * @type { { speciesSeparationRate: number, similarityThreshold: number, speciesCount: number } }
+     * @type { { speciesSeparationRate: number, speciesCount: number } }
      */
     _evolution;
     _oneEra() {
@@ -17,37 +17,40 @@ export class KimuraExecutor extends GA {
     }
 
     _separate() {
-        const fitnessOptions = this._preference.fitness;
+        const { speciesCount } = this._evolution;
+        
+        // 0. Create clusters
+        /**
+         * @type { Array<{ Array<number> }> } - array of clusters and its content Individual.content
+         */
+        const clusters = clusterfck.kmeans(this._population.map(x => x.content));
+        const countOfClusters = clusters.length;
+
+        if (speciesCount >= countOfClusters) {
+            return;
+        }
 
         /**
-         * @type { KimuraIndividual[] }
+         * NOTE: The choice of clusters can be. (TODO: Could be an option later on)
+         * 1. By best fitness of random individual in cluster
+         * 2. By best fitness in cluster
+         * 3. Random
+         * ✓ 4. By cluster size
          */
-        const kimuraPopulation = this._population.map(x => {
-            return KimuraIndividual.fromIndividual(x, fitnessOptions);
-        });
 
-        const groups = kimuraPopulation.reduce((store, x) => {
-            const [maxFitnessName] = Object.entries(x.fitnessValues).reduce((prevMaxPair, [name, value]) => {
-                if (!prevMaxPair) {
-                    return [name, value];
-                }
-                return value > prevMaxPair[1] ? [name, value] : prevMaxPair;
-            }, null);
+        // 1. Sort by size
+        clusters.sort((c1, c2) => c1.length - c2.length);
 
-            return { 
-                ...store,
-                [maxFitnessName]: (store[maxFitnessName] || []).concat(x)  
-            };
-        }, {});
+        // 2. Grab only needed count of clusters
+        const clustersToUse = clusters.slice(0, speciesCount);
 
-        debugger;
+        // 3. Flatten clusters
+        const gensForNewPopulation = clustersToUse.reduce((store, cluster) => [...store, ...cluster], []);
 
-        /*
-        1. Вначале разбиваем на столько групп сколько фитнессов.
-        2. Выбираем самый большой фитесс и кладем в эту группу
-        3. Сортируем поциков внутри групп по общему фитнесу
-        4. Режем группы
-        5. Делаем детей
-         */
+        // 4. Recreate individuals from gens
+        const newPopulation = gensForNewPopulation.map(x => new Individual(this._reference, x, null, false, this._context));
+
+        // 5. Recreate population
+        this._population = this._createNewPopulation(newPopulation);
     }
 }
