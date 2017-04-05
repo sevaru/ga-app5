@@ -24,9 +24,9 @@
     "expect": false
   },
   "rules": {
+    "no-debugger": 1,
     "no-mixed-spaces-and-tabs": 0,
-    "no-unused-vars": 1,
-
+    "no-unused-vars": [1, { "argsIgnorePattern": "^_"  }],
     "no-console": 0,
     "new-cap": 0,
     "strict": 0,

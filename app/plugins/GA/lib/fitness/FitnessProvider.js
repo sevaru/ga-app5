@@ -1,4 +1,4 @@
 import { createCompositeProvider } from '../common/createProvider';
+import { plugins } from './plugins';
 
-const context = require.context('./providers', false, /Fitness.js/);
-export const {run, Component} = createCompositeProvider('fitness', context);
+export const { run, Component } = createCompositeProvider('fitness', plugins);

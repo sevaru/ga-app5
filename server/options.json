@@ -1,0 +1,109 @@
+{
+  "crossover": {
+    "one-point-crossover": {
+      "weight": 0.5
+    },
+    "random-crossover": {
+      "weight": 0.5
+    },
+    "two-point-crossover": {
+      "weight": 0.7
+    }
+  },
+  "mutation": {
+    "change-duration-mutation": {
+      "weight": 0.4,
+      "count": 7
+    },
+    "copy-paste-mutation": {
+      "weight": 0.2,
+      "groupSize": 5,
+      "count": 2
+    },
+    "order-mutation": {
+      "weight": 0.2,
+      "groupSize": 5,
+      "count": 2
+    },
+    "random-mutation": {
+      "weight": 0.25,
+      "percents": 5
+    },
+    "reverse-mutation": {
+      "weight": 0.2,
+      "groupSize": 5,
+      "count": 2
+    },
+    "sort-mutation": {
+      "weight": 1,
+      "count": 10
+    },
+    "swap2-mutation": {
+      "weight": 0.25,
+      "count": 32
+    },
+    "swap-group-mutation": {
+      "weight": 0.5,
+      "groupSize": 5,
+      "count": 2
+    },
+    "transpose-mutation": {
+      "weight": 0.2,
+      "groupSize": 5,
+      "count": 2,
+      "transposeSize": 2
+    },
+    "up-and-down-mutation": {
+      "weight": 1,
+      "count": 7
+    }
+  },
+  "fitness": {
+    "basic-reference-fitness": {
+      "weight": 0
+    },
+    "cluster-fitness": {
+      "weight": 0.1,
+      "_important": false
+    },
+    "direction-fitness": {
+      "weight": 0.01
+    },
+    "interval-fitness": {
+      "weight": 0
+    },
+    "magnitude-fitness": {
+      "weight": 0
+    },
+    "melody-line-fitness": {
+      "weight": 0.5,
+      "_important": false
+    },
+    "note-size-partial-fitness": {
+      "weight": 0.3,
+      "_important": false
+    },
+    "rhythm-line-fitness": {
+      "weight": 0.2,
+      "_important": false
+    },
+    "rod-note-fitness": {
+      "weight": 0,
+      "_important": false
+    },
+    "sign-sequence-fitness": {
+      "weight": 0,
+      "_important": false
+    }
+  },
+  "options": {
+    "maxIterations": 100,
+    "deathLimit": 0.2,
+    "count": 100,
+    "threshold": 0.9,
+    "mutationProbability": 0.5,
+    "useRandomInitialIndividuals": true,
+    "countOfBestToLiveThrought": 0,
+    "stopOnEndOfIterations": true
+  }
+}

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import { SliderControl } from '../../components/UIFactory.jsx';
-import {changeOptions} from '../../actions/index';
+import { changeOptions } from '../../actions/index';
 
 /**
- * @description pluginKey = crossover | mutation | fitness
+ * @description pluginKey = crossover | mutation | fitness | evolution
  */
-export const createRenderComponent = (pluginKey, plugins) => {
+export const createRenderComponent = (pluginKey, plugins, { expanded = false } = {}) => {
 	return ({ store }) => {
 		const state = store.getState().GA[pluginKey];
 
@@ -15,6 +15,7 @@ export const createRenderComponent = (pluginKey, plugins) => {
 				changeOptions([pluginKey, name, field], value)
 			);
 		};
+
 		const options = Object
 			.keys(plugins)
 			.map((name) => {
@@ -22,19 +23,19 @@ export const createRenderComponent = (pluginKey, plugins) => {
 				const innerMarkup = plugin.render && plugin.render(state[name], onblur.bind(null, name));
 				return (
 					<Panel header={name} key={name}>
-		                <SliderControl
-		                	defaultValue={state[name].weight}
-		                	onBlur={onblur.bind(null, name)}
-		                	field={'weight'} />
-		                {innerMarkup}
-		            </Panel>
-	            );
+						<SliderControl
+							defaultValue={state[name].weight}
+							onBlur={onblur.bind(null, name)}
+							field={'weight'} />
+						{innerMarkup}
+					</Panel>
+				);
 			});
 
 		return (
-			<Panel collapsible header={pluginKey + ' options'}>
-                {options}
-            </Panel>
+			<Panel defaultExpanded={expanded} collapsible header={pluginKey + ' options'}>
+				{options}
+			</Panel>
 		);
 	};
 };

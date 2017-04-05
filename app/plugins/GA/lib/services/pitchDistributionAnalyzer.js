@@ -1,5 +1,4 @@
 import { chunk } from 'lodash';
-import Composition from '../utils/Composition';
 import { normalizePitchToOctave } from '../utils/normalization';
 import MusicContext from '../MusicContext';
 

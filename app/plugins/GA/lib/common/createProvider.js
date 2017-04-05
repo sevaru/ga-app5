@@ -18,6 +18,12 @@ export function createCompositeProvider(providerName, context) {
 	};	
 }
 
+/**
+ * @param {string} providerName
+ * @param {Array<Object>} context
+ * @param {boolean} randomRun
+ * @returns {{ run: Function, Component: Function }}
+ */
 export default (providerName, context, randomRun = false) => {
 	const plugins = createPluginsHash(context);
 	const instance = new BaseCalculateProvider(plugins, initialState, providerName);
@@ -29,3 +35,4 @@ export default (providerName, context, randomRun = false) => {
 		Component: createRenderComponent(providerName, plugins)
 	};
 };
+

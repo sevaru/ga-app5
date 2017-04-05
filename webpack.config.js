@@ -80,7 +80,14 @@ if ( TARGET === 'start' || !TARGET ) {
                     include: APP_PATH
                 }
             ]
-        }
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('development')
+                }
+            })
+        ]
     });
 }
 

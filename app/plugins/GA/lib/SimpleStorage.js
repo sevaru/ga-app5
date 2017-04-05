@@ -25,6 +25,21 @@ const FIRMWARE_INDIVIDUAL = [
 const ALL_KEY = '__all';
 const CURRENT_KEY = '__current';
 
+const localStorageInstance = global.localStorage || {
+	getItem() {
+		return undefined;
+	},
+	setItem() {
+		return undefined;
+	},
+	removeItem() {
+		return undefined;
+	},
+	clear() {
+		return undefined;
+	}
+};
+
 class SimpleStorage {
 	getKeys() {
 		const keys = this._getKeys();
@@ -36,7 +51,7 @@ class SimpleStorage {
 	}
 
 	_getKeys() {
-		const keysRaw = localStorage.getItem(ALL_KEY);
+		const keysRaw = localStorageInstance.getItem(ALL_KEY);
 		return JSON.parse(keysRaw);
 	}
 
@@ -49,7 +64,7 @@ class SimpleStorage {
 			return this.getDefault();
 		}
 
-		let compositionRaw = localStorage.getItem(key);
+		let compositionRaw = localStorageInstance.getItem(key);
 		if ( !compositionRaw ) {
 			return null;
 		}
@@ -59,14 +74,14 @@ class SimpleStorage {
 	save( key, value ) {
 		try {
 			value = JSON.stringify(value);
-			localStorage.setItem(key, value);
-			let prevKeys = JSON.parse(localStorage.getItem(ALL_KEY)) || [];
+			localStorageInstance.setItem(key, value);
+			let prevKeys = JSON.parse(localStorageInstance.getItem(ALL_KEY)) || [];
 
 			if ( prevKeys.indexOf(key) === -1 ) {
 				prevKeys.push(key);
 			}
 
-			localStorage.setItem(ALL_KEY, JSON.stringify(prevKeys));
+			localStorageInstance.setItem(ALL_KEY, JSON.stringify(prevKeys));
 		} catch (e) {
 			console.warn('You got invalid data');
 			return false;
@@ -75,7 +90,7 @@ class SimpleStorage {
 	}
 
 	getCurrentKey() {
-		return localStorage.getItem(CURRENT_KEY) || 'default';
+		return localStorageInstance.getItem(CURRENT_KEY) || 'default';
 	}
 
 	getCurrent() {
@@ -83,21 +98,21 @@ class SimpleStorage {
 	}
 
 	setCurrent( key ) {
-		localStorage.setItem(CURRENT_KEY, key);
+		localStorageInstance.setItem(CURRENT_KEY, key);
 	}
 
 	remove( key ) {
-		let prevKeys = JSON.parse(localStorage.getItem(ALL_KEY)) || [];
+		let prevKeys = JSON.parse(localStorageInstance.getItem(ALL_KEY)) || [];
 		const index = prevKeys.indexOf(key);
 		if (  index !== -1 ) {
 			prevKeys.splice(index, 1);
 		}
-		localStorage.setItem(ALL_KEY, JSON.stringify(prevKeys));
-		localStorage.removeItem(key);
+		localStorageInstance.setItem(ALL_KEY, JSON.stringify(prevKeys));
+		localStorageInstance.removeItem(key);
 	}
 
 	clear() {
-		localStorage.clear();
+		localStorageInstance.clear();
 	}
 }
 
